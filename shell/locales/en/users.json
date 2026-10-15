@@ -51,8 +51,6 @@
     "warning": "All their sessions will be revoked and they won't be able to sign in until the account is reactivated.",
     "reason": "Reason",
     "reasonRequired": "The reason is required.",
-    "until": "Until (optional)",
-    "untilHint": "Without a date, the suspension is indefinite.",
     "confirm": "Suspend account",
     "done": "Account suspended"
   },

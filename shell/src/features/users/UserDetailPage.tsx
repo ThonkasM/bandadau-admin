@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/Button';
 import { Card, CardBody, CardHeader } from '@/components/ui/Card';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { ErrorState } from '@/components/ui/ErrorState';
-import { Checkbox, Field, Input, Textarea } from '@/components/ui/Field';
+import { Checkbox, Field, Textarea } from '@/components/ui/Field';
 import { Modal } from '@/components/ui/Modal';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Skeleton } from '@/components/ui/Skeleton';
@@ -53,7 +53,6 @@ export default function UserDetailPage() {
   const [suspendOpen, setSuspendOpen] = useState(false);
   const [reactivateOpen, setReactivateOpen] = useState(false);
   const [reason, setReason] = useState('');
-  const [until, setUntil] = useState('');
   const [note, setNote] = useState('');
   const [reasonError, setReasonError] = useState<string | null>(null);
 
@@ -94,7 +93,7 @@ export default function UserDetailPage() {
       setReasonError(t('users:suspend.reasonRequired'));
       return;
     }
-    const res = await suspend({ input: { userId: user.id, reason: reason.trim(), until: until ? new Date(`${until}T23:59:59Z`).toISOString() : null } });
+    const res = await suspend({ input: { userId: user.id, reason: reason.trim() } });
     const errors = res.data?.suspendUser.errors ?? [];
     if (res.error || errors.length > 0) {
       setReasonError(errorText(res.error ?? errors[0]?.code));
@@ -103,7 +102,6 @@ export default function UserDetailPage() {
     toast.success(t('users:suspend.done'));
     setSuspendOpen(false);
     setReason('');
-    setUntil('');
   };
 
   const confirmReactivate = async () => {
@@ -221,9 +219,6 @@ export default function UserDetailPage() {
             {({ id: fid, describedBy, invalid }) => (
               <Textarea id={fid} aria-describedby={describedBy} invalid={invalid} value={reason} onChange={(e) => { setReason(e.target.value); setReasonError(null); }} />
             )}
-          </Field>
-          <Field label={t('users:suspend.until')} hint={t('users:suspend.untilHint')}>
-            {({ id: fid }) => <Input id={fid} type="date" value={until} onChange={(e) => setUntil(e.target.value)} />}
           </Field>
         </div>
       </Modal>

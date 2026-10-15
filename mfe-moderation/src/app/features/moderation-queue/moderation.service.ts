@@ -103,7 +103,7 @@ export class ModerationService {
   suspendUser(userId: string, reason: string): Promise<Outcome> {
     return this.mutate<{ suspendUser: MutationPayload | null }>(
       SUSPEND_USER,
-      { input: { userId, reason, until: null } },
+      { input: { userId, reason } },
       (d) => d.suspendUser,
     );
   }

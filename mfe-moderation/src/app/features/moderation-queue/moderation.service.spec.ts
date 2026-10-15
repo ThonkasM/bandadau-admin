@@ -101,6 +101,6 @@ describe('ModerationService', () => {
     fetchMock.mockClear();
     fetchMock.mockResolvedValue(json({ data: { suspendUser: { user: { id: 'u-1' }, errors: [] } } }));
     await service.suspendUser('u-1', 'spam');
-    expect(sent().variables).toEqual({ input: { userId: 'u-1', reason: 'spam', until: null } });
+    expect(sent().variables).toEqual({ input: { userId: 'u-1', reason: 'spam' } });
   });
 });
