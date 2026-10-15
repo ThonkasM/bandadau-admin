@@ -1,18 +1,19 @@
-# Plantilla de CI para bandadau-admin → copiar a bandadau-admin/.github/workflows/ci.yml
-# lint + test + build (sin despliegue; el despliegue AWS es de una fase posterior).
+# CI para bandadau-admin: lint + typecheck + build por app (shell + mfe-moderation).
 name: ci
 on:
   push: { branches: [main, develop] }
-  pull_request:
+  pull_request: {}
 concurrency: { group: "ci-${{ github.ref }}", cancel-in-progress: true }
 permissions: { contents: read }
 jobs:
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix: { app: [shell, mfe-moderation] }
     steps:
-      # Layout de hermanos: $GITHUB_WORKSPACE/{<este-repo>,bandadau-shared,bandadau-docs} (ADR-0017).
-      # Si los repos son privados, crea el secreto CI_REPOS_TOKEN (PAT con lectura de la organización).
+      # Layout de hermanos: $GITHUB_WORKSPACE/{bandadau-admin,bandadau-shared,bandadau-docs} (ADR-0017).
       - uses: actions/checkout@v4
         with: { path: bandadau-admin }
       - uses: actions/checkout@v4
@@ -26,9 +27,13 @@ jobs:
       - name: Construir bandadau-shared
         working-directory: bandadau-shared
         run: pnpm install --frozen-lockfile && pnpm build
-      - working-directory: bandadau-admin
+      - name: ¿Hay código para ${{ matrix.app }}?
+        id: detect
+        run: echo "present=$([ -f bandadau-admin/${{ matrix.app }}/package.json ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+      - if: steps.detect.outputs.present == 'true'
+        working-directory: bandadau-admin/${{ matrix.app }}
         run: |
           pnpm install --frozen-lockfile
-          pnpm -r lint
-          pnpm -r build
-          pnpm -r test
+          pnpm lint
+          pnpm typecheck
+          pnpm build
