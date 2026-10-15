@@ -6,10 +6,10 @@ Panel de administración y host de microfrontends (Web Components) de Bandada U,
 |---|---|
 | Stack | Next.js 16 static export · React 19 · Tailwind v4 · urql + graphql-ws · tokens + i18n compartidos |
 | Puerto dev | 3001 (uso normal: `http://admin.bandada.localhost` vía Traefik) |
-| Casos de uso | UC-03, UC-18, UC-21 (UC-19/20 en fase 2) |
+| Casos de uso | UC-03, UC-18, UC-21 (UC-19/20 vía `mfe-insights`) |
 
 Secciones: Dashboard, Usuarios (roles, suspender/reactivar), Universidades, Eventos, SAGAs (`retrySaga`),
-Moderación (`<bandada-mfe-moderation>`), Insights/Reportes deshabilitados (fase 2, feature flag).
+Moderación (`<bandada-mfe-moderation>`), Insights/Reportes (`<bandada-mfe-insights>`, React) tras el feature flag `NEXT_PUBLIC_FEATURE_INSIGHTS`.
 
 ```bash
 cd ../../bandadau-shared && corepack pnpm install --frozen-lockfile && corepack pnpm build   # una vez

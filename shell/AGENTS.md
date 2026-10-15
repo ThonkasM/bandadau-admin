@@ -53,7 +53,7 @@ corepack pnpm manifest:prod  # out/mfe-manifest.json con BASE_DOMAIN/versiones/S
 ## Variables de entorno (`.env.example`)
 
 `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_GRAPHQL_URL`, `NEXT_PUBLIC_GRAPHQL_WS_URL`, `NEXT_PUBLIC_APP_URL`,
-`NEXT_PUBLIC_MFE_MANIFEST_URL`, `NEXT_PUBLIC_DEFAULT_LOCALE`, `NEXT_PUBLIC_FEATURE_INSIGHTS` (false en fase 1).
+`NEXT_PUBLIC_MFE_MANIFEST_URL`, `NEXT_PUBLIC_DEFAULT_LOCALE`, `NEXT_PUBLIC_FEATURE_INSIGHTS` (true por defecto en `.env.example`: monta `<bandada-mfe-insights>`; con `false` queda la tarjeta de fase 2. Si el gateway responde `FEATURE_DISABLED`, el propio MFE muestra un estado explicativo).
 
 ## Desarrollo: sitio, cookie y mock
 
