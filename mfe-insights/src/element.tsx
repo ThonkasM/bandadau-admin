@@ -97,9 +97,10 @@ export class BandadaMfeInsights extends HTMLElement {
     }
     this.applyTheme(this.config.theme);
     this.applyLocale(this.config.locale);
-    if (!this.graphqlUrl) {
-      console.error('event=mfe.contract.violation missing=graphql-url mfe=insights');
-    }
+    // el host puede asignar la URL justo después de conectar el elemento: se avisa solo si sigue vacía
+    setTimeout(() => {
+      if (this.isConnected && !this.graphqlUrl) console.error('event=mfe.contract.violation missing=graphql-url mfe=insights');
+    }, 2000);
 
     this.bridge.attach(this);
     this.services = BandadaMfeInsights.servicesFactory?.(this.config, this.bridge, this.i18n) ?? createServices(this.config, this.bridge, this.i18n);
