@@ -1,0 +1,16 @@
+{
+  "moderation": {
+    "url": "http://localhost:4201/main.js",
+    "element": "bandada-mfe-moderation",
+    "version": "0.1.0",
+    "requiredRoles": ["MODERATOR", "ADMIN"],
+    "basePath": "/moderation"
+  },
+  "insights": {
+    "url": "http://localhost:4301/main.js",
+    "element": "bandada-mfe-insights",
+    "version": "0.0.0",
+    "requiredRoles": ["ADMIN"],
+    "basePath": "/insights"
+  }
+}

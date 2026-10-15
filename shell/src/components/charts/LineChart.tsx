@@ -32,7 +32,8 @@ export function LineChart({ series, locale, title }: { series: ChartSeries[]; lo
   const innerH = H - PAD.top - PAD.bottom;
   const x = (i: number) => PAD.left + (dates.length <= 1 ? innerW / 2 : (i / (dates.length - 1)) * innerW);
   const y = (v: number) => PAD.top + innerH - (v / maxValue) * innerH;
-  const ticks = [0, 0.25, 0.5, 0.75, 1].map((f) => f * maxValue);
+  const steps = maxValue % 5 === 0 ? 5 : 4;
+  const ticks = Array.from({ length: steps + 1 }, (_, i) => (i * maxValue) / steps);
   const labelIdx = Array.from(new Set([0, Math.floor((dates.length - 1) / 2), dates.length - 1])).filter((i) => i >= 0);
 
   return (

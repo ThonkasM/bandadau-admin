@@ -6,5 +6,5 @@
     "types": ["node", "vitest/globals", "@testing-library/jest-dom"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".next/dev/types/**/*.ts"],
-  "exclude": ["node_modules", "out", "dev-mock"]
+  "exclude": ["node_modules", "out", "dev"]
 }

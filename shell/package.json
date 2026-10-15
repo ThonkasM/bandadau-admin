@@ -13,7 +13,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "i18n:check": "node scripts/i18n-check.mjs",
-    "mock": "node dev-mock/server.mjs",
+    "mfe:serve": "node dev/serve-mfe.mjs",
     "manifest:prod": "node scripts/write-manifest.mjs"
   },
   "dependencies": {
