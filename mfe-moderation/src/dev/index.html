@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <title>mfe-moderation · host de prueba</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Solo en modo standalone: el shell real carga tokens.css una vez en :root (D13). -->
+    <link rel="stylesheet" href="dev/tokens.css" />
+    <style>
+      body {
+        margin: 0;
+        background: var(--bd-color-bg-canvas);
+        color: var(--bd-color-text-primary);
+        font-family: var(--bd-font-family-body);
+      }
+      .host-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--bd-space-2);
+        padding: var(--bd-space-3) var(--bd-space-4);
+        background: var(--bd-color-bg-surface);
+        border-bottom: 1px solid var(--bd-color-border-default);
+        font-size: var(--bd-font-size-sm);
+      }
+      .host-bar strong { margin-right: var(--bd-space-2); }
+      .host-bar button, .host-bar input {
+        font: inherit;
+        padding: var(--bd-space-1) var(--bd-space-3);
+        border-radius: var(--bd-radius-sm);
+        border: 1px solid var(--bd-color-border-strong);
+        background: var(--bd-color-bg-surface);
+        color: var(--bd-color-text-primary);
+        cursor: pointer;
+      }
+      .host-bar input { cursor: text; min-width: 18rem; }
+      #toasts {
+        position: fixed;
+        right: var(--bd-space-4);
+        bottom: var(--bd-space-4);
+        display: flex;
+        flex-direction: column;
+        gap: var(--bd-space-2);
+        z-index: var(--bd-z-toast);
+      }
+      .toast {
+        padding: var(--bd-space-3) var(--bd-space-4);
+        border-radius: var(--bd-radius-md);
+        background: var(--bd-color-bg-inverse);
+        color: var(--bd-color-text-inverse);
+        box-shadow: var(--bd-shadow-md);
+      }
+      #log {
+        margin: 0;
+        padding: var(--bd-space-2) var(--bd-space-4);
+        font-family: var(--bd-font-family-mono);
+        font-size: var(--bd-font-size-xs);
+        color: var(--bd-color-text-muted);
+        max-height: 6rem;
+        overflow: auto;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="host-bar" role="toolbar" aria-label="Host de prueba (simula al shell)">
+      <strong>Shell simulado</strong>
+      <button id="btn-theme" type="button">Tema: claro</button>
+      <button id="btn-locale" type="button">Idioma: es</button>
+      <button id="btn-token-ok" type="button">Token válido</button>
+      <button id="btn-token-bad" type="button">Token inválido</button>
+      <button id="btn-token-none" type="button">Sin token</button>
+      <label>GraphQL <input id="gql-url" type="url" /></label>
+      <button id="btn-url" type="button">Aplicar URL</button>
+    </div>
+    <pre id="log" aria-live="off"></pre>
+    <main>
+      <bandada-mfe-moderation
+        id="mfe"
+        base-path="/moderation"
+        theme="light"
+        locale="es"
+      ></bandada-mfe-moderation>
+    </main>
+    <div id="toasts" role="region" aria-live="polite" aria-label="Toasts del shell"></div>
+    <script type="module" src="dev/dev-host.js"></script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+{
+  "queue": {
+    "title": "Moderation",
+    "listLabel": "Moderation queue"
+  },
+  "filters": {
+    "label": "Queue filters",
+    "type": "Type",
+    "kind": "Media",
+    "reason": "Reason",
+    "all": "All"
+  },
+  "type": {
+    "MEDIA": "Media",
+    "POST": "Post",
+    "COMMENT": "Comment"
+  },
+  "live": {
+    "live": "Live",
+    "connecting": "Connecting…",
+    "offline": "Live updates offline",
+    "idle": "Live updates paused"
+  },
+  "item": {
+    "score": "Score {score}",
+    "reports": "{count, plural, one {# report} other {# reports}}",
+    "new": "New",
+    "author": "Author: {author}"
+  },
+  "states": {
+    "error": "We could not load the moderation queue.",
+    "empty": "There is no content waiting for review.",
+    "emptyHint": "New items will show up here live.",
+    "partial": "Showing only part of the queue. {reason}",
+    "waitingSession": "Waiting for the panel session…"
+  },
+  "shortcuts": {
+    "hint": "Shortcuts: j / k move selection · a approve or keep · r reject or remove · s suspend author"
+  },
+  "detail": {
+    "titleMedia": "Media flagged by AI",
+    "titleReport": "Reported content",
+    "empty": "Select an item from the queue to review it.",
+    "preview": "Media preview",
+    "previewAlt": "Preview of the flagged media. Tags: {tags}",
+    "previewExpired": "The preview is unavailable or expired (links last 15 minutes).",
+    "refreshPreview": "Refresh preview",
+    "noPreview": "This media has no preview.",
+    "show": "Show",
+    "hide": "Hide",
+    "text": "Text",
+    "ocr": "Text detected in the image",
+    "model": "Moderation model",
+    "modelVersion": "Model version: {version}",
+    "tags": "Tags",
+    "reports": "{count, plural, one {# open report} other {# open reports}}",
+    "reportsNotLoaded": "The report details could not be loaded.",
+    "author": "Author",
+    "actions": "Moderation actions"
+  },
+  "actions": {
+    "APPROVE": "Approve",
+    "REJECT": "Reject",
+    "KEEP": "Keep",
+    "REMOVE": "Remove",
+    "SUSPEND": "Suspend author"
+  },
+  "dialog": {
+    "title": {
+      "APPROVE": "Approve this media",
+      "REJECT": "Reject this media",
+      "KEEP": "Keep the content",
+      "REMOVE": "Remove the content",
+      "SUSPEND": "Suspend the author"
+    },
+    "description": {
+      "APPROVE": "The media will be approved and the posts waiting for it will be published.",
+      "REJECT": "The media will be rejected and the posts that contain it will be hidden. This decision is final.",
+      "KEEP": "The reports will be closed and the content will stay visible.",
+      "REMOVE": "The reports will be closed and the content will be removed.",
+      "SUSPEND": "The author will not be able to use their account. This action is destructive and requires a reason."
+    },
+    "noteLabel": "Audit note (optional)",
+    "reasonLabel": "Reason for the suspension",
+    "noteRequired": "Enter the reason to continue.",
+    "alsoSuspend": "Also suspend the author",
+    "defaultSuspendReason": "Content rejected by moderation"
+  },
+  "toast": {
+    "APPROVE": "Content approved",
+    "REJECT": "Content rejected",
+    "KEEP": "Content kept",
+    "REMOVE": "Content removed",
+    "SUSPEND": "Author suspended"
+  },
+  "errors": {
+    "generic": "We could not complete the action. Please try again.",
+    "ALREADY_MODERATED": "Another moderator already resolved this content. We refreshed the queue.",
+    "NETWORK_ERROR": "Cannot reach the server. Check your network and try again.",
+    "UNAUTHENTICATED": "Your session expired. Please sign in again.",
+    "UPSTREAM_UNAVAILABLE": "A service did not respond in time.",
+    "CONTRACT_VIOLATION": "The module is missing configuration (graphql-url).",
+    "INVALID_RESPONSE": "The server replied with an unexpected format.",
+    "REPORT_NOT_FOUND": "The reports for this content were not found.",
+    "FEATURE_DISABLED": "This feature is not enabled.",
+    "NOT_FOUND": "The item was not found.",
+    "INTERNAL_SERVER_ERROR": "An unexpected server error occurred."
+  }
+}

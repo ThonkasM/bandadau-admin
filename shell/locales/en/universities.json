@@ -1,0 +1,29 @@
+{
+  "title": "Universities",
+  "description": "Enabled universities and the institutional email domains allowed for sign-up.",
+  "create": "New university",
+  "created": "University created",
+  "tableCaption": "University list",
+  "empty": "There are no universities yet",
+  "enabled": "Enabled",
+  "disabled": "Disabled",
+  "columns": {
+    "name": "Name",
+    "domains": "Allowed domains",
+    "enabled": "Status",
+    "createdAt": "Created",
+    "actions": "Actions"
+  },
+  "editPending": "Editing domains needs the updateUniversity mutation, which is not yet in the panel's GraphQL contract.",
+  "editAria": "Edit {name}",
+  "form": {
+    "title": "New university",
+    "name": "Name",
+    "nameRequired": "The name is required.",
+    "domains": "Email domains",
+    "domainsHint": "One per line or comma-separated, e.g. umsa.edu.bo",
+    "domainsPlaceholder": "umsa.edu.bo",
+    "domainsRequired": "Add at least one domain.",
+    "domainsInvalid": "One of the domains has an invalid format."
+  }
+}

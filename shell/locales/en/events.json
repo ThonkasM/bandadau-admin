@@ -1,0 +1,62 @@
+{
+  "title": "Events",
+  "description": "Events, registrations and their status.",
+  "tableCaption": "Event list",
+  "empty": "No events match these filters",
+  "free": "Free",
+  "noValue": "—",
+  "view": "View",
+  "viewAria": "View event {title}",
+  "limitNote": "Showing up to {count} events; refine the filters to narrow down.",
+  "columns": {
+    "title": "Event",
+    "startsAt": "Date",
+    "venue": "Venue",
+    "seats": "Seats",
+    "price": "Price",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "filters": {
+    "search": "Search",
+    "searchPlaceholder": "Event title",
+    "status": "Status",
+    "all": "All"
+  },
+  "detail": {
+    "notFound": "We couldn't find this event",
+    "back": "Back to events"
+  },
+  "registrations": {
+    "title": "Registrations",
+    "caption": "Event registrations",
+    "empty": "No registrations",
+    "user": "User",
+    "unknownUser": "Unknown user",
+    "status": "Status",
+    "failure": "Failure reason",
+    "saga": "SAGA",
+    "createdAt": "Created"
+  },
+  "sagas": {
+    "title": "SAGAs",
+    "description": "Registrations and cancellations in progress or failed. Retry failed SAGAs from the step where they stopped.",
+    "caption": "SAGA list",
+    "empty": "No SAGAs match these filters",
+    "emptyFailed": "There are no failed SAGAs. All good.",
+    "id": "SAGA",
+    "type": "Type",
+    "step": "Step",
+    "status": "Status",
+    "failure": "Reason",
+    "retries": "Retries",
+    "updatedAt": "Updated",
+    "actions": "Actions",
+    "retry": "Retry",
+    "retryAria": "Retry SAGA {id}",
+    "retryTitle": "Retry SAGA {id}",
+    "retryBody": "The SAGA restarts from the step where it stopped. Commands are idempotent, so repeating it does not duplicate charges.",
+    "retryConfirm": "Retry SAGA",
+    "retried": "SAGA restarted"
+  }
+}

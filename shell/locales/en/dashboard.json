@@ -1,0 +1,51 @@
+{
+  "title": "Dashboard",
+  "description": "Platform indicators and service status.",
+  "range": {
+    "label": "Range",
+    "lastDays": "Last {count, plural, one {# day} other {# days}}"
+  },
+  "cards": {
+    "activeUsers": "Active users",
+    "newUsers": "New users",
+    "posts": "Posts",
+    "comments": "Comments",
+    "registrations": "Confirmed registrations",
+    "creditsSpent": "Credits spent",
+    "flagged": "Flagged content",
+    "openAlerts": "Open alerts"
+  },
+  "chart": {
+    "title": "Daily activity",
+    "description": "Daily series for the last {count, plural, one {# day} other {# days}}.",
+    "empty": "No data in this range.",
+    "credits": "Credits per day"
+  },
+  "series": {
+    "registrationsConfirmed": "Confirmed registrations",
+    "newUsers": "New users",
+    "posts": "Posts",
+    "comments": "Comments",
+    "activeUsers": "Active users",
+    "creditsSpent": "Credits spent",
+    "creditsToppedUp": "Credits topped up"
+  },
+  "health": {
+    "title": "Service health",
+    "summary": "{up} of {total} operational",
+    "latency": "{ms} ms"
+  },
+  "alerts": {
+    "title": "Open alerts ({count})",
+    "raised": "New alert: {message}",
+    "empty": "There are no open alerts.",
+    "meta": "{kind} · {when}",
+    "insightsPhase2": "Insights: phase 2",
+    "disabled": "Alerts are available in phase 2."
+  },
+  "queues": {
+    "title": "Message queues",
+    "ready": "{count, plural, =0 {No messages} one {# message} other {# messages}}",
+    "dlq": "DLQ has messages"
+  }
+}

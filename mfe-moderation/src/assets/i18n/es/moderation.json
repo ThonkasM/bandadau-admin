@@ -1,0 +1,109 @@
+{
+  "queue": {
+    "title": "Moderación",
+    "listLabel": "Cola de moderación"
+  },
+  "filters": {
+    "label": "Filtros de la cola",
+    "type": "Tipo",
+    "kind": "Medio",
+    "reason": "Motivo",
+    "all": "Todos"
+  },
+  "type": {
+    "MEDIA": "Medio",
+    "POST": "Publicación",
+    "COMMENT": "Comentario"
+  },
+  "live": {
+    "live": "En vivo",
+    "connecting": "Conectando…",
+    "offline": "Sin conexión en vivo",
+    "idle": "En vivo pausado"
+  },
+  "item": {
+    "score": "Puntaje {score}",
+    "reports": "{count, plural, one {# denuncia} other {# denuncias}}",
+    "new": "Nuevo",
+    "author": "Autor: {author}"
+  },
+  "states": {
+    "error": "No pudimos cargar la cola de moderación.",
+    "empty": "No hay contenido pendiente de revisión.",
+    "emptyHint": "Cuando llegue algo nuevo aparecerá aquí en vivo.",
+    "partial": "Mostramos solo una parte de la cola. {reason}",
+    "waitingSession": "Esperando la sesión del panel…"
+  },
+  "shortcuts": {
+    "hint": "Atajos: j / k mover la selección · a aprobar o mantener · r rechazar o retirar · s suspender al autor"
+  },
+  "detail": {
+    "titleMedia": "Medio marcado por la IA",
+    "titleReport": "Contenido denunciado",
+    "empty": "Selecciona un elemento de la cola para revisarlo.",
+    "preview": "Vista previa del medio",
+    "previewAlt": "Vista previa del medio marcado. Etiquetas: {tags}",
+    "previewExpired": "La vista previa no está disponible o expiró (los enlaces duran 15 minutos).",
+    "refreshPreview": "Actualizar vista previa",
+    "noPreview": "Este medio no tiene vista previa.",
+    "show": "Mostrar",
+    "hide": "Ocultar",
+    "text": "Texto",
+    "ocr": "Texto detectado en la imagen",
+    "model": "Modelo de moderación",
+    "modelVersion": "Versión del modelo: {version}",
+    "tags": "Etiquetas",
+    "reports": "{count, plural, one {# denuncia abierta} other {# denuncias abiertas}}",
+    "reportsNotLoaded": "No se pudo cargar el detalle de las denuncias.",
+    "author": "Autor",
+    "actions": "Acciones de moderación"
+  },
+  "actions": {
+    "APPROVE": "Aprobar",
+    "REJECT": "Rechazar",
+    "KEEP": "Mantener",
+    "REMOVE": "Retirar",
+    "SUSPEND": "Suspender autor"
+  },
+  "dialog": {
+    "title": {
+      "APPROVE": "Aprobar este medio",
+      "REJECT": "Rechazar este medio",
+      "KEEP": "Mantener el contenido",
+      "REMOVE": "Retirar el contenido",
+      "SUSPEND": "Suspender al autor"
+    },
+    "description": {
+      "APPROVE": "El medio quedará aprobado y las publicaciones que lo esperaban se publicarán.",
+      "REJECT": "El medio quedará rechazado y las publicaciones que lo contienen se ocultarán. La decisión es final.",
+      "KEEP": "Se cerrarán las denuncias y el contenido seguirá visible.",
+      "REMOVE": "Se cerrarán las denuncias y el contenido se retirará.",
+      "SUSPEND": "El autor no podrá usar su cuenta. Esta acción es destructiva y requiere un motivo."
+    },
+    "noteLabel": "Nota para la auditoría (opcional)",
+    "reasonLabel": "Motivo de la suspensión",
+    "noteRequired": "Escribe el motivo para continuar.",
+    "alsoSuspend": "Suspender también al autor",
+    "defaultSuspendReason": "Contenido rechazado por moderación"
+  },
+  "toast": {
+    "APPROVE": "Contenido aprobado",
+    "REJECT": "Contenido rechazado",
+    "KEEP": "Contenido mantenido",
+    "REMOVE": "Contenido retirado",
+    "SUSPEND": "Autor suspendido"
+  },
+  "errors": {
+    "generic": "No pudimos completar la acción. Inténtalo de nuevo.",
+    "ALREADY_MODERATED": "Otro moderador ya resolvió este contenido. Actualizamos la cola.",
+    "NETWORK_ERROR": "Sin conexión con el servidor. Revisa tu red e inténtalo de nuevo.",
+    "UNAUTHENTICATED": "Tu sesión expiró. Vuelve a iniciar sesión.",
+    "UPSTREAM_UNAVAILABLE": "Un servicio no respondió a tiempo.",
+    "CONTRACT_VIOLATION": "Falta configuración del módulo (graphql-url).",
+    "INVALID_RESPONSE": "El servidor respondió con un formato inesperado.",
+    "REPORT_NOT_FOUND": "No se encontraron las denuncias de este contenido.",
+    "FEATURE_DISABLED": "Esta función no está habilitada.",
+    "NOT_FOUND": "No se encontró el elemento.",
+    "INTERNAL_SERVER_ERROR": "Ocurrió un error inesperado en el servidor."
+  }
+}

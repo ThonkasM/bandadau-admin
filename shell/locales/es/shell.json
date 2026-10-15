@@ -1,0 +1,89 @@
+{
+  "pagination": {
+    "label": "Paginación",
+    "page": "Página {page}"
+  },
+  "theme": {
+    "SYSTEM": "Sistema",
+    "LIGHT": "Claro",
+    "DARK": "Oscuro",
+    "current": "Tema: {mode}"
+  },
+  "localeName": {
+    "es": "Español",
+    "en": "English"
+  },
+  "states": {
+    "errorTitle": "No pudimos cargar los datos",
+    "crashTitle": "Algo salió mal en esta pantalla",
+    "crashBody": "El resto del panel sigue funcionando. Intenta de nuevo; si persiste, avisa al equipo."
+  },
+  "nav": {
+    "label": "Navegación principal",
+    "expand": "Expandir menú lateral",
+    "collapse": "Contraer menú lateral",
+    "detail": "Detalle",
+    "groups": {
+      "main": "General",
+      "manage": "Gestión",
+      "insights": "Inteligencia"
+    },
+    "items": {
+      "dashboard": "Dashboard",
+      "moderation": "Moderación",
+      "users": "Usuarios",
+      "universities": "Universidades",
+      "events": "Eventos",
+      "sagas": "SAGAs",
+      "insights": "Insights",
+      "reports": "Reportes"
+    }
+  },
+  "phase2": {
+    "badge": "Fase 2",
+    "title": "Disponible en fase 2",
+    "body": "Los reportes generativos y el monitoreo con agentes llegan en la fase 2. Por ahora esta sección está deshabilitada."
+  },
+  "breadcrumbs": {
+    "label": "Ruta de navegación"
+  },
+  "userMenu": {
+    "label": "Menú de usuario de {email}",
+    "openInApp": "Abrir en la app"
+  },
+  "accessDenied": {
+    "title": "Sin acceso al panel",
+    "panelBody": "La cuenta {email} no tiene rol de moderador ni de administrador. Cierra sesión e ingresa con otra cuenta.",
+    "sectionBody": "Tu rol no permite ver esta sección.",
+    "goHome": "Ir al inicio"
+  },
+  "mfe": {
+    "loading": "Cargando módulo…",
+    "failedTitle": "No pudimos cargar este módulo",
+    "goHome": "Volver al inicio",
+    "errors": {
+      "MANIFEST_FAILED": "Panel en mantenimiento parcial: no se pudo leer el catálogo de módulos.",
+      "MFE_NOT_IN_MANIFEST": "Este módulo no está publicado en el catálogo.",
+      "MFE_LOAD_FAILED": "El script del módulo no se pudo descargar. Revisa tu conexión e inténtalo otra vez.",
+      "MFE_TIMEOUT": "El módulo tardó demasiado en responder (10 s)."
+    }
+  },
+  "moderation": {
+    "description": "Cola de contenido marcado y denuncias."
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "body": "La ruta que buscas no existe en el panel.",
+    "home": "Ir al inicio"
+  },
+  "apiErrors": {
+    "NETWORK_ERROR": "No pudimos conectar con el servidor.",
+    "FEATURE_DISABLED": "Esta función está deshabilitada en esta fase.",
+    "CANNOT_DEMOTE_SELF": "No puedes quitarte el rol de administrador.",
+    "CANNOT_SUSPEND_SELF": "No puedes suspender tu propia cuenta.",
+    "ROLES_REQUIRED": "El usuario debe conservar al menos un rol.",
+    "DOMAIN_ALREADY_ASSIGNED": "Ese dominio ya pertenece a otra universidad.",
+    "HANDOFF_CODE_EXPIRED": "El enlace expiró.",
+    "HANDOFF_TARGET_FORBIDDEN": "Tu cuenta no tiene acceso al panel."
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "pagination": {
+    "label": "Pagination",
+    "page": "Page {page}"
+  },
+  "theme": {
+    "SYSTEM": "System",
+    "LIGHT": "Light",
+    "DARK": "Dark",
+    "current": "Theme: {mode}"
+  },
+  "localeName": {
+    "es": "Español",
+    "en": "English"
+  },
+  "states": {
+    "errorTitle": "We couldn't load the data",
+    "crashTitle": "Something went wrong on this screen",
+    "crashBody": "The rest of the panel is still working. Try again; if it persists, let the team know."
+  },
+  "nav": {
+    "label": "Main navigation",
+    "expand": "Expand sidebar",
+    "collapse": "Collapse sidebar",
+    "detail": "Detail",
+    "groups": {
+      "main": "General",
+      "manage": "Management",
+      "insights": "Intelligence"
+    },
+    "items": {
+      "dashboard": "Dashboard",
+      "moderation": "Moderation",
+      "users": "Users",
+      "universities": "Universities",
+      "events": "Events",
+      "sagas": "SAGAs",
+      "insights": "Insights",
+      "reports": "Reports"
+    }
+  },
+  "phase2": {
+    "badge": "Phase 2",
+    "title": "Available in phase 2",
+    "body": "Generative reports and agent-based monitoring arrive in phase 2. This section is disabled for now."
+  },
+  "breadcrumbs": {
+    "label": "Breadcrumb"
+  },
+  "userMenu": {
+    "label": "User menu for {email}",
+    "openInApp": "Open in the app"
+  },
+  "accessDenied": {
+    "title": "No access to the panel",
+    "panelBody": "The account {email} has neither the moderator nor the administrator role. Sign out and sign in with another account.",
+    "sectionBody": "Your role does not allow you to see this section.",
+    "goHome": "Go to home"
+  },
+  "mfe": {
+    "loading": "Loading module…",
+    "failedTitle": "We couldn't load this module",
+    "goHome": "Back to home",
+    "errors": {
+      "MANIFEST_FAILED": "Panel partially unavailable: the module catalog could not be read.",
+      "MFE_NOT_IN_MANIFEST": "This module is not published in the catalog.",
+      "MFE_LOAD_FAILED": "The module script could not be downloaded. Check your connection and try again.",
+      "MFE_TIMEOUT": "The module took too long to respond (10 s)."
+    }
+  },
+  "moderation": {
+    "description": "Flagged content queue and reports."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The route you are looking for does not exist in the panel.",
+    "home": "Go to home"
+  },
+  "apiErrors": {
+    "NETWORK_ERROR": "We couldn't reach the server.",
+    "FEATURE_DISABLED": "This feature is disabled in this phase.",
+    "CANNOT_DEMOTE_SELF": "You cannot remove your own administrator role.",
+    "CANNOT_SUSPEND_SELF": "You cannot suspend your own account.",
+    "ROLES_REQUIRED": "The user must keep at least one role.",
+    "DOMAIN_ALREADY_ASSIGNED": "That domain already belongs to another university.",
+    "HANDOFF_CODE_EXPIRED": "The link has expired.",
+    "HANDOFF_TARGET_FORBIDDEN": "Your account has no access to the panel."
+  }
+}

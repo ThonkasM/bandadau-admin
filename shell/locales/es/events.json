@@ -1,0 +1,62 @@
+{
+  "title": "Eventos",
+  "description": "Eventos, inscripciones y su estado.",
+  "tableCaption": "Listado de eventos",
+  "empty": "No hay eventos con estos filtros",
+  "free": "Gratis",
+  "noValue": "—",
+  "view": "Ver",
+  "viewAria": "Ver el evento {title}",
+  "limitNote": "Se muestran hasta {count} eventos; afina los filtros para acotar.",
+  "columns": {
+    "title": "Evento",
+    "startsAt": "Fecha",
+    "venue": "Lugar",
+    "seats": "Cupos",
+    "price": "Precio",
+    "status": "Estado",
+    "actions": "Acciones"
+  },
+  "filters": {
+    "search": "Buscar",
+    "searchPlaceholder": "Título del evento",
+    "status": "Estado",
+    "all": "Todos"
+  },
+  "detail": {
+    "notFound": "No encontramos este evento",
+    "back": "Volver a eventos"
+  },
+  "registrations": {
+    "title": "Inscripciones",
+    "caption": "Inscripciones del evento",
+    "empty": "Sin inscripciones",
+    "user": "Usuario",
+    "unknownUser": "Usuario desconocido",
+    "status": "Estado",
+    "failure": "Motivo de fallo",
+    "saga": "SAGA",
+    "createdAt": "Creada"
+  },
+  "sagas": {
+    "title": "SAGAs",
+    "description": "Inscripciones y cancelaciones en curso o fallidas. Reintenta las SAGAs fallidas desde el paso en que quedaron.",
+    "caption": "Listado de SAGAs",
+    "empty": "No hay SAGAs con estos filtros",
+    "emptyFailed": "No hay SAGAs fallidas. Todo en orden.",
+    "id": "SAGA",
+    "type": "Tipo",
+    "step": "Paso",
+    "status": "Estado",
+    "failure": "Motivo",
+    "retries": "Reintentos",
+    "updatedAt": "Actualizada",
+    "actions": "Acciones",
+    "retry": "Reintentar",
+    "retryAria": "Reintentar la SAGA {id}",
+    "retryTitle": "Reintentar la SAGA {id}",
+    "retryBody": "Se reimpulsa la SAGA desde el paso en que quedó. Los comandos son idempotentes, así que repetirlo no duplica cobros.",
+    "retryConfirm": "Reintentar SAGA",
+    "retried": "SAGA reimpulsada"
+  }
+}

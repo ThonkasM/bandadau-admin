@@ -1,0 +1,67 @@
+{
+  "title": "Usuarios",
+  "description": "Busca cuentas, cambia roles y suspende o reactiva usuarios.",
+  "tableCaption": "Listado de usuarios",
+  "noName": "Sin nombre",
+  "noUniversity": "Sin universidad",
+  "noValue": "—",
+  "manage": "Gestionar",
+  "manageAria": "Gestionar a {email}",
+  "columns": {
+    "name": "Nombre",
+    "email": "Correo",
+    "university": "Universidad",
+    "roles": "Roles",
+    "status": "Estado",
+    "actions": "Acciones"
+  },
+  "filters": {
+    "search": "Buscar",
+    "searchPlaceholder": "Correo o nombre",
+    "role": "Rol",
+    "status": "Estado",
+    "university": "Universidad",
+    "all": "Todos"
+  },
+  "empty": {
+    "noMatch": "Ningún usuario coincide con la búsqueda",
+    "none": "Aún no hay usuarios"
+  },
+  "detail": {
+    "notFound": "No encontramos a este usuario",
+    "back": "Volver a usuarios",
+    "account": "Cuenta",
+    "createdAt": "Alta",
+    "verifiedAt": "Correo verificado",
+    "notVerified": "Sin verificar",
+    "career": "Carrera",
+    "locale": "Idioma (preferencia del usuario)",
+    "theme": "Tema (preferencia del usuario)",
+    "suspension": "Suspensión vigente",
+    "rolesTitle": "Roles",
+    "rolesHint": "Marca el conjunto completo de roles. Los cambios se aplican en el próximo token del usuario (≤ 15 min).",
+    "rolesReadOnly": "Solo un administrador puede cambiar roles.",
+    "rolesRules": "Todo usuario conserva el rol Estudiante y un administrador no puede quitarse su propio rol.",
+    "saveRoles": "Guardar roles",
+    "rolesUpdated": "Roles actualizados"
+  },
+  "suspend": {
+    "action": "Suspender",
+    "title": "Suspender a {email}",
+    "warning": "Se revocarán todas sus sesiones y no podrá iniciar sesión hasta que se reactive la cuenta.",
+    "reason": "Motivo",
+    "reasonRequired": "El motivo es obligatorio.",
+    "until": "Hasta (opcional)",
+    "untilHint": "Sin fecha, la suspensión es indefinida.",
+    "confirm": "Suspender cuenta",
+    "done": "Cuenta suspendida"
+  },
+  "reactivate": {
+    "action": "Reactivar",
+    "title": "Reactivar a {email}",
+    "warning": "El usuario podrá iniciar sesión otra vez; sus sesiones anteriores no se restauran.",
+    "note": "Nota (opcional)",
+    "confirm": "Reactivar cuenta",
+    "done": "Cuenta reactivada"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "title": "Universidades",
+  "description": "Universidades habilitadas y los dominios de correo institucional permitidos para el registro.",
+  "create": "Nueva universidad",
+  "created": "Universidad creada",
+  "tableCaption": "Listado de universidades",
+  "empty": "Aún no hay universidades",
+  "enabled": "Habilitada",
+  "disabled": "Deshabilitada",
+  "columns": {
+    "name": "Nombre",
+    "domains": "Dominios permitidos",
+    "enabled": "Estado",
+    "createdAt": "Alta",
+    "actions": "Acciones"
+  },
+  "editPending": "Editar dominios requiere la mutación updateUniversity, que aún no está en el contrato GraphQL del panel.",
+  "editAria": "Editar {name}",
+  "form": {
+    "title": "Nueva universidad",
+    "name": "Nombre",
+    "nameRequired": "El nombre es obligatorio.",
+    "domains": "Dominios de correo",
+    "domainsHint": "Uno por línea o separados por coma, p. ej. umsa.edu.bo",
+    "domainsPlaceholder": "umsa.edu.bo",
+    "domainsRequired": "Agrega al menos un dominio.",
+    "domainsInvalid": "Hay un dominio con formato inválido."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "mfe-moderation",
+  "version": "0.1.0",
+  "description": "Microfrontend de moderaci\u00f3n de Bandada U: <bandada-mfe-moderation> (Angular 21 + Angular Elements)",
+  "private": true,
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@10.34.7",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve --configuration development",
+    "build": "ng build && node scripts/postbuild.mjs",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test --watch=false",
+    "lint": "eslint .",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.spec.json --noEmit",
+    "i18n:check": "node scripts/i18n-check.mjs",
+    "mock": "node dev/mock-gateway.mjs"
+  },
+  "dependencies": {
+    "@angular/common": "^21.2.0",
+    "@angular/compiler": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/elements": "^21.2.0",
+    "@angular/platform-browser": "^21.2.0",
+    "@bandada/contracts-ts": "file:../../bandadau-shared/packages/contracts-ts",
+    "@bandada/i18n": "file:../../bandadau-shared/packages/i18n",
+    "@bandada/ui-tokens": "file:../../bandadau-shared/packages/ui-tokens",
+    "@jsverse/transloco": "^8.4.0",
+    "@jsverse/transloco-messageformat": "^8.4.0",
+    "@jsverse/utils": "1.0.0-beta.5",
+    "@messageformat/core": "^3.4.0",
+    "graphql-ws": "^6.4.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^21.2.25",
+    "@angular/cli": "^21.2.25",
+    "@angular/compiler-cli": "^21.2.0",
+    "@bandada/eslint-config": "file:../../bandadau-shared/packages/eslint-config",
+    "@types/ws": "^8.18.1",
+    "angular-eslint": "^21.4.0",
+    "eslint": "^9.39.5",
+    "graphql": "^17.0.2",
+    "jsdom": "^28.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "^8.71.2",
+    "vitest": "^4.0.8",
+    "ws": "^8.22.0"
+  }
+}

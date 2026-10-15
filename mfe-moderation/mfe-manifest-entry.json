@@ -1,0 +1,10 @@
+{
+  "moderation": {
+    "url": "https://mfe.bandadau.com/moderation/0.1.0/main.js",
+    "element": "bandada-mfe-moderation",
+    "version": "0.1.0",
+    "integrity": "sha384-<se calcula en el build: dist/mfe-moderation/mfe-manifest-entry.json>",
+    "requiredRoles": ["MODERATOR", "ADMIN"],
+    "basePath": "/moderation"
+  }
+}

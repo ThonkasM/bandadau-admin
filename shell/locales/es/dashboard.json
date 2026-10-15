@@ -1,0 +1,51 @@
+{
+  "title": "Dashboard",
+  "description": "Indicadores de la plataforma y estado de los servicios.",
+  "range": {
+    "label": "Rango",
+    "lastDays": "Últimos {count, plural, one {# día} other {# días}}"
+  },
+  "cards": {
+    "activeUsers": "Usuarios activos",
+    "newUsers": "Usuarios nuevos",
+    "posts": "Publicaciones",
+    "comments": "Comentarios",
+    "registrations": "Inscripciones confirmadas",
+    "creditsSpent": "Créditos gastados",
+    "flagged": "Contenido marcado",
+    "openAlerts": "Alertas abiertas"
+  },
+  "chart": {
+    "title": "Actividad por día",
+    "description": "Serie diaria de los últimos {count, plural, one {# día} other {# días}}.",
+    "empty": "Sin datos en este rango.",
+    "credits": "Créditos por día"
+  },
+  "series": {
+    "registrationsConfirmed": "Inscripciones confirmadas",
+    "newUsers": "Usuarios nuevos",
+    "posts": "Publicaciones",
+    "comments": "Comentarios",
+    "activeUsers": "Usuarios activos",
+    "creditsSpent": "Créditos gastados",
+    "creditsToppedUp": "Créditos recargados"
+  },
+  "health": {
+    "title": "Salud de servicios",
+    "summary": "{up} de {total} operativos",
+    "latency": "{ms} ms"
+  },
+  "alerts": {
+    "title": "Alertas abiertas ({count})",
+    "raised": "Nueva alerta: {message}",
+    "empty": "No hay alertas abiertas.",
+    "meta": "{kind} · {when}",
+    "insightsPhase2": "Insights: fase 2",
+    "disabled": "Alertas disponibles en la fase 2."
+  },
+  "queues": {
+    "title": "Colas de mensajes",
+    "ready": "{count, plural, =0 {Sin mensajes} one {# mensaje} other {# mensajes}}",
+    "dlq": "DLQ con mensajes"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "title": "Users",
+  "description": "Search accounts, change roles, and suspend or reactivate users.",
+  "tableCaption": "User list",
+  "noName": "No name",
+  "noUniversity": "No university",
+  "noValue": "—",
+  "manage": "Manage",
+  "manageAria": "Manage {email}",
+  "columns": {
+    "name": "Name",
+    "email": "Email",
+    "university": "University",
+    "roles": "Roles",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "filters": {
+    "search": "Search",
+    "searchPlaceholder": "Email or name",
+    "role": "Role",
+    "status": "Status",
+    "university": "University",
+    "all": "All"
+  },
+  "empty": {
+    "noMatch": "No user matches the search",
+    "none": "There are no users yet"
+  },
+  "detail": {
+    "notFound": "We couldn't find this user",
+    "back": "Back to users",
+    "account": "Account",
+    "createdAt": "Created",
+    "verifiedAt": "Email verified",
+    "notVerified": "Not verified",
+    "career": "Degree",
+    "locale": "Language (user preference)",
+    "theme": "Theme (user preference)",
+    "suspension": "Current suspension",
+    "rolesTitle": "Roles",
+    "rolesHint": "Check the complete set of roles. Changes apply with the user's next token (≤ 15 min).",
+    "rolesReadOnly": "Only an administrator can change roles.",
+    "rolesRules": "Every user keeps the Student role, and an administrator cannot remove their own role.",
+    "saveRoles": "Save roles",
+    "rolesUpdated": "Roles updated"
+  },
+  "suspend": {
+    "action": "Suspend",
+    "title": "Suspend {email}",
+    "warning": "All their sessions will be revoked and they won't be able to sign in until the account is reactivated.",
+    "reason": "Reason",
+    "reasonRequired": "The reason is required.",
+    "until": "Until (optional)",
+    "untilHint": "Without a date, the suspension is indefinite.",
+    "confirm": "Suspend account",
+    "done": "Account suspended"
+  },
+  "reactivate": {
+    "action": "Reactivate",
+    "title": "Reactivate {email}",
+    "warning": "The user will be able to sign in again; their previous sessions are not restored.",
+    "note": "Note (optional)",
+    "confirm": "Reactivate account",
+    "done": "Account reactivated"
+  }
+}

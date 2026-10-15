@@ -1,0 +1,93 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "packageManager": "pnpm",
+    "analytics": false
+  },
+  "projects": {
+    "mfe-moderation": {
+      "projectType": "application",
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "bmod",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "src/main.ts",
+            "tsConfig": "tsconfig.app.json",
+            "index": false,
+            "outputPath": {
+              "base": "dist/mfe-moderation",
+              "browser": ""
+            },
+            "outputHashing": "none",
+            "preserveSymlinks": true,
+            "allowedCommonJsDependencies": [
+              "@messageformat/core"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "700kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "12kB",
+                  "maximumError": "24kB"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "index": "src/dev/index.html",
+              "assets": [
+                {
+                  "glob": "tokens.css",
+                  "input": "node_modules/@bandada/ui-tokens/dist/css",
+                  "output": "dev"
+                },
+                {
+                  "glob": "dev-host.js",
+                  "input": "src/dev",
+                  "output": "dev"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": {
+            "port": 4201,
+            "host": "localhost",
+            "headers": {
+              "Access-Control-Allow-Origin": "*"
+            },
+            "prebundle": false
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "mfe-moderation:build:production"
+            },
+            "development": {
+              "buildTarget": "mfe-moderation:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test"
+        }
+      }
+    }
+  }
+}

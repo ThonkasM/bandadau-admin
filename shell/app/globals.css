@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@import "@bandada/ui-tokens/css/tokens.css";
+@import "@bandada/ui-tokens/css/tailwind-theme.css"; /* bg-surface, text-primary, border-default, bg-action-primary… */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@layer base {
+  html {
+    font-family: var(--bd-font-family-body);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--bd-color-bg-canvas);
+    color: var(--bd-color-text-primary);
+    line-height: var(--bd-line-height-normal);
+    min-height: 100vh;
+  }
+  :focus-visible {
+    outline-color: var(--bd-color-border-focus);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
