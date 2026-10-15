@@ -17,8 +17,8 @@ Cada una tiene su `AGENTS.md`.
 
 ## Reglas del repo
 
-- **pnpm workspace** en la raíz de este repo (`shell` → paquete `admin-shell`, `mfe-moderation`, `mfe-insights`). Paquetes compartidos
-  como dependencia local hermana: `file:../../bandadau-shared/packages/<pkg>` (`ui-tokens`, `i18n`, `contracts-ts`).
+- Cada app es un **proyecto independiente** (su `package.json` y lockfile; sin workspace en la raíz). Paquetes compartidos
+  como dependencia local hermana: `file:../../bandadau-shared/packages/<pkg>` (`ui-tokens`, `i18n`, `contracts-ts`). Package manager: `corepack pnpm`.
 - Los MFEs **no** importan código del shell ni entre sí. El contrato es el de
   `microfrontends.md`: propiedades `graphql-url`, `access-token`, `base-path`, `theme`, `locale`;
   eventos `bandada:navigate`, `bandada:toast`, `bandada:auth-expired`, `bandada:theme-changed`,
@@ -30,9 +30,6 @@ Cada una tiene su `AGENTS.md`.
 ## Comandos
 
 ```bash
-pnpm install
-pnpm --filter admin-shell dev       # http://localhost:3001
-pnpm --filter mfe-moderation dev    # http://localhost:4201
-pnpm --filter mfe-insights dev      # http://localhost:4301
-pnpm -r build && pnpm -r test
+(cd shell && corepack pnpm install && corepack pnpm dev)           # http://localhost:3001
+(cd mfe-moderation && corepack pnpm install && corepack pnpm start)  # http://localhost:4201
 ```

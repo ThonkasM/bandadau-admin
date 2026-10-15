@@ -95,7 +95,7 @@ export function MfeHost({ name }: { name: string }) {
         });
         on('bandada:toast', (event) => {
           const detail = (event as CustomEvent<ToastDetail>).detail ?? {};
-          const text = detail.messageKey ? translate.current(detail.messageKey) : (detail.message ?? translate.current('common:states.success'));
+          const text = detail.message ?? (detail.messageKey ? translate.current(detail.messageKey) : translate.current('common:states.success'));
           const kind = detail.kind ?? 'info';
           toast[kind](text);
         });

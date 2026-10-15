@@ -35,6 +35,7 @@ export function createGraphQLClient(): GraphQLClientHandle {
   const client = new Client({
     url: env.graphqlUrl,
     requestPolicy: 'cache-and-network',
+    preferGetMethod: false,
     fetchOptions: { credentials: 'omit' },
     exchanges: [
       cacheExchange,
