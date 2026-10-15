@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
+import { FakeModerationService, fakeRealtime, mediaItem } from '../../../testing/fixtures';
 import { HostConfig } from '../../core/host-config';
 import { provideI18n } from '../../core/i18n';
 import { RealtimeClient } from '../../core/realtime';
 import { ShellBridge } from '../../core/shell-bridge';
-import { FakeModerationService, fakeRealtime, mediaItem } from '../../../testing/fixtures';
 import { ModerationService } from './moderation.service';
 import { ModerationStore } from './moderation.store';
 

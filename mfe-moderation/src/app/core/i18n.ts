@@ -1,13 +1,13 @@
-import { Injectable, inject, provideAppInitializer } from '@angular/core';
-import { Translation, TranslocoLoader, TranslocoService, provideTransloco } from '@jsverse/transloco';
-import { Observable, of } from 'rxjs';
-import { provideTranslocoMessageformat } from '@jsverse/transloco-messageformat';
+import { inject, Injectable, provideAppInitializer } from '@angular/core';
 import enCommon from '@bandada/i18n/locales/en/common.json';
 import enEnums from '@bandada/i18n/locales/en/enums.json';
 import enErrors from '@bandada/i18n/locales/en/errors.json';
 import esCommon from '@bandada/i18n/locales/es/common.json';
 import esEnums from '@bandada/i18n/locales/es/enums.json';
 import esErrors from '@bandada/i18n/locales/es/errors.json';
+import { provideTransloco,type Translation, type TranslocoLoader, TranslocoService } from '@jsverse/transloco';
+import { provideTranslocoMessageformat } from '@jsverse/transloco-messageformat';
+import { type Observable, of } from 'rxjs';
 
 import enModeration from '../../assets/i18n/en/moderation.json';
 import esModeration from '../../assets/i18n/es/moderation.json';

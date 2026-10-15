@@ -1,4 +1,4 @@
-import { Injectable, InjectionToken, inject } from '@angular/core';
+import { inject,Injectable, InjectionToken } from '@angular/core';
 
 import { HostConfig } from './host-config';
 import { ShellBridge } from './shell-bridge';
@@ -121,7 +121,7 @@ export class GraphqlClient {
         ...(e.path ? { path: e.path } : {}),
       }),
     );
-    if (!body || (body.data == null && errors.length === 0)) {
+    if (!body || ((body.data === null || body.data === undefined) && errors.length === 0)) {
       if (response.status === 401) return { data: null, errors: [{ message: '', code: 'UNAUTHENTICATED' }] };
       if (response.status === 403) throw new GqlError('FORBIDDEN');
       throw new GqlError(response.ok ? 'INVALID_RESPONSE' : 'UPSTREAM_UNAVAILABLE');

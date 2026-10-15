@@ -1,4 +1,4 @@
-import { ItemView, QueueEntry, QueueFilters, ReportReason, ReportView } from './moderation.models';
+import { type ItemView, type QueueEntry, type QueueFilters, type ReportReason, type ReportView } from './moderation.models';
 
 /** Códigos que indican que otro moderador ya resolvió el elemento (UC-18 curso 10a). */
 export const CONFLICT_CODES: ReadonlySet<string> = new Set([
@@ -28,11 +28,23 @@ export function buildEntries(
     list.push(report);
     byTarget.set(report.targetId, list);
   }
+  const queuePostIds = new Set(items.map((i) => i.post?.id ?? i.id));
+  const commentsByPost = new Map<string, ReportView[]>();
+  for (const report of reports) {
+    const pid = report.post?.id;
+    if (report.targetType !== 'COMMENT' || !pid || !queuePostIds.has(pid)) continue;
+    commentsByPost.set(pid, [...(commentsByPost.get(pid) ?? []), report]);
+  }
   const isNew = (key: string) => options.newKeys?.has(key) ?? false;
 
   const entries: QueueEntry[] = items.map((item): QueueEntry => {
     const isMedia = item.source === 'AI' && item.media !== null;
-    const own = byTarget.get(item.id) ?? (item.post ? (byTarget.get(item.post.id) ?? []) : []);
+    const postId = item.post?.id ?? item.id;
+    // Denuncias del propio post + de comentarios de ese post (el gateway las cuenta en `openReports`).
+    const own = [
+      ...(byTarget.get(item.id) ?? byTarget.get(postId) ?? []),
+      ...(commentsByPost.get(postId) ?? []),
+    ];
     const media = mediaOf(item);
     const reasons = [...new Set(own.map((r) => r.reason))];
     return {
@@ -54,7 +66,7 @@ export function buildEntries(
   if (options.includeComments) {
     const comments = new Map<string, ReportView[]>();
     for (const report of reports) {
-      if (report.targetType !== 'COMMENT') continue;
+      if (report.targetType !== 'COMMENT' || queuePostIds.has(report.post?.id ?? '')) continue;
       const list = comments.get(report.targetId) ?? [];
       list.push(report);
       comments.set(report.targetId, list);

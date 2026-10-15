@@ -88,3 +88,33 @@ UC-18 (moderar contenido marcado por IA), UC-10 (resolver denuncias).
 ## Definición de hecho
 
 `definition-of-done.md` §0, §4, §5 + E2E montado en el shell (aprobar/rechazar) en `es`/`en` y claro/oscuro.
+
+## Estado de implementación (fase 1) y decisiones
+
+- **Cliente GraphQL**: `fetch` propio (`core/graphql-client.ts`, único chokepoint: `Authorization`, `Accept-Language`,
+  `X-Correlation-Id`, `Idempotency-Key` por intención en mutaciones) + `graphql-ws` (`core/realtime.ts`). Sin Apollo.
+  Operaciones escritas a mano en `features/moderation-queue/moderation.queries.ts` y validadas contra el SDL
+  real por `scripts/check-contract.mjs` (parte de `pnpm test`). Tipos de enums de `@bandada/contracts-ts/graphql/admin`.
+- **Carpetas reales**: `src/main.ts`, `src/element/` (raíz ShadowDom + `moderation.css`), `src/app/core/`
+  (`host-config`, `shell-bridge`, `graphql-client`, `realtime`, `i18n`), `src/app/features/moderation-queue/`
+  (store con signals, service, lista, detalle, diálogo; las denuncias UC-10 viven en el mismo store/servicio),
+  `src/assets/i18n/{es,en}/moderation.json` (no `src/locales`), `src/dev/` (host de prueba), `dev/mock-gateway.mjs`.
+- **Estilos**: una sola hoja en el raíz (ShadowDom); los hijos usan `ViewEncapsulation.None` **sin** estilos
+  propios (los estilos Emulated/None irían al `<head>` del shell). Diálogo con `<dialog>` nativo.
+- **i18n**: Transloco + MessageFormat, catálogos empaquetados (común + enums + errores de `@bandada/i18n` y `moderation`).
+  Errores por `code`: `errors.<code>` → `moderation.errors.<code>` → genérico.
+- **Pruebas**: `ng test` (Vitest + jsdom). `pnpm i18n:check` usa `scripts/i18n-check.mjs` (combina catálogos).
+
+### Divergencias de contrato / dudas (reportadas, no resueltas aquí)
+1. `ALREADY_MODERATED` (UC-18 10a) no está en el contrato; se acepta como `UserError.code` y como `extensions.code`
+   (también `MEDIA_NOT_FLAGGED`, `CONFLICT`). Mensaje propio en `moderation.errors`.
+2. `ModerationQueueFilter` solo tiene `source/kind/minScore`: tipo POST/COMMENT y motivo se filtran en cliente;
+   `ModerationItem` no expone ids de denuncia → se unen con `contentReports(status: OPEN, first: 50)` y
+   "resolver" un ítem = resolver todas sus denuncias abiertas (también las de comentarios de ese post).
+3. `HiddenReason` no existe en el SDL; el motivo mostrado es `ReportReason` (denuncias) o etiquetas del modelo.
+4. `User` no tiene nombre visible: se muestra el email.
+5. WebSocket: el doc (§6.2) dice `connectionParams {accessToken, locale}`; el mock oficial lee `Authorization`.
+   El cliente envía ambas formas.
+6. `@bandada/i18n` no declara `yaml`, por lo que `bandada-i18n-check --contracts` falla al instalarlo como `file:`;
+   el check del MFE no usa `--contracts`.
+7. `bandadau-admin/AGENTS.md` habla de workspace pnpm; este MFE es independiente por instrucción del coordinador.

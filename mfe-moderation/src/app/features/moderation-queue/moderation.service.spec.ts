@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
+import { fakeRealtime } from '../../../testing/fixtures';
 import { GRAPHQL_CLIENT_OPTIONS } from '../../core/graphql-client';
 import { HostConfig } from '../../core/host-config';
 import { provideI18n } from '../../core/i18n';
 import { RealtimeClient } from '../../core/realtime';
-import { fakeRealtime } from '../../../testing/fixtures';
 import { ModerationService } from './moderation.service';
 
 function json(body: unknown): Response {

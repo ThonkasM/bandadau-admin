@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
-import { TranslocoPipe } from '@jsverse/transloco';
 import { formatDateTime, formatNumber } from '@bandada/i18n/format';
+import { TranslocoPipe } from '@jsverse/transloco';
 
-import { LocaleName } from '../../core/host-config';
+import { type LocaleName } from '../../core/host-config';
 import { sortedScores } from './entries';
-import { ActionKind, QueueEntry } from './moderation.models';
+import { type ActionKind, type QueueEntry } from './moderation.models';
 
 /** Panel de detalle: vista previa (URL prefirmada, difuminada hasta "Mostrar"), texto, autor, motivo y acciones. */
 @Component({

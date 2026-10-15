@@ -1,5 +1,5 @@
-import { Injectable, InjectionToken, inject, signal } from '@angular/core';
-import { Client, ClientOptions, createClient } from 'graphql-ws';
+import { inject, Injectable, InjectionToken, signal } from '@angular/core';
+import { type Client, type ClientOptions, createClient } from 'graphql-ws';
 
 import { HostConfig } from './host-config';
 import { ShellBridge } from './shell-bridge';
@@ -63,10 +63,17 @@ export class RealtimeClient {
       url,
       lazy: true,
       retryAttempts: Infinity,
-      connectionParams: () => ({
-        accessToken: this.config.accessToken(),
-        locale: this.config.locale(),
-      }),
+      // graphql-admin.md §6.2 define `accessToken` + `locale`; el mock oficial lee `Authorization`:
+      // se envían ambas formas para ser compatible con los dos.
+      connectionParams: () => {
+        const token = this.config.accessToken();
+        return {
+          accessToken: token,
+          locale: this.config.locale(),
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          'Accept-Language': this.config.locale(),
+        };
+      },
       on: {
         connecting: () => this.state.set('connecting'),
         connected: (_socket, _payload, wasRetry) => {

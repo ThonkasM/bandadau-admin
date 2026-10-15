@@ -1,4 +1,4 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 
 import { GqlError } from '../../core/graphql-client';
@@ -7,19 +7,19 @@ import { RealtimeClient } from '../../core/realtime';
 import { ShellBridge } from '../../core/shell-bridge';
 import { buildEntries, isConflict, matchesFilters } from './entries';
 import {
-  ActionInput,
-  ActionRequest,
+  type ActionInput,
+  type ActionRequest,
   DEFAULT_FILTERS,
-  ItemView,
-  Outcome,
-  PageInfoView,
-  QueueChange,
-  QueueEntry,
-  QueueFilters,
-  ReportView,
-  Role,
+  type ItemView,
+  type Outcome,
+  type PageInfoView,
+  type QueueChange,
+  type QueueEntry,
+  type QueueFilters,
+  type ReportView,
+  type Role,
 } from './moderation.models';
-import { ModerationService, ServerFilter } from './moderation.service';
+import { ModerationService, type ServerFilter } from './moderation.service';
 
 export const PAGE_SIZE = 20;
 export type LoadStatus = 'idle' | 'loading' | 'ready' | 'error';

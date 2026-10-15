@@ -1,14 +1,14 @@
 import { signal } from '@angular/core';
 
 import {
-  ItemView,
-  MediaView,
-  Outcome,
-  PostView,
-  QueueChange,
-  QueuePage,
-  ReportView,
-  UserRef,
+  type ItemView,
+  type MediaView,
+  type Outcome,
+  type PostView,
+  type QueueChange,
+  type QueuePage,
+  type ReportView,
+  type UserRef,
 } from '../app/features/moderation-queue/moderation.models';
 import { ModerationService } from '../app/features/moderation-queue/moderation.service';
 

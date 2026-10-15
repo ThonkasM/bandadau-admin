@@ -1,26 +1,26 @@
-import { Injectable, inject } from '@angular/core';
+import { inject,Injectable } from '@angular/core';
 
-import { GqlError, GqlErrorItem, GraphqlClient } from '../../core/graphql-client';
+import { GqlError, type GqlErrorItem, GraphqlClient } from '../../core/graphql-client';
 import { RealtimeClient } from '../../core/realtime';
 import {
-  ItemView,
-  MediaKind,
-  MediaReviewDecision,
-  MediaView,
-  ModerationSource,
-  Outcome,
-  PostView,
-  QueueChange,
-  QueuePage,
-  ReportResolution,
-  ReportView,
-  Role,
+  type ItemView,
+  type MediaKind,
+  type MediaReviewDecision,
+  type MediaView,
+  type ModerationSource,
+  type Outcome,
+  type PostView,
+  type QueueChange,
+  type QueuePage,
+  type ReportResolution,
+  type ReportView,
+  type Role,
 } from './moderation.models';
 import {
   CONTENT_REPORTS,
+  ME,
   MODERATE_MEDIA,
   MODERATION_QUEUE,
-  ME,
   QUEUE_CHANGED,
   RESOLVE_CONTENT_REPORT,
   SUSPEND_USER,

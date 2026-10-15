@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, ElementRef, input, output, viewChild } from '@angular/core';
-import { TranslocoPipe } from '@jsverse/transloco';
+import { ChangeDetectionStrategy, Component, type ElementRef, input, output, viewChild } from '@angular/core';
 import { formatNumber, formatRelative } from '@bandada/i18n/format';
+import { TranslocoPipe } from '@jsverse/transloco';
 
-import { LocaleName } from '../../core/host-config';
-import { QueueEntry } from './moderation.models';
+import { type LocaleName } from '../../core/host-config';
+import { type QueueEntry } from './moderation.models';
 
 /** Score a partir del cual el modelo bloquearía automáticamente (D7): se resalta como peligro. */
 const BLOCK_SCORE = 0.85;

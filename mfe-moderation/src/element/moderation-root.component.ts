@@ -1,20 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  OnDestroy,
-  ViewEncapsulation,
   effect,
+  ElementRef,
   inject,
   input,
+  type OnDestroy,
   untracked,
+  ViewEncapsulation,
 } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 
-import { HostConfig, LocaleName, ThemeName } from '../app/core/host-config';
+import { HostConfig, type LocaleName, type ThemeName } from '../app/core/host-config';
 import { ShellBridge } from '../app/core/shell-bridge';
-import { ModerationPageComponent } from '../app/features/moderation-queue/moderation-page.component';
 import { ModerationStore } from '../app/features/moderation-queue/moderation.store';
+import { ModerationPageComponent } from '../app/features/moderation-queue/moderation-page.component';
 
 /**
  * Raíz del Web Component `<bandada-mfe-moderation>`. Único componente con `ShadowDom`: los hijos

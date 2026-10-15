@@ -1,4 +1,4 @@
-import { mediaItem, postItem, report } from '../../../testing/fixtures';
+import { mediaItem, post, postItem, report } from '../../../testing/fixtures';
 import { buildEntries, isConflict, matchesFilters } from './entries';
 import { DEFAULT_FILTERS } from './moderation.models';
 
@@ -15,6 +15,12 @@ describe('entries', () => {
       ['comment:c-1', 'COMMENT', 1],
     ]);
     expect(entries[1]!.reasons).toEqual(['SPAM', 'HARASSMENT']);
+  });
+
+  it('attaches comment reports to the queue item of their post instead of listing them twice', () => {
+    const entries = buildEntries([postItem('p-1', 1)], [report('r-9', 'c-9', { targetType: 'COMMENT', post: post('p-1') })], { includeComments: true });
+    expect(entries.map((e) => e.key)).toEqual(['p-1']);
+    expect(entries[0]!.reports.map((r) => r.id)).toEqual(['r-9']);
   });
 
   it('omits comments when the type filter excludes them', () => {

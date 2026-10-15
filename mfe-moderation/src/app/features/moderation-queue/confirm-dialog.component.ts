@@ -1,9 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   computed,
   effect,
+  type ElementRef,
   input,
   output,
   signal,
@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 
-import { ActionInput, ActionRequest } from './moderation.models';
+import { type ActionInput, type ActionRequest } from './moderation.models';
 
 /**
  * Confirmación con nota. Usa `<dialog>` nativo dentro del shadow root (los overlays del CDK

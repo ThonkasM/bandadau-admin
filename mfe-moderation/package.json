@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Microfrontend de moderaci\u00f3n de Bandada U: <bandada-mfe-moderation> (Angular 21 + Angular Elements)",
   "private": true,
+  "type": "module",
   "license": "UNLICENSED",
   "packageManager": "pnpm@10.34.7",
   "engines": {
@@ -13,8 +14,8 @@
     "start": "ng serve --configuration development",
     "build": "ng build && node scripts/postbuild.mjs",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --watch=false",
-    "lint": "eslint .",
+    "test": "ng test --watch=false && node scripts/check-contract.mjs",
+    "lint": "eslint . && node scripts/check-style-rules.mjs",
     "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.spec.json --noEmit",
     "i18n:check": "node scripts/i18n-check.mjs",
     "mock": "node dev/mock-gateway.mjs"

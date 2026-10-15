@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GRAPHQL_CLIENT_OPTIONS, GqlError, GraphqlClient } from './graphql-client';
+import { GqlError, GRAPHQL_CLIENT_OPTIONS, GraphqlClient } from './graphql-client';
 import { HostConfig } from './host-config';
 import { provideI18n } from './i18n';
 import { ShellBridge } from './shell-bridge';

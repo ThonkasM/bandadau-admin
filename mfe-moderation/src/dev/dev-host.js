@@ -3,7 +3,7 @@
 const params = new URLSearchParams(location.search);
 const mfe = document.getElementById('mfe');
 const log = document.getElementById('log');
-const GOOD_TOKEN = params.get('token') ?? 'dev-moderator-token';
+let GOOD_TOKEN = params.get('token') ?? 'dev-moderator-token';
 const BAD_TOKEN = 'expired-token';
 
 const state = {
@@ -35,6 +35,24 @@ function applyUrl() {
   mfe.graphqlUrl = urlInput.value;
 }
 
+// Contra el gateway mock oficial (bandadau-infra/mock) el token sale de su login REST de desarrollo
+// (usuario demo del seed local); contra el mock propio de esta carpeta sirve 'dev-moderator-token'.
+async function fetchDevToken() {
+  if (params.has('token')) return GOOD_TOKEN;
+  try {
+    const origin = new URL(urlInput.value).origin;
+    const res = await fetch(`${origin}/api/v1/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: 'mod@umsa.edu.bo', password: 'Bandada#2026' }),
+    });
+    if (res.ok) GOOD_TOKEN = (await res.json()).accessToken ?? GOOD_TOKEN;
+  } catch {
+    /* mock propio: se usa el token fijo */
+  }
+  return GOOD_TOKEN;
+}
+
 function showToast(detail) {
   const el = document.createElement('div');
   el.className = 'toast';
@@ -50,8 +68,8 @@ mfe.addEventListener('bandada:toast', (e) => {
 mfe.addEventListener('bandada:navigate', (e) => write(`bandada:navigate ${JSON.stringify(e.detail)}`));
 mfe.addEventListener('bandada:auth-expired', () => {
   write('bandada:auth-expired -> el shell simula un refresh y reasigna accessToken en 600 ms');
-  setTimeout(() => {
-    mfe.accessToken = GOOD_TOKEN;
+  setTimeout(async () => {
+    mfe.accessToken = await fetchDevToken();
     write('shell: accessToken renovado');
   }, 600);
 });
@@ -64,7 +82,7 @@ document.getElementById('btn-locale').addEventListener('click', () => {
   state.locale = state.locale === 'es' ? 'en' : 'es';
   applyLocale();
 });
-document.getElementById('btn-token-ok').addEventListener('click', () => (mfe.accessToken = GOOD_TOKEN));
+document.getElementById('btn-token-ok').addEventListener('click', async () => (mfe.accessToken = await fetchDevToken()));
 document.getElementById('btn-token-bad').addEventListener('click', () => (mfe.accessToken = BAD_TOKEN));
 document.getElementById('btn-token-none').addEventListener('click', () => (mfe.accessToken = null));
 document.getElementById('btn-url').addEventListener('click', applyUrl);
@@ -73,8 +91,8 @@ applyTheme();
 applyLocale();
 applyUrl();
 // El token es PROPIEDAD, nunca atributo.
-customElements.whenDefined('bandada-mfe-moderation').then(() => {
-  mfe.accessToken = GOOD_TOKEN;
+customElements.whenDefined('bandada-mfe-moderation').then(async () => {
+  mfe.accessToken = await fetchDevToken();
   write('shell: elemento definido, accessToken asignado como propiedad');
 });
 

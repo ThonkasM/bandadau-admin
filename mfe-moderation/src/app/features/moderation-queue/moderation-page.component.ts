@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal, viewChild } from '@angular/core';
-import { TranslocoPipe } from '@jsverse/transloco';
 import { formatNumber } from '@bandada/i18n/format';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 import { HostConfig } from '../../core/host-config';
 import { ConfirmDialogComponent } from './confirm-dialog.component';
 import { DetailPanelComponent } from './detail-panel.component';
-import { ActionInput, ActionKind, ActionRequest, EntryType, MediaKind, QueueFilters, ReportReason } from './moderation.models';
+import { type ActionInput, type ActionKind, type ActionRequest, type EntryType, type MediaKind, type QueueFilters, type ReportReason } from './moderation.models';
 import { ModerationStore } from './moderation.store';
 import { QueueListComponent } from './queue-list.component';
 
