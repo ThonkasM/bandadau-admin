@@ -9,7 +9,7 @@
   "insights": {
     "url": "http://localhost:4301/main.js",
     "element": "bandada-mfe-insights",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "requiredRoles": ["ADMIN"],
     "basePath": "/insights"
   }

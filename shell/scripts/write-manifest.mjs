@@ -15,7 +15,7 @@ const entry = (name, element, roles, version, integrity) => ({
 });
 const manifest = {
   moderation: entry('moderation', 'bandada-mfe-moderation', ['MODERATOR', 'ADMIN'], process.env.MODERATION_VERSION ?? '0.1.0', process.env.MODERATION_INTEGRITY),
-  insights: entry('insights', 'bandada-mfe-insights', ['ADMIN'], process.env.INSIGHTS_VERSION ?? '0.0.0', process.env.INSIGHTS_INTEGRITY),
+  insights: entry('insights', 'bandada-mfe-insights', ['ADMIN'], process.env.INSIGHTS_VERSION ?? '0.1.0', process.env.INSIGHTS_INTEGRITY),
 };
 const out = path.resolve(process.argv[2] ?? 'out/mfe-manifest.json');
 fs.mkdirSync(path.dirname(out), { recursive: true });
