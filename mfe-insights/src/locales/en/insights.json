@@ -1,0 +1,181 @@
+{
+  "title": "Insights",
+  "tabs": {
+    "label": "Insights sections",
+    "reports": "Reports",
+    "alerts": "Alerts",
+    "runs": "Agent runs",
+    "openAlerts": "{count, plural, =0 {no open alerts} one {# open alert} other {# open alerts}}"
+  },
+  "reports": {
+    "form": {
+      "title": "Request a report",
+      "label": "Question in natural language",
+      "placeholder": "How many registrations were there last month, and for which events?",
+      "submit": "Request report",
+      "submitting": "Sending…",
+      "examplesLabel": "Examples",
+      "hint": "The report is written and narrated in the panel's active language ({language}).",
+      "tooShort": "Write a question of at least {min} characters.",
+      "tooLong": "The question cannot exceed {max} characters.",
+      "language": {
+        "es": "Spanish",
+        "en": "English"
+      }
+    },
+    "examples": {
+      "lastMonth": "Registrations in the last month",
+      "topEvents": "Events with the most registrations this month",
+      "moderation": "Content flagged by moderation this week"
+    },
+    "list": {
+      "title": "Recent reports",
+      "empty": "There are no reports yet. Request the first one with the form above.",
+      "loadMore": "Load more reports",
+      "refresh": "Refresh list",
+      "untitled": "Untitled report",
+      "pendingHint": "The agent is working on this report…"
+    },
+    "detail": {
+      "title": "Report",
+      "close": "Close report",
+      "requestedAt": "Requested {date}",
+      "question": "Question",
+      "generating": "The agent is working… this can take up to a couple of minutes.",
+      "pollingFallback": "No live connection: checking the status every few seconds.",
+      "summary": "Summary",
+      "chart": "Chart",
+      "chartError": "The chart could not be drawn.",
+      "chartLoading": "Loading chart…",
+      "noChart": "This report has no chart.",
+      "dataset": "Data table",
+      "datasetEmpty": "This report has no data table.",
+      "copyCsv": "Copy CSV",
+      "copied": "CSV copied to the clipboard.",
+      "copyFailed": "The CSV could not be copied.",
+      "tools": "Tools used",
+      "toolsNone": "None",
+      "tokens": "{count, number} tokens",
+      "agentRun": "View agent run",
+      "failed": "The report could not be generated.",
+      "noMarkdown": "The report has no text."
+    },
+    "audio": {
+      "title": "Summary audio",
+      "label": "Audio player for the report summary",
+      "unavailable": "Audio not available.",
+      "duration": "Length: {seconds, number} s",
+      "refreshing": "Renewing the audio link…",
+      "error": "The audio could not be played.",
+      "transcriptNote": "The transcript is the summary shown below."
+    },
+    "failure": {
+      "OUT_OF_SCOPE": "The question is out of scope: only questions about platform metrics (users, content, events, credits and moderation) are supported.",
+      "DATA_UNAVAILABLE": "No data was available to answer the question.",
+      "BUDGET_EXCEEDED": "The agent ran out of budget before gathering enough data.",
+      "LLM_UNAVAILABLE": "The AI model is unavailable right now. Try again later.",
+      "unknown": "The report could not be generated."
+    },
+    "toast": {
+      "requested": "Report requested. The agent is working…",
+      "ready": "Your report is ready.",
+      "failed": "The report could not be generated."
+    }
+  },
+  "alerts": {
+    "title": "Alerts",
+    "live": {
+      "label": "Live connection status",
+      "live": "Live",
+      "connecting": "Connecting…",
+      "offline": "No live connection",
+      "idle": "Paused"
+    },
+    "filter": {
+      "label": "Status"
+    },
+    "kind": {
+      "SERVICE_DOWN": "Service down",
+      "SAGA_FAILURES": "SAGA failures",
+      "DLQ_BACKLOG": "Messages piling up in DLQ",
+      "MODERATION_BACKLOG": "Moderation queue backlog",
+      "METRIC_ANOMALY": "Metric anomaly",
+      "MODERATION_ESCALATION": "Moderation escalation"
+    },
+    "empty": "There are no alerts with this filter. The platform is quiet.",
+    "resource": "Resource: {resource}",
+    "occurrences": "{count, plural, one {# detection} other {# detections}}",
+    "raised": "Raised {when}",
+    "acknowledgedAt": "Acknowledged {when}",
+    "details": "Details",
+    "acknowledge": "Acknowledge",
+    "acknowledging": "Acknowledging…",
+    "acknowledgeLabel": "Acknowledge the alert: {title}",
+    "acknowledged": "Alert acknowledged.",
+    "newAlert": "New {severity} alert: {title}",
+    "runNow": "Run monitoring now",
+    "running": "Running monitoring…",
+    "runDone": "Monitoring finished: {count, plural, =0 {no new alerts} one {# new alert} other {# new alerts}}.",
+    "runFailed": "The monitoring run ended with an error."
+  },
+  "runs": {
+    "title": "Agent runs",
+    "empty": "There are no agent runs yet.",
+    "loadMore": "Load more runs",
+    "trigger": {
+      "SCHEDULE": "Scheduled",
+      "MANUAL": "Manual",
+      "REPORT_REQUEST": "Report request"
+    },
+    "model": "Model: {model}",
+    "started": "Started {when}",
+    "duration": "Duration {seconds, number, ::.#} s",
+    "stopReason": "Stop reason: {reason}",
+    "stopReasonValue": {
+      "COMPLETED": "completed",
+      "MAX_STEPS": "step limit",
+      "MAX_TOKENS": "token limit",
+      "ERROR": "error",
+      "STEP_LIMIT": "step limit",
+      "TOKEN_LIMIT": "token limit"
+    },
+    "steps": "Steps ({count, number})",
+    "noSteps": "No steps recorded.",
+    "step": "Step {index}: {kind}",
+    "stepKind": {
+      "LLM": "Model",
+      "LLM_CALL": "Model",
+      "TOOL_CALL": "Tool"
+    },
+    "stepError": "failed",
+    "stepDuration": "{ms, number} ms",
+    "tokens": "Tokens: {input, number} in · {output, number} out · {total, number} total",
+    "tools": "Tools",
+    "error": "Run error: {message}",
+    "alertsCreated": "{count, plural, =0 {No alerts} one {# alert raised} other {# alerts raised}}",
+    "toggle": "Show steps of run {id}"
+  },
+  "states": {
+    "retry": "Try again",
+    "featureDisabled": {
+      "title": "Insights will be available in phase 2",
+      "body": "Generative reports and the monitoring agent's alerts are not enabled in this environment yet. They will show up here once phase 2 is turned on."
+    },
+    "contract": {
+      "title": "Panel configuration is missing",
+      "body": "The panel did not provide the GraphQL service address. Reload the page."
+    },
+    "waitingSession": "Waiting for the panel session…"
+  },
+  "errors": {
+    "NETWORK_ERROR": "We could not reach the server.",
+    "UPSTREAM_UNAVAILABLE": "The server did not respond correctly. Try again.",
+    "INVALID_RESPONSE": "The server returned an unexpected response.",
+    "CONTRACT_VIOLATION": "The panel did not configure the microfrontend correctly.",
+    "LLM_BUDGET_EXCEEDED": "The AI model's monthly budget has been reached.",
+    "UNSUPPORTED_LOCALE": "The requested language is not supported.",
+    "VALIDATION_ERROR": "Check the question and try again.",
+    "NOT_FOUND": "The requested item was not found.",
+    "generic": "Something went wrong. Try again."
+  }
+}

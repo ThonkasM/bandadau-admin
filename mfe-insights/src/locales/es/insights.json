@@ -1,0 +1,181 @@
+{
+  "title": "Insights",
+  "tabs": {
+    "label": "Secciones de Insights",
+    "reports": "Reportes",
+    "alerts": "Alertas",
+    "runs": "Ejecuciones de agentes",
+    "openAlerts": "{count, plural, =0 {sin alertas abiertas} one {# alerta abierta} other {# alertas abiertas}}"
+  },
+  "reports": {
+    "form": {
+      "title": "Pedir reporte",
+      "label": "Pregunta en lenguaje natural",
+      "placeholder": "¿Cuántas inscripciones hubo el último mes y en qué eventos?",
+      "submit": "Pedir reporte",
+      "submitting": "Enviando…",
+      "examplesLabel": "Ejemplos",
+      "hint": "El reporte se redacta y se narra en el idioma activo del panel ({language}).",
+      "tooShort": "Escribe una pregunta de al menos {min} caracteres.",
+      "tooLong": "La pregunta no puede superar {max} caracteres.",
+      "language": {
+        "es": "español",
+        "en": "inglés"
+      }
+    },
+    "examples": {
+      "lastMonth": "Inscripciones del último mes",
+      "topEvents": "Eventos con más inscripciones este mes",
+      "moderation": "Contenido marcado por moderación esta semana"
+    },
+    "list": {
+      "title": "Reportes recientes",
+      "empty": "Todavía no hay reportes. Pide el primero con el formulario de arriba.",
+      "loadMore": "Cargar más reportes",
+      "refresh": "Actualizar lista",
+      "untitled": "Reporte sin título",
+      "pendingHint": "El agente está trabajando en este reporte…"
+    },
+    "detail": {
+      "title": "Reporte",
+      "close": "Cerrar reporte",
+      "requestedAt": "Pedido {date}",
+      "question": "Pregunta",
+      "generating": "El agente está trabajando… esto puede tardar hasta un par de minutos.",
+      "pollingFallback": "Sin conexión en vivo: consultando el estado cada pocos segundos.",
+      "summary": "Resumen",
+      "chart": "Gráfico",
+      "chartError": "No se pudo dibujar el gráfico.",
+      "chartLoading": "Cargando gráfico…",
+      "noChart": "Este reporte no incluye gráfico.",
+      "dataset": "Tabla de datos",
+      "datasetEmpty": "Este reporte no incluye tabla de datos.",
+      "copyCsv": "Copiar CSV",
+      "copied": "CSV copiado al portapapeles.",
+      "copyFailed": "No se pudo copiar el CSV.",
+      "tools": "Herramientas usadas",
+      "toolsNone": "Ninguna",
+      "tokens": "{count, number} tokens",
+      "agentRun": "Ver ejecución del agente",
+      "failed": "El reporte no se pudo generar.",
+      "noMarkdown": "El reporte no incluye texto."
+    },
+    "audio": {
+      "title": "Audio del resumen",
+      "label": "Reproductor de audio del resumen del reporte",
+      "unavailable": "Audio no disponible.",
+      "duration": "Duración: {seconds, number} s",
+      "refreshing": "Renovando el enlace del audio…",
+      "error": "No se pudo reproducir el audio.",
+      "transcriptNote": "La transcripción es el resumen que se muestra debajo."
+    },
+    "failure": {
+      "OUT_OF_SCOPE": "La pregunta está fuera de alcance: solo se admiten preguntas sobre métricas de la plataforma (usuarios, contenido, eventos, créditos y moderación).",
+      "DATA_UNAVAILABLE": "No hubo datos disponibles para responder la pregunta.",
+      "BUDGET_EXCEEDED": "Se agotó el presupuesto del agente antes de reunir datos suficientes.",
+      "LLM_UNAVAILABLE": "El modelo de IA no está disponible por ahora. Inténtalo más tarde.",
+      "unknown": "No se pudo generar el reporte."
+    },
+    "toast": {
+      "requested": "Reporte solicitado. El agente está trabajando…",
+      "ready": "Tu reporte está listo.",
+      "failed": "El reporte no se pudo generar."
+    }
+  },
+  "alerts": {
+    "title": "Alertas",
+    "live": {
+      "label": "Estado de la conexión en vivo",
+      "live": "En vivo",
+      "connecting": "Conectando…",
+      "offline": "Sin conexión en vivo",
+      "idle": "En pausa"
+    },
+    "filter": {
+      "label": "Estado"
+    },
+    "kind": {
+      "SERVICE_DOWN": "Servicio caído",
+      "SAGA_FAILURES": "Fallos de SAGA",
+      "DLQ_BACKLOG": "Mensajes acumulados en DLQ",
+      "MODERATION_BACKLOG": "Cola de moderación acumulada",
+      "METRIC_ANOMALY": "Anomalía en métricas",
+      "MODERATION_ESCALATION": "Escalamiento de moderación"
+    },
+    "empty": "No hay alertas con este filtro. La plataforma está tranquila.",
+    "resource": "Recurso: {resource}",
+    "occurrences": "{count, plural, one {# detección} other {# detecciones}}",
+    "raised": "Levantada {when}",
+    "acknowledgedAt": "Reconocida {when}",
+    "details": "Detalles",
+    "acknowledge": "Reconocer",
+    "acknowledging": "Reconociendo…",
+    "acknowledgeLabel": "Reconocer la alerta: {title}",
+    "acknowledged": "Alerta reconocida.",
+    "newAlert": "Nueva alerta {severity}: {title}",
+    "runNow": "Ejecutar monitoreo ahora",
+    "running": "Ejecutando monitoreo…",
+    "runDone": "Monitoreo completado: {count, plural, =0 {sin alertas nuevas} one {# alerta nueva} other {# alertas nuevas}}.",
+    "runFailed": "El monitoreo terminó con error."
+  },
+  "runs": {
+    "title": "Ejecuciones de agentes",
+    "empty": "Todavía no hay ejecuciones de agentes.",
+    "loadMore": "Cargar más ejecuciones",
+    "trigger": {
+      "SCHEDULE": "Programada",
+      "MANUAL": "Manual",
+      "REPORT_REQUEST": "Pedido de reporte"
+    },
+    "model": "Modelo: {model}",
+    "started": "Inicio {when}",
+    "duration": "Duración {seconds, number, ::.#} s",
+    "stopReason": "Motivo de cierre: {reason}",
+    "stopReasonValue": {
+      "COMPLETED": "completada",
+      "MAX_STEPS": "límite de pasos",
+      "MAX_TOKENS": "límite de tokens",
+      "ERROR": "error",
+      "STEP_LIMIT": "límite de pasos",
+      "TOKEN_LIMIT": "límite de tokens"
+    },
+    "steps": "Pasos ({count, number})",
+    "noSteps": "Sin pasos registrados.",
+    "step": "Paso {index}: {kind}",
+    "stepKind": {
+      "LLM": "Modelo",
+      "LLM_CALL": "Modelo",
+      "TOOL_CALL": "Herramienta"
+    },
+    "stepError": "con error",
+    "stepDuration": "{ms, number} ms",
+    "tokens": "Tokens: {input, number} entrada · {output, number} salida · {total, number} total",
+    "tools": "Herramientas",
+    "error": "Error de la ejecución: {message}",
+    "alertsCreated": "{count, plural, =0 {Sin alertas} one {# alerta generada} other {# alertas generadas}}",
+    "toggle": "Ver pasos de la ejecución {id}"
+  },
+  "states": {
+    "retry": "Reintentar",
+    "featureDisabled": {
+      "title": "Insights estará disponible en la fase 2",
+      "body": "Los reportes generativos y las alertas del agente de monitoreo todavía no están activados en este entorno. Cuando se active la fase 2 aparecerán aquí."
+    },
+    "contract": {
+      "title": "Falta la configuración del panel",
+      "body": "El panel no entregó la dirección del servicio GraphQL. Recarga la página."
+    },
+    "waitingSession": "Esperando la sesión del panel…"
+  },
+  "errors": {
+    "NETWORK_ERROR": "No pudimos conectar con el servidor.",
+    "UPSTREAM_UNAVAILABLE": "El servidor no respondió correctamente. Inténtalo de nuevo.",
+    "INVALID_RESPONSE": "El servidor devolvió una respuesta inesperada.",
+    "CONTRACT_VIOLATION": "El panel no configuró el microfrontend correctamente.",
+    "LLM_BUDGET_EXCEEDED": "Se alcanzó el presupuesto mensual del modelo de IA.",
+    "UNSUPPORTED_LOCALE": "El idioma solicitado no está soportado.",
+    "VALIDATION_ERROR": "Revisa la pregunta e inténtalo de nuevo.",
+    "NOT_FOUND": "No se encontró el elemento solicitado.",
+    "generic": "Algo salió mal. Inténtalo de nuevo."
+  }
+}
