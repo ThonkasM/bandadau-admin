@@ -26,7 +26,12 @@
     "examples": {
       "lastMonth": "Registrations in the last month",
       "topEvents": "Events with the most registrations this month",
-      "moderation": "Content flagged by moderation this week"
+      "moderation": "Content flagged by moderation this week",
+      "creditsToday": "How many credits were spent today?",
+      "lastBuyer": "Who bought the last ticket?",
+      "topEvent": "Which event has the most registrations?",
+      "topSpender": "Who spent the most credits this week?",
+      "newUsersToday": "How many new users today?"
     },
     "list": {
       "title": "Recent reports",
@@ -58,7 +63,9 @@
       "tokens": "{count, number} tokens",
       "agentRun": "View agent run",
       "failed": "The report could not be generated.",
-      "noMarkdown": "The report has no text."
+      "noMarkdown": "The report has no text.",
+      "answer": "Answer",
+      "answerDetail": "Details"
     },
     "audio": {
       "title": "Summary audio",

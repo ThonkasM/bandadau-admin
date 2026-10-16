@@ -7,7 +7,15 @@ import type { Report } from '../../lib/types';
 
 export const QUESTION_MIN = 5;
 export const QUESTION_MAX = 500;
-const EXAMPLE_KEYS = ['reports.examples.lastMonth', 'reports.examples.topEvents', 'reports.examples.moderation'] as const;
+const EXAMPLE_KEYS = [
+  'reports.examples.creditsToday',
+  'reports.examples.lastBuyer',
+  'reports.examples.topEvent',
+  'reports.examples.topSpender',
+  'reports.examples.newUsersToday',
+  'reports.examples.lastMonth',
+  'reports.examples.moderation',
+] as const;
 
 /** UC-19 pasos 1–2: pregunta en lenguaje natural → `requestReport(question, locale)` con `Idempotency-Key` por intención. */
 export function RequestReportForm({ onRequested }: { onRequested: (report: Report) => void }) {

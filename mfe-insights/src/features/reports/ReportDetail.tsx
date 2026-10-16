@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useRealtimeStatus } from '../../app/hooks';
 import { Button, Spinner, StateBox, useFormat } from '../../components/ui';
+import { splitAnswer } from '../../lib/answer';
 import { normalizeDataset } from '../../lib/dataset';
 import type { Report } from '../../lib/types';
 import { AudioPlayer } from './AudioPlayer';
@@ -36,6 +37,7 @@ export function ReportDetail({
     if (terminal && !hasDetail) void onNeedDetail(report.id);
   }, [terminal, hasDetail, report.id, onNeedDetail]);
 
+  const { answer, rest } = useMemo(() => splitAnswer(report.markdown), [report.markdown]);
   const dataset = useMemo(() => normalizeDataset(report.dataset), [report.dataset]);
   const failure = report.failureReason
     ? (KNOWN_FAILURES as readonly string[]).includes(report.failureReason)
@@ -75,6 +77,15 @@ export function ReportDetail({
 
       {report.status === 'READY' ? (
         <>
+          {answer ? (
+            <section className="bi-answer" aria-labelledby="bi-answer-title" data-testid="report-answer">
+              <h3 id="bi-answer-title" className="bi-answer__label">
+                {t('reports.detail.answer')}
+              </h3>
+              <p className="bi-answer__text">{answer}</p>
+            </section>
+          ) : null}
+
           <section aria-labelledby="bi-audio-title" className="bi-section">
             <h3 id="bi-audio-title" className="bi-section__title">
               {t('reports.audio.title')}
@@ -88,9 +99,9 @@ export function ReportDetail({
 
           <section aria-labelledby="bi-summary-title" className="bi-section">
             <h3 id="bi-summary-title" className="bi-section__title">
-              {t('reports.detail.summary')}
+              {answer ? t('reports.detail.answerDetail') : t('reports.detail.summary')}
             </h3>
-            {report.markdown ? <Markdown source={report.markdown} /> : hasDetail ? <p className="bi-hint">{t('reports.detail.noMarkdown')}</p> : <Spinner />}
+            {report.markdown ? <Markdown source={answer ? rest : report.markdown} /> : hasDetail ? <p className="bi-hint">{t('reports.detail.noMarkdown')}</p> : <Spinner />}
           </section>
 
           <section aria-labelledby="bi-chart-title" className="bi-section">

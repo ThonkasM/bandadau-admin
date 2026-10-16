@@ -145,7 +145,7 @@ describe('reports (UC-19)', () => {
     await waitFor(() => expect(root(el).querySelector('.bi-chip')).not.toBeNull());
     fireEvent.click(root(el).querySelector('.bi-chip') as HTMLElement);
     const form = root(el).querySelector('form') as HTMLFormElement;
-    expect((root(el).querySelector('textarea') as HTMLTextAreaElement).value).toBe('Inscripciones del último mes');
+    expect((root(el).querySelector('textarea') as HTMLTextAreaElement).value).toBe('¿Cuántos créditos se gastaron hoy?');
     fireEvent.submit(form);
     await waitFor(() => expect(root(el).querySelector('[role=alert]')).not.toBeNull());
     fireEvent.submit(form);
@@ -171,6 +171,33 @@ describe('reports (UC-19)', () => {
     expect(text(el)).toContain('get_registration_stats');
     const embed = (await import('vega-embed')).default as unknown as ReturnType<typeof vi.fn>;
     await waitFor(() => expect(embed).toHaveBeenCalled());
+  });
+
+  it('offers the admin example questions as chips and highlights the direct answer above the detail', async () => {
+    const withAnswer = { ...readyReport, markdown: 'Hoy se gastaron 815 créditos en inscripciones.\n\n## Detalle\n\n- **Créditos**: 815 gastados.' };
+    const { service } = fakes({ getReport: vi.fn(async () => withAnswer) });
+    const el = await mount();
+    await waitFor(() => expect(root(el).querySelector('.bi-chip')).not.toBeNull());
+    const chips = Array.from(root(el).querySelectorAll('.bi-chip')).map((c) => c.textContent);
+    expect(chips).toEqual(expect.arrayContaining(['¿Cuántos créditos se gastaron hoy?', '¿Quién compró el último ticket?', '¿Qué evento tiene más inscritos?', '¿Quién gastó más créditos esta semana?', '¿Cuántos usuarios nuevos hoy?']));
+    fireEvent.click(root(el).querySelector('.bi-row') as HTMLElement);
+    await waitFor(() => expect(service.getReport).toHaveBeenCalled());
+    await waitFor(() => expect(root(el).querySelector('[data-testid=report-answer]')).not.toBeNull());
+    const answer = root(el).querySelector('[data-testid=report-answer]') as HTMLElement;
+    expect(answer.textContent).toContain('Hoy se gastaron 815 créditos en inscripciones.');
+    const detail = root(el).querySelector('[data-testid=report-detail]') as HTMLElement;
+    expect(detail.querySelector('.bi-answer')).toBe(answer); // above the detail
+    expect(root(el).querySelector('.bi-md')?.textContent).not.toContain('Hoy se gastaron'); // not repeated in the detail
+    expect(root(el).querySelector('.bi-md h2')?.textContent).toBe('Detalle');
+  });
+
+  it('shows the report without a highlighted answer when the markdown starts with a title (open questions)', async () => {
+    fakes();
+    const el = await mount();
+    await waitFor(() => expect(root(el).querySelector('.bi-row')).not.toBeNull());
+    fireEvent.click(root(el).querySelector('.bi-row') as HTMLElement);
+    await waitFor(() => expect(root(el).querySelector('.bi-md h2')).not.toBeNull());
+    expect(root(el).querySelector('[data-testid=report-answer]')).toBeNull();
   });
 
   it('shows progress for in-flight reports and the failure explanation for FAILED ones', async () => {

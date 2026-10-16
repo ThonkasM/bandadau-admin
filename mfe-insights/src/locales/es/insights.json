@@ -26,7 +26,12 @@
     "examples": {
       "lastMonth": "Inscripciones del último mes",
       "topEvents": "Eventos con más inscripciones este mes",
-      "moderation": "Contenido marcado por moderación esta semana"
+      "moderation": "Contenido marcado por moderación esta semana",
+      "creditsToday": "¿Cuántos créditos se gastaron hoy?",
+      "lastBuyer": "¿Quién compró el último ticket?",
+      "topEvent": "¿Qué evento tiene más inscritos?",
+      "topSpender": "¿Quién gastó más créditos esta semana?",
+      "newUsersToday": "¿Cuántos usuarios nuevos hoy?"
     },
     "list": {
       "title": "Reportes recientes",
@@ -58,7 +63,9 @@
       "tokens": "{count, number} tokens",
       "agentRun": "Ver ejecución del agente",
       "failed": "El reporte no se pudo generar.",
-      "noMarkdown": "El reporte no incluye texto."
+      "noMarkdown": "El reporte no incluye texto.",
+      "answer": "Respuesta",
+      "answerDetail": "Detalle"
     },
     "audio": {
       "title": "Audio del resumen",

@@ -426,6 +426,31 @@ summary:focus-visible {
 }
 
 /* ---- reporte ---- */
+.bi-answer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bd-space-1);
+  padding: var(--bd-space-4);
+  border: 1px solid var(--bd-color-feedback-info-border);
+  border-radius: var(--bd-card-radius);
+  background: var(--bd-color-feedback-info-bg);
+  color: var(--bd-color-feedback-info-fg);
+}
+.bi-answer__label {
+  margin: 0;
+  font-size: var(--bd-font-size-sm);
+  font-weight: var(--bd-font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.bi-answer__text {
+  margin: 0;
+  font-family: var(--bd-font-family-display);
+  font-size: var(--bd-font-size-xl);
+  font-weight: var(--bd-font-weight-semibold);
+  line-height: var(--bd-line-height-normal);
+  overflow-wrap: anywhere;
+}
 .bi-question {
   display: flex;
   flex-direction: column;
@@ -468,7 +493,7 @@ summary:focus-visible {
 .bi-md h3 {
   margin: var(--bd-space-3) 0 var(--bd-space-2);
   font-family: var(--bd-font-family-display);
-  line-height: var(--bd-line-height-tight);
+  line-height: var(--bd-line-height-normal);
 }
 .bi-md h1 {
   font-size: var(--bd-font-size-xl);
