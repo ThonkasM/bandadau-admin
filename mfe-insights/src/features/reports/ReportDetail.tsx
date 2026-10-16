@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useRealtimeStatus } from '../../app/hooks';
 import { Button, Spinner, StateBox, useFormat } from '../../components/ui';
-import { splitAnswer } from '../../lib/answer';
+import { answerMeta, splitAnswer } from '../../lib/answer';
 import { normalizeDataset } from '../../lib/dataset';
 import type { Report } from '../../lib/types';
 import { AudioPlayer } from './AudioPlayer';
@@ -39,6 +39,7 @@ export function ReportDetail({
 
   const { answer, rest } = useMemo(() => splitAnswer(report.markdown), [report.markdown]);
   const dataset = useMemo(() => normalizeDataset(report.dataset), [report.dataset]);
+  const meta = answerMeta(report);
   const failure = report.failureReason
     ? (KNOWN_FAILURES as readonly string[]).includes(report.failureReason)
       ? t(`reports.failure.${report.failureReason}`)
@@ -83,6 +84,12 @@ export function ReportDetail({
                 {t('reports.detail.answer')}
               </h3>
               <p className="bi-answer__text">{answer}</p>
+              {meta ? (
+                <p className="bi-answer__meta" data-testid="answer-meta">
+                  {meta.seconds === null ? t('reports.detail.answeredByNoTime', { model: meta.model }) : t('reports.detail.answeredBy', { model: meta.model, seconds: meta.seconds })}
+                  {meta.tags.map((tag) => ` · ${t(`reports.detail.modelTag.${tag}`)}`).join('')}
+                </p>
+              ) : null}
             </section>
           ) : null}
 
@@ -126,7 +133,6 @@ export function ReportDetail({
             <span className="bi-label">{t('reports.detail.tools')}</span>{' '}
             <span>{report.agentRun.toolsUsed.length > 0 ? report.agentRun.toolsUsed.join(', ') : t('reports.detail.toolsNone')}</span>
           </p>
-          {report.model ? <p className="bi-hint">{t('reports.detail.engine', { model: report.model })}</p> : null}
           {report.agentRun.tokens ? <p className="bi-hint">{t('reports.detail.tokens', { count: report.agentRun.tokens.total })}</p> : null}
           <button type="button" className="bi-link" onClick={onOpenRun}>
             {t('reports.detail.agentRun')}

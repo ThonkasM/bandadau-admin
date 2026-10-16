@@ -195,4 +195,28 @@ describe('selector de motor (ADR-0022)', () => {
     await vi.waitFor(() => expect(requestReport).toHaveBeenCalledTimes(1));
     expect(requestReport.mock.calls[0]?.[3]).toBe('STUB');
   });
+
+  it('catálogo de preguntas por tema: 6 pestañas accesibles con 4–6 ejemplos y navegación con flechas', async () => {
+    setup();
+    const tabs = screen.getAllByRole('tab');
+    expect(tabs.map((t) => t.textContent)).toEqual(['Usuarios', 'Créditos', 'Eventos', 'Tickets', 'Contenido', 'Sistema']);
+    expect(tabs[0]?.getAttribute('aria-selected')).toBe('true');
+    expect(screen.getByRole('tabpanel').querySelectorAll('button').length).toBeGreaterThanOrEqual(4);
+    fireEvent.keyDown(tabs[0] as HTMLElement, { key: 'ArrowRight' });
+    expect(screen.getByRole('tab', { name: 'Créditos' }).getAttribute('aria-selected')).toBe('true');
+    expect(screen.getByRole('button', { name: '¿Cuál es el usuario con más créditos?' })).toBeTruthy();
+    fireEvent.keyDown(screen.getByRole('tab', { name: 'Créditos' }), { key: 'End' });
+    expect(screen.getByRole('tab', { name: 'Sistema' }).getAttribute('aria-selected')).toBe('true');
+    fireEvent.click(screen.getByRole('button', { name: '¿Cómo están los servicios?' }));
+    expect((screen.getByLabelText('Pregunta en lenguaje natural') as HTMLTextAreaElement).value).toBe('¿Cómo están los servicios?');
+  });
+
+  it('incluye las preguntas originales y las de cada tema en español e inglés', async () => {
+    const { rerender, ...view } = setup('en');
+    void rerender;
+    void view;
+    expect(screen.getAllByRole('tab').map((t) => t.textContent)).toEqual(['Users', 'Credits', 'Events', 'Tickets', 'Content', 'System']);
+    fireEvent.click(screen.getByRole('tab', { name: 'Credits' }));
+    expect(screen.getByRole('button', { name: 'Which user has the most credits?' })).toBeTruthy();
+  });
 });

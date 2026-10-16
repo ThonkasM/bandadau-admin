@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { splitAnswer } from './answer';
+import { answerMeta, splitAnswer } from './answer';
 
 describe('splitAnswer', () => {
   it('takes the first line as the direct answer and returns the rest', () => {
@@ -14,5 +14,20 @@ describe('splitAnswer', () => {
   });
   it('handles undefined', () => {
     expect(splitAnswer(undefined)).toEqual({ answer: null, rest: '' });
+  });
+});
+
+describe('answerMeta', () => {
+  const base = { createdAt: '2026-10-16T10:00:00Z', completedAt: '2026-10-16T10:00:09Z' };
+  it('gives the model and the seconds between request and completion', () => {
+    expect(answerMeta({ ...base, model: 'deepseek-v4.1-flash' })).toEqual({ model: 'deepseek-v4.1-flash', tags: [], seconds: 9 });
+  });
+  it('turns +retry and +stub-fallback into tags', () => {
+    expect(answerMeta({ ...base, model: 'deepseek-v4.1-flash+retry' })?.tags).toEqual(['retry']);
+    expect(answerMeta({ ...base, model: 'deepseek-v4.1-flash+stub-fallback' })?.tags).toEqual(['stubFallback']);
+  });
+  it('is null without a model and has no seconds while the report is not complete', () => {
+    expect(answerMeta({ ...base, model: null })).toBeNull();
+    expect(answerMeta({ createdAt: base.createdAt, completedAt: null, model: 'm' })?.seconds).toBeNull();
   });
 });

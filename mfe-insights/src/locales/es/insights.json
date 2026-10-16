@@ -23,16 +23,6 @@
         "en": "inglés"
       }
     },
-    "examples": {
-      "lastMonth": "Inscripciones del último mes",
-      "topEvents": "Eventos con más inscripciones este mes",
-      "moderation": "Contenido marcado por moderación esta semana",
-      "creditsToday": "¿Cuántos créditos se gastaron hoy?",
-      "lastBuyer": "¿Quién compró el último ticket?",
-      "topEvent": "¿Qué evento tiene más inscritos?",
-      "topSpender": "¿Quién gastó más créditos esta semana?",
-      "newUsersToday": "¿Cuántos usuarios nuevos hoy?"
-    },
     "list": {
       "title": "Reportes recientes",
       "empty": "Todavía no hay reportes. Pide el primero con el formulario de arriba.",
@@ -66,7 +56,12 @@
       "noMarkdown": "El reporte no incluye texto.",
       "answer": "Respuesta",
       "answerDetail": "Detalle",
-      "engine": "Redactado por: {model}"
+      "answeredBy": "Respondió {model} · {seconds, number} s",
+      "answeredByNoTime": "Respondió {model}",
+      "modelTag": {
+        "retry": "regenerada",
+        "stubFallback": "respaldo determinista"
+      }
     },
     "audio": {
       "title": "Audio del resumen",
@@ -129,6 +124,60 @@
         "OPENCODE": "OpenCode",
         "OLLAMA": "Ollama",
         "STUB": "Determinista"
+      }
+    },
+    "catalog": {
+      "topics": {
+        "users": "Usuarios",
+        "credits": "Créditos",
+        "events": "Eventos",
+        "tickets": "Tickets",
+        "content": "Contenido",
+        "system": "Sistema"
+      },
+      "users": {
+        "q1": "¿Cuántos usuarios nuevos hoy?",
+        "q2": "¿Cuántos usuarios hay registrados en total?",
+        "q3": "¿Cuántos usuarios están suspendidos?",
+        "q4": "¿Cuántos usuarios hay por universidad?",
+        "q5": "¿Qué carrera tiene más usuarios?",
+        "q6": "¿Cuántos usuarios activos hubo ayer?"
+      },
+      "credits": {
+        "q1": "¿Cuántos créditos se gastaron hoy?",
+        "q2": "¿Quién gastó más créditos esta semana?",
+        "q3": "¿Cuál es el usuario con más créditos?",
+        "q4": "¿Cuántos créditos hay en circulación en total?",
+        "q5": "¿Cuántos créditos se recargaron esta semana?",
+        "q6": "¿Cuál es el promedio de créditos por inscripción?"
+      },
+      "events": {
+        "q1": "¿Qué evento tiene más inscritos?",
+        "q2": "¿Qué evento tiene el cupo más lleno?",
+        "q3": "¿Cuáles son los próximos eventos?",
+        "q4": "Top 3 eventos por ingresos",
+        "q5": "¿Qué eventos no tienen inscritos?"
+      },
+      "tickets": {
+        "q1": "¿Quién compró el último ticket?",
+        "q2": "¿Cuántos tickets se han emitido?",
+        "q3": "¿Cuántos tickets fueron usados?",
+        "q4": "¿Qué evento tuvo más asistencia?",
+        "q5": "Compara las inscripciones de esta semana con la semana pasada"
+      },
+      "content": {
+        "q1": "¿Cuáles son los hashtags más usados?",
+        "q2": "¿Quién publicó más esta semana?",
+        "q3": "¿Qué publicación tiene más reacciones?",
+        "q4": "¿Cuántas publicaciones hubo hoy?",
+        "q5": "¿Cuántos comentarios hubo ayer?"
+      },
+      "system": {
+        "q1": "¿Cómo están los servicios?",
+        "q2": "¿Hay mensajes en las colas de error?",
+        "q3": "¿Hay contenido pendiente de moderación?",
+        "q4": "¿Qué sagas fallaron hoy?",
+        "q5": "Dame un resumen de la semana"
       }
     }
   },

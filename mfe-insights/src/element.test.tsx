@@ -125,7 +125,8 @@ describe.each([
     expect(el.getAttribute('data-theme')).toBe(theme);
     expect(text(el)).toContain(title);
     for (const tab of tabs) expect(text(el)).toContain(tab);
-    expect(root(el).querySelectorAll('[role=tab]')).toHaveLength(3);
+    expect(root(el).querySelectorAll('.bi-app > .bi-tabs [role=tab]')).toHaveLength(3);
+    expect(root(el).querySelectorAll('.bi-tabs--topics [role=tab]')).toHaveLength(6);
   });
 });
 
@@ -150,7 +151,7 @@ describe('reports (UC-19)', () => {
     await waitFor(() => expect(root(el).querySelector('.bi-chip')).not.toBeNull());
     fireEvent.click(root(el).querySelector('.bi-chip') as HTMLElement);
     const form = root(el).querySelector('form') as HTMLFormElement;
-    expect((root(el).querySelector('textarea') as HTMLTextAreaElement).value).toBe('¿Cuántos créditos se gastaron hoy?');
+    expect((root(el).querySelector('textarea') as HTMLTextAreaElement).value).toBe('¿Cuántos usuarios nuevos hoy?');
     fireEvent.submit(form);
     await waitFor(() => expect(root(el).querySelector('[role=alert]')).not.toBeNull());
     fireEvent.submit(form);
@@ -183,8 +184,13 @@ describe('reports (UC-19)', () => {
     const { service } = fakes({ getReport: vi.fn(async () => withAnswer) });
     const el = await mount();
     await waitFor(() => expect(root(el).querySelector('.bi-chip')).not.toBeNull());
-    const chips = Array.from(root(el).querySelectorAll('.bi-chip')).map((c) => c.textContent);
-    expect(chips).toEqual(expect.arrayContaining(['¿Cuántos créditos se gastaron hoy?', '¿Quién compró el último ticket?', '¿Qué evento tiene más inscritos?', '¿Quién gastó más créditos esta semana?', '¿Cuántos usuarios nuevos hoy?']));
+    const chips: (string | null)[] = [];
+    for (const tab of Array.from(root(el).querySelectorAll('.bi-tabs--topics [role=tab]')) as HTMLElement[]) {
+      fireEvent.click(tab);
+      chips.push(...Array.from(root(el).querySelectorAll('.bi-chip')).map((c) => c.textContent));
+    }
+    expect(chips.length).toBeGreaterThanOrEqual(30);
+    expect(chips).toEqual(expect.arrayContaining(['¿Cuántos créditos se gastaron hoy?', '¿Quién compró el último ticket?', '¿Qué evento tiene más inscritos?', '¿Quién gastó más créditos esta semana?', '¿Cuántos usuarios nuevos hoy?', '¿Cuál es el usuario con más créditos?']));
     fireEvent.click(root(el).querySelector('.bi-row') as HTMLElement);
     await waitFor(() => expect(service.getReport).toHaveBeenCalled());
     await waitFor(() => expect(root(el).querySelector('[data-testid=report-answer]')).not.toBeNull());

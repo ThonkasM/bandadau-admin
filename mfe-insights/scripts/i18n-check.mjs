@@ -26,7 +26,7 @@ try {
   // Claves resueltas dinámicamente (`alerts.kind.${kind}`, `runs.trigger.*`, `reports.failure.*`, `alerts.live.${state}`…),
   // pasadas como cadena a `bridge.toast('insights:…')` o ambiguas con los catálogos compartidos, y los catálogos compartidos.
   const dynamic =
-    /^unused key (common|enums|errors):|^unused key insights:(alerts\.(kind|live)\.|alerts\.(acknowledged|newAlert|runDone|runFailed)$|reports\.(failure|toast|examples|form\.language|dictation\.(errors|unsupported))\.|reports\.detail\.(copied|copyFailed)$|runs\.(trigger|stopReasonValue|stepKind)\.|errors\.)/;
+    /^unused key (common|enums|errors):|^unused key insights:(alerts\.(kind|live)\.|alerts\.(acknowledged|newAlert|runDone|runFailed)$|reports\.(failure|toast|catalog|form\.language|dictation\.(errors|unsupported))\.|reports\.detail\.(copied|copyFailed|modelTag\.\w+)$|runs\.(trigger|stopReasonValue|stepKind)\.|errors\.)/;
   const relevant = warnings.filter((w) => !dynamic.test(w));
   for (const w of relevant) console.warn(`warn  ${w}`);
   for (const e of errors) console.error(`error ${e}`);

@@ -222,6 +222,28 @@
   background: var(--bd-color-bg-muted);
 }
 
+/* ---- catálogo de preguntas por tema ---- */
+.bi-catalog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bd-space-2);
+}
+
+.bi-tabs--topics {
+  margin-inline: calc(var(--bd-space-1) * -1);
+}
+
+.bi-tabs--topics .bi-tab {
+  padding: var(--bd-space-1) var(--bd-space-3);
+  font-size: var(--bd-font-size-sm);
+}
+
+.bi-answer__meta {
+  margin: var(--bd-space-2) 0 0;
+  color: var(--bd-color-text-muted);
+  font-size: var(--bd-font-size-sm);
+}
+
 /* ---- botones ---- */
 .bi-btn {
   display: inline-flex;

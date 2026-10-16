@@ -26,7 +26,7 @@ bandadau-admin/mfe-insights/
 │   ├── element.tsx                 define <bandada-mfe-insights>; props graphqlUrl, accessToken, basePath, theme, locale
 │   ├── app/                        App.tsx, router interno (memoria + base-path), providers (Query, i18n)
 │   ├── features/
-│   │   ├── reports/                RequestReportForm, ReportView (markdown, chart, audio), hooks (requestReport, report, reportReady)
+│   │   ├── reports/                RequestReportForm, QuestionCatalog (preguntas sugeridas por tema, `question-catalog.ts`), ReportView (markdown, chart, audio), hooks (requestReport, report, reportReady)
 │   │   ├── alerts/                 AlertsList, ack (acknowledgeAlert), subscription alertRaised
 │   │   └── agent-runs/             historial y detalle (pasos, herramientas, tokens)
 │   ├── components/ui/              primitivas con tokens

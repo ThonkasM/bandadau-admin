@@ -23,16 +23,6 @@
         "en": "English"
       }
     },
-    "examples": {
-      "lastMonth": "Registrations in the last month",
-      "topEvents": "Events with the most registrations this month",
-      "moderation": "Content flagged by moderation this week",
-      "creditsToday": "How many credits were spent today?",
-      "lastBuyer": "Who bought the last ticket?",
-      "topEvent": "Which event has the most registrations?",
-      "topSpender": "Who spent the most credits this week?",
-      "newUsersToday": "How many new users today?"
-    },
     "list": {
       "title": "Recent reports",
       "empty": "There are no reports yet. Request the first one with the form above.",
@@ -66,7 +56,12 @@
       "noMarkdown": "The report has no text.",
       "answer": "Answer",
       "answerDetail": "Details",
-      "engine": "Written by: {model}"
+      "answeredBy": "Answered by {model} · {seconds, number} s",
+      "answeredByNoTime": "Answered by {model}",
+      "modelTag": {
+        "retry": "regenerated",
+        "stubFallback": "deterministic fallback"
+      }
     },
     "audio": {
       "title": "Summary audio",
@@ -129,6 +124,60 @@
         "OPENCODE": "OpenCode",
         "OLLAMA": "Ollama",
         "STUB": "Deterministic"
+      }
+    },
+    "catalog": {
+      "topics": {
+        "users": "Users",
+        "credits": "Credits",
+        "events": "Events",
+        "tickets": "Tickets",
+        "content": "Content",
+        "system": "System"
+      },
+      "users": {
+        "q1": "How many new users today?",
+        "q2": "How many users are there in total?",
+        "q3": "How many users are suspended?",
+        "q4": "How many users are there per university?",
+        "q5": "Which career has the most users?",
+        "q6": "How many active users were there yesterday?"
+      },
+      "credits": {
+        "q1": "How many credits were spent today?",
+        "q2": "Who spent the most credits this week?",
+        "q3": "Which user has the most credits?",
+        "q4": "How many credits are in circulation in total?",
+        "q5": "How many credits were topped up this week?",
+        "q6": "What is the average credits per registration?"
+      },
+      "events": {
+        "q1": "Which event has the most registrations?",
+        "q2": "Which event has the fullest seats?",
+        "q3": "What are the upcoming events?",
+        "q4": "Top 3 events by revenue",
+        "q5": "Which events have no registrations?"
+      },
+      "tickets": {
+        "q1": "Who bought the last ticket?",
+        "q2": "How many tickets have been issued?",
+        "q3": "How many tickets were used?",
+        "q4": "Which event had the most attendance?",
+        "q5": "Compare this week registrations with last week"
+      },
+      "content": {
+        "q1": "What are the most used hashtags?",
+        "q2": "Who posted the most this week?",
+        "q3": "Which post has the most reactions?",
+        "q4": "How many posts were there today?",
+        "q5": "How many comments were there yesterday?"
+      },
+      "system": {
+        "q1": "How are the services?",
+        "q2": "Are there messages in the error queues?",
+        "q3": "Is there content pending moderation?",
+        "q4": "Which sagas failed today?",
+        "q5": "Give me a summary of the week"
       }
     }
   },

@@ -5,6 +5,7 @@ import { useErrorMessage, useHost, useServices } from '../../app/services';
 import { Button, StateBox } from '../../components/ui';
 import type { Report, ReportEngine, ReportEngineInfo } from '../../lib/types';
 import { DICTATION_SHORTCUT, DictationButton } from './DictationButton';
+import { QuestionCatalog } from './QuestionCatalog';
 import { useSpeechDictation } from './useSpeechDictation';
 
 export const QUESTION_MIN = 5;
@@ -12,15 +13,6 @@ export const QUESTION_MAX = 500;
 /** Segundos de la cuenta regresiva antes de enviar solo lo dictado (UC-19, flujo alterno «dictado»). */
 export const DICTATION_AUTO_SEND_SECONDS = 2;
 const ENGINE_ORDER = ['AUTO', 'OPENCODE', 'OLLAMA', 'STUB'] as const;
-const EXAMPLE_KEYS = [
-  'reports.examples.creditsToday',
-  'reports.examples.lastBuyer',
-  'reports.examples.topEvent',
-  'reports.examples.topSpender',
-  'reports.examples.newUsersToday',
-  'reports.examples.lastMonth',
-  'reports.examples.moderation',
-] as const;
 
 /** UC-19 pasos 1–2: pregunta en lenguaje natural → `requestReport(question, locale)` con `Idempotency-Key` por intención. */
 export function RequestReportForm({ onRequested }: { onRequested: (report: Report) => void }) {
@@ -225,17 +217,13 @@ export function RequestReportForm({ onRequested }: { onRequested: (report: Repor
       <p className="bi-sr-only" role="status" aria-live="polite" data-testid="dictation-live">
         {liveStatus}
       </p>
-      <div className="bi-chips" role="group" aria-label={t('reports.form.examplesLabel')}>
-        <span className="bi-chips__label">{t('reports.form.examplesLabel')}</span>
-        {EXAMPLE_KEYS.map((key) => (
-          <button key={key} type="button" className="bi-chip" onClick={() => {
-              setCountdown(null);
-              setQuestion(t(key));
-            }} disabled={busy}>
-            {t(key)}
-          </button>
-        ))}
-      </div>
+      <QuestionCatalog
+        disabled={busy}
+        onPick={(text) => {
+          setCountdown(null);
+          setQuestion(text);
+        }}
+      />
       {problem ? <StateBox tone="error" role="alert" body={problem} /> : null}
     </form>
   );
