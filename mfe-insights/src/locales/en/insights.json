@@ -87,6 +87,35 @@
       "requested": "Report requested. The agent is working…",
       "ready": "Your report is ready.",
       "failed": "The report could not be generated."
+    },
+    "dictation": {
+      "start": "Dictate the question by voice",
+      "listening": "Listening…",
+      "transcribing": "Transcribing…",
+      "countdown": "Generating report in {seconds} s…",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "privacy": "Browser voice dictation: in Chrome the audio is processed by Google's speech recognition service. It asks for microphone permission. Shortcut: {shortcut}.",
+      "status": {
+        "listening": "Listening. Speak now.",
+        "transcribing": "Transcribing your voice.",
+        "countdown": "Generating the report in a few seconds. Press Cancel or Edit to stop it.",
+        "generating": "Generating the report."
+      },
+      "unsupported": {
+        "browser": "Your browser does not support dictation; use Chrome or Safari.",
+        "insecure": "Dictation requires a secure connection (HTTPS or localhost)."
+      },
+      "errors": {
+        "not-allowed": "Microphone permission denied. Enable it in the browser to dictate.",
+        "no-speech": "Nothing was heard. Check the microphone and try again.",
+        "audio-capture": "No microphone available.",
+        "network": "No connection to the speech recognition service. Check your internet.",
+        "aborted": "Dictation was interrupted. Try again.",
+        "language-not-supported": "The browser does not recognize this language by voice.",
+        "start-failed": "Could not start dictation. Try again.",
+        "unknown": "Dictation failed. Type the question or try again."
+      }
     }
   },
   "alerts": {

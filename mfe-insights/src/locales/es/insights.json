@@ -87,6 +87,35 @@
       "requested": "Reporte solicitado. El agente está trabajando…",
       "ready": "Tu reporte está listo.",
       "failed": "El reporte no se pudo generar."
+    },
+    "dictation": {
+      "start": "Dictar la pregunta por voz",
+      "listening": "Escuchando…",
+      "transcribing": "Transcribiendo…",
+      "countdown": "Generando reporte en {seconds} s…",
+      "cancel": "Cancelar",
+      "edit": "Editar",
+      "privacy": "Dictado por voz del navegador: en Chrome el audio lo procesa el servicio de reconocimiento de Google. Pide permiso de micrófono. Atajo: {shortcut}.",
+      "status": {
+        "listening": "Escuchando. Habla ahora.",
+        "transcribing": "Transcribiendo tu voz.",
+        "countdown": "Generando el reporte en unos segundos. Pulsa Cancelar o Editar para evitarlo.",
+        "generating": "Generando el reporte."
+      },
+      "unsupported": {
+        "browser": "Tu navegador no soporta el dictado; usa Chrome o Safari.",
+        "insecure": "El dictado requiere una conexión segura (HTTPS o localhost)."
+      },
+      "errors": {
+        "not-allowed": "Permiso de micrófono denegado. Habilítalo en el navegador para dictar.",
+        "no-speech": "No se oyó nada. Revisa el micrófono e inténtalo de nuevo.",
+        "audio-capture": "No se encontró un micrófono disponible.",
+        "network": "Sin conexión con el servicio de reconocimiento de voz. Revisa tu internet.",
+        "aborted": "El dictado se interrumpió. Inténtalo de nuevo.",
+        "language-not-supported": "El navegador no reconoce este idioma por voz.",
+        "start-failed": "No se pudo iniciar el dictado. Inténtalo de nuevo.",
+        "unknown": "El dictado falló. Escribe la pregunta o inténtalo de nuevo."
+      }
     }
   },
   "alerts": {

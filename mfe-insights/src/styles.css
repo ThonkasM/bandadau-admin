@@ -762,3 +762,139 @@ code {
     align-items: flex-start;
   }
 }
+
+/* ---- dictado por voz (UC-19, flujo alterno) ---- */
+.bi-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.bi-mic-wrap {
+  display: inline-flex;
+}
+
+.bi-mic {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 3rem;
+  padding: 0 var(--bd-space-3);
+  border: 1px solid var(--bd-color-border-default);
+  border-radius: var(--bd-button-radius);
+  background: var(--bd-button-secondary-bg);
+  color: var(--bd-button-secondary-fg);
+  cursor: pointer;
+}
+
+.bi-mic:hover:not(:disabled) {
+  background: var(--bd-button-secondary-bg-hover);
+}
+
+.bi-mic:focus-visible {
+  outline: 2px solid var(--bd-color-border-focus);
+  outline-offset: 2px;
+}
+
+.bi-mic:disabled {
+  background: var(--bd-button-disabled-bg);
+  color: var(--bd-button-disabled-fg);
+  cursor: not-allowed;
+}
+
+.bi-mic--active {
+  border-color: var(--bd-color-action-primary-bg);
+  background: var(--bd-button-primary-bg);
+  color: var(--bd-button-primary-fg);
+}
+
+.bi-mic--active:hover:not(:disabled) {
+  background: var(--bd-button-primary-bg-hover);
+}
+
+/* Pulso mientras escucha: anillo que se expande (estático con prefers-reduced-motion). */
+.bi-mic--listening::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 2px solid var(--bd-color-action-primary-bg);
+  border-radius: var(--bd-button-radius);
+  animation: bi-pulse 1.4s var(--bd-motion-easing-standard) infinite;
+  pointer-events: none;
+}
+
+@keyframes bi-pulse {
+  from {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+}
+
+.bi-input--interim {
+  color: var(--bd-color-text-muted);
+  font-style: italic;
+}
+
+.bi-dictation-state {
+  display: flex;
+  align-items: center;
+  gap: var(--bd-space-2);
+  margin: 0;
+  color: var(--bd-color-text-primary);
+  font-size: var(--bd-font-size-sm);
+  font-weight: var(--bd-font-weight-medium);
+}
+
+.bi-dictation-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: var(--bd-radius-full);
+  background: var(--bd-color-action-primary-bg);
+  animation: bi-pulse-dot 1s ease-in-out infinite alternate;
+}
+
+@keyframes bi-pulse-dot {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.35;
+  }
+}
+
+.bi-dictation-countdown {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--bd-space-3);
+  padding: var(--bd-space-2) var(--bd-space-3);
+  border: 1px solid var(--bd-color-border-default);
+  border-radius: var(--bd-radius-md);
+  background: var(--bd-color-bg-muted);
+  color: var(--bd-color-text-primary);
+  font-weight: var(--bd-font-weight-medium);
+}
+
+.bi-btn--touch {
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bi-mic--listening::after,
+  .bi-dictation-dot {
+    animation: none;
+  }
+}
