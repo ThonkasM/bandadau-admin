@@ -75,6 +75,7 @@ export function report(id: string, targetId: string, overrides: Partial<ReportVi
     createdAt: '2026-10-14T14:10:00Z',
     reporter: { id: 'u-2', email: 'lucia@umsa.edu.bo', status: 'ACTIVE' },
     post: post(targetId),
+    comment: null,
     ...overrides,
   };
 }

@@ -41,7 +41,7 @@ function post(n, author, text, mediaList, status = 'PUBLISHED') {
   return { id: `20000000-0000-7000-8000-0000000000${n}`, author, text, hashtags: ['campus'], visibility: 'PUBLIC', status, media: mediaList, createdAt: iso(60) };
 }
 function report(n, targetType, target, reason, details, reporter) {
-  return { id: `30000000-0000-7000-8000-0000000000${n}`, targetType, targetId: target.id, post: target.post ?? target, reporter, reason, details, status: 'OPEN', resolution: null, resolutionNote: null, createdAt: iso(20 + Number(n)), resolvedAt: null, resolvedBy: null };
+  return { id: `30000000-0000-7000-8000-0000000000${n}`, targetType, targetId: target.id, post: target.post ?? target, comment: target.comment ?? null, reporter, reason, details, status: 'OPEN', resolution: null, resolutionNote: null, createdAt: iso(20 + Number(n)), resolvedAt: null, resolvedBy: null };
 }
 
 function seed() {
@@ -50,7 +50,7 @@ function seed() {
   const m3 = media('03', 'IMAGE', users.lucia, 45, { nsfw: 0.55, violence: 0.62 }, ['campus', 'pelea']);
   const p1 = post('01', users.marco, 'Esta publicación fue ocultada tras varias denuncias. Contiene opiniones muy fuertes.', [], 'HIDDEN');
   const p2 = post('02', users.juanp, 'Vendo apuntes de Cálculo II, escríbeme por privado. #apuntes', [], 'HIDDEN');
-  const c1 = { id: '40000000-0000-7000-8000-000000000001', post: p2 };
+  const c1 = { id: '40000000-0000-7000-8000-000000000001', post: p2, comment: { id: '40000000-0000-7000-8000-000000000001', postId: p2.id, author: users.juanp, text: 'Eso es falso, el parcial no se mueve de fecha.', status: 'VISIBLE', createdAt: iso(50) } };
   const reports = [
     report('01', 'POST', p1, 'HARASSMENT', 'Insulta a una compañera.', users.lucia),
     report('02', 'POST', p1, 'SPAM', null, users.juanp),

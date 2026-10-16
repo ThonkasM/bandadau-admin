@@ -12,6 +12,10 @@ const POST = `
   author { ${USER} }
   media { ${MEDIA} }`;
 
+const COMMENT = `
+  id postId text status createdAt
+  author { ${USER} }`;
+
 export const ITEM_FIELDS = `
   id source openReports enqueuedAt
   media { ${MEDIA} }
@@ -32,6 +36,7 @@ export const CONTENT_REPORTS = `
       id targetType targetId reason details createdAt
       reporter { ${USER} }
       post { ${POST} }
+      comment { ${COMMENT} }
     }
   }`;
 

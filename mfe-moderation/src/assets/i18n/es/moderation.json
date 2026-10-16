@@ -56,7 +56,13 @@
     "reports": "{count, plural, one {# denuncia abierta} other {# denuncias abiertas}}",
     "reportsNotLoaded": "No se pudo cargar el detalle de las denuncias.",
     "author": "Autor",
-    "actions": "Acciones de moderación"
+    "actions": "Acciones de moderación",
+    "comment": "Comentario denunciado",
+    "commentStatus": {
+      "VISIBLE": "Visible",
+      "HIDDEN": "Oculto",
+      "REMOVED": "Eliminado"
+    }
   },
   "actions": {
     "APPROVE": "Aprobar",

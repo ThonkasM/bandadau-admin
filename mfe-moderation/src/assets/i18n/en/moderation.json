@@ -56,7 +56,13 @@
     "reports": "{count, plural, one {# open report} other {# open reports}}",
     "reportsNotLoaded": "The report details could not be loaded.",
     "author": "Author",
-    "actions": "Moderation actions"
+    "actions": "Moderation actions",
+    "comment": "Reported comment",
+    "commentStatus": {
+      "VISIBLE": "Visible",
+      "HIDDEN": "Hidden",
+      "REMOVED": "Removed"
+    }
   },
   "actions": {
     "APPROVE": "Approve",

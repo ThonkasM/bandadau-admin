@@ -58,6 +58,16 @@ import { type ActionKind, type QueueEntry } from './moderation.models';
           </section>
         }
 
+        @if (e.comment; as c) {
+          <section class="bmod-section">
+            <h3 class="bmod-h3">{{ 'moderation.detail.comment' | transloco }}</h3>
+            <p class="bmod-user-text">{{ c.text }}</p>
+            <p class="bmod-muted">
+              {{ c.author?.email ?? '—' }} · {{ 'moderation.detail.commentStatus.' + c.status | transloco }} · {{ dt(c.createdAt) }}
+            </p>
+          </section>
+        }
+
         @if (e.post?.text || e.media?.ocrText) {
           <section class="bmod-section">
             <h3 class="bmod-h3">{{ 'moderation.detail.text' | transloco }}</h3>

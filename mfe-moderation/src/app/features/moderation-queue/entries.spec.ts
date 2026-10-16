@@ -23,6 +23,14 @@ describe('entries', () => {
     expect(entries[0]!.reports.map((r) => r.id)).toEqual(['r-9']);
   });
 
+  it('carries the reported comment and uses its author on comment entries', () => {
+    const author = { id: 'u-9', email: 'autor@umsa.edu.bo', status: 'ACTIVE' as const };
+    const comment = { id: 'c-1', postId: 'p-7', text: 'texto denunciado', status: 'VISIBLE', createdAt: '2026-10-14T14:00:00Z', author };
+    const [entry] = buildEntries([], [report('r-3', 'c-1', { targetType: 'COMMENT', comment })], { includeComments: true });
+    expect(entry?.comment).toEqual(comment);
+    expect(entry?.author).toEqual(author);
+  });
+
   it('omits comments when the type filter excludes them', () => {
     const entries = buildEntries([], [report('r-3', 'c-1', { targetType: 'COMMENT' })], { includeComments: false });
     expect(entries).toEqual([]);

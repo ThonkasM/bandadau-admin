@@ -61,6 +61,15 @@ export interface PostView {
   media: MediaView[];
 }
 
+export interface CommentView {
+  id: string;
+  postId: string;
+  text: string;
+  status: string;
+  createdAt: string;
+  author: UserRef | null;
+}
+
 export interface ItemView {
   id: string;
   source: ModerationSource;
@@ -79,6 +88,8 @@ export interface ReportView {
   createdAt: string;
   reporter: UserRef | null;
   post: PostView | null;
+  /** Comentario denunciado (solo si `targetType = COMMENT` y el comentario aún existe). */
+  comment: CommentView | null;
 }
 
 export interface PageInfoView {
@@ -109,6 +120,7 @@ export interface QueueEntry {
   itemId: string | null;
   media: MediaView | null;
   post: PostView | null;
+  comment: CommentView | null;
   author: UserRef | null;
   reports: ReportView[];
   reportCount: number;
