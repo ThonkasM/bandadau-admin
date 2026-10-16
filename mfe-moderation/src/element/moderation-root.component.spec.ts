@@ -23,6 +23,18 @@ async function render(): Promise<{ fixture: ComponentFixture<ModerationRootCompo
   return { fixture, host, shadow: host.shadowRoot! };
 }
 
+/** Waits for a DOM state (not a fixed time): re-renders and yields to the event loop until `ready()` holds or the deadline passes. */
+async function waitForState(fixture: ComponentFixture<unknown>, ready: () => boolean, timeoutMs = 5000): Promise<void> {
+  const deadline = Date.now() + timeoutMs;
+  for (;;) {
+    fixture.detectChanges();
+    await fixture.whenStable();
+    if (ready()) return;
+    if (Date.now() > deadline) throw new Error('waitForState: timed out waiting for the expected DOM state');
+    await new Promise((r) => setTimeout(r, 10));
+  }
+}
+
 describe('<bandada-mfe-moderation> rendering', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -120,7 +132,9 @@ describe('<bandada-mfe-moderation> rendering', () => {
     TestBed.configureTestingModule({
       providers: [provideI18n(), { provide: ModerationService, useValue: fake }, { provide: RealtimeClient, useValue: fakeRealtime() }],
     });
-    const { shadow } = await render();
+    const { fixture, shadow } = await render();
+    // Wait for the error state AND the loaded translations instead of relying on a single timer tick.
+    await waitForState(fixture, () => !!shadow.querySelector('[role="alert"]')?.textContent?.includes('No pudimos cargar la cola'));
     expect(shadow.querySelector('[role="alert"]')?.textContent).toContain('No pudimos cargar la cola');
     expect(shadow.querySelector('[role="alert"] button')?.textContent).toContain('Reintentar');
   });
