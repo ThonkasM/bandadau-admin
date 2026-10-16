@@ -17,6 +17,7 @@ import { ErrorState } from '@/components/ui/ErrorState';
 import { Checkbox, Field, Textarea } from '@/components/ui/Field';
 import { Modal } from '@/components/ui/Modal';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { RefreshButton } from '@/components/ui/RefreshButton';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { toast } from '@/components/ui/Toast';
 import { useSession } from '@/lib/auth/session-store';
@@ -126,17 +127,22 @@ export default function UserDetailPage() {
         title={user.displayName ?? user.email}
         description={user.email}
         actions={
-          isAdmin && !isSelf ? (
-            user.status === 'SUSPENDED' ? (
-              <Button variant="secondary" onClick={() => setReactivateOpen(true)}>
-                {t('users:reactivate.action')}
-              </Button>
-            ) : (
-              <Button variant="danger" onClick={() => setSuspendOpen(true)} disabled={user.status === 'DELETED'}>
-                {t('users:suspend.action')}
-              </Button>
-            )
-          ) : undefined
+          <>
+            <RefreshButton onRefresh={() => refetch({ requestPolicy: 'network-only' })} loading={result.fetching} />
+            {isAdmin && !isSelf
+              ? user.status === 'SUSPENDED'
+                ? (
+                    <Button variant="secondary" onClick={() => setReactivateOpen(true)}>
+                      {t('users:reactivate.action')}
+                    </Button>
+                  )
+                : (
+                    <Button variant="danger" onClick={() => setSuspendOpen(true)} disabled={user.status === 'DELETED'}>
+                      {t('users:suspend.action')}
+                    </Button>
+                  )
+              : null}
+          </>
         }
       />
 

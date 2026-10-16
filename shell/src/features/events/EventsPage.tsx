@@ -15,6 +15,7 @@ import { EmptyState } from '@/components/ui/EmptyState';
 import { ErrorState } from '@/components/ui/ErrorState';
 import { Field, Input, Select } from '@/components/ui/Field';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { RefreshButton } from '@/components/ui/RefreshButton';
 import { useDebounced } from '@/hooks/useDebounced';
 import { useLocale } from '@/lib/format';
 import { eventStatusTone } from '@/lib/status';
@@ -57,7 +58,11 @@ export default function EventsPage() {
 
   return (
     <>
-      <PageHeader title={t('events:title')} description={t('events:description')} />
+      <PageHeader
+        title={t('events:title')}
+        description={t('events:description')}
+        actions={<RefreshButton onRefresh={() => refetch({ requestPolicy: 'network-only' })} loading={result.fetching} />}
+      />
       <Card>
         <div className="grid gap-3 border-b border-default p-4 sm:grid-cols-2">
           <Field label={t('events:filters.search')}>

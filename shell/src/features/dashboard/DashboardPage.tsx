@@ -13,6 +13,7 @@ import { EmptyState } from '@/components/ui/EmptyState';
 import { ErrorState } from '@/components/ui/ErrorState';
 import { Field, Select } from '@/components/ui/Field';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { RefreshButton } from '@/components/ui/RefreshButton';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { toast } from '@/components/ui/Toast';
 import { daysAgo, isoDate, useLocale } from '@/lib/format';
@@ -81,17 +82,27 @@ export default function DashboardPage() {
         title={t('dashboard:title')}
         description={t('dashboard:description')}
         actions={
-          <Field label={t('dashboard:range.label')} className="min-w-44">
-            {({ id }) => (
-              <Select id={id} value={days} onChange={(e) => setDays(Number(e.target.value) as (typeof RANGES)[number])}>
-                {RANGES.map((r) => (
-                  <option key={r} value={r}>
-                    {t('dashboard:range.lastDays', { count: r })}
-                  </option>
-                ))}
-              </Select>
-            )}
-          </Field>
+          <>
+            <RefreshButton
+              loading={dash.fetching || health.fetching || alerts.fetching}
+              onRefresh={() => {
+                refetchDash({ requestPolicy: 'network-only' });
+                refetchHealth({ requestPolicy: 'network-only' });
+                refetchAlerts({ requestPolicy: 'network-only' });
+              }}
+            />
+            <Field label={t('dashboard:range.label')} className="min-w-44">
+              {({ id }) => (
+                <Select id={id} value={days} onChange={(e) => setDays(Number(e.target.value) as (typeof RANGES)[number])}>
+                  {RANGES.map((r) => (
+                    <option key={r} value={r}>
+                      {t('dashboard:range.lastDays', { count: r })}
+                    </option>
+                  ))}
+                </Select>
+              )}
+            </Field>
+          </>
         }
       />
 

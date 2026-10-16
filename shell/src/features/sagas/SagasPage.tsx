@@ -16,6 +16,7 @@ import { ErrorState } from '@/components/ui/ErrorState';
 import { Field, Select } from '@/components/ui/Field';
 import { Modal } from '@/components/ui/Modal';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { RefreshButton } from '@/components/ui/RefreshButton';
 import { toast } from '@/components/ui/Toast';
 import { shortId, useLocale } from '@/lib/format';
 import { useErrorText } from '@/lib/graphql/errors';
@@ -74,7 +75,11 @@ export default function SagasPage() {
 
   return (
     <>
-      <PageHeader title={t('events:sagas.title')} description={t('events:sagas.description')} />
+      <PageHeader
+        title={t('events:sagas.title')}
+        description={t('events:sagas.description')}
+        actions={<RefreshButton onRefresh={() => refetch({ requestPolicy: 'network-only' })} loading={result.fetching} />}
+      />
       <Card>
         <div className="grid gap-3 border-b border-default p-4 sm:grid-cols-2">
           <Field label={t('events:sagas.status')}>

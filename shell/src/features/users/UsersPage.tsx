@@ -15,6 +15,7 @@ import { ErrorState } from '@/components/ui/ErrorState';
 import { Field, Input, Select } from '@/components/ui/Field';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Pagination } from '@/components/ui/Pagination';
+import { RefreshButton } from '@/components/ui/RefreshButton';
 import { useDebounced } from '@/hooks/useDebounced';
 import { userStatusTone } from '@/lib/status';
 
@@ -95,7 +96,11 @@ export default function UsersPage() {
 
   return (
     <>
-      <PageHeader title={t('users:title')} description={t('users:description')} />
+      <PageHeader
+        title={t('users:title')}
+        description={t('users:description')}
+        actions={<RefreshButton onRefresh={() => refetch({ requestPolicy: 'network-only' })} loading={result.fetching} />}
+      />
       <Card>
         <div className="grid gap-3 border-b border-default p-4 sm:grid-cols-2 xl:grid-cols-4">
           <Field label={t('users:filters.search')}>

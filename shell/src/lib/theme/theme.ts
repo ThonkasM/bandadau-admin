@@ -53,3 +53,25 @@ export function initTheme(): () => void {
 export function adoptAccountTheme(theme: string | null | undefined) {
   if (isPreference(theme)) useTheme.getState().setPreference(theme, { sync: false });
 }
+
+/**
+ * Cambia entre claro y oscuro con un círculo que crece desde `origin` (View Transitions API).
+ * Sin soporte o con movimiento reducido el cambio es inmediato.
+ */
+export function toggleTheme(origin?: { x: number; y: number }): void {
+  const next: ThemePreference = useTheme.getState().effective === 'dark' ? 'LIGHT' : 'DARK';
+  const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+  if (typeof document.startViewTransition !== 'function' || reduced || !origin) {
+    useTheme.getState().setPreference(next);
+    return;
+  }
+  const { x, y } = origin;
+  const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+  const transition = document.startViewTransition(() => useTheme.getState().setPreference(next));
+  void transition.ready.then(() => {
+    document.documentElement.animate(
+      { clipPath: [`circle(0 at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+      { duration: 480, easing: 'ease-in-out', pseudoElement: '::view-transition-new(root)' },
+    );
+  });
+}

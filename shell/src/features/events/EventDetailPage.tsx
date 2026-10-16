@@ -16,6 +16,7 @@ import { EmptyState } from '@/components/ui/EmptyState';
 import { ErrorState } from '@/components/ui/ErrorState';
 import { Field, Select } from '@/components/ui/Field';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { RefreshButton } from '@/components/ui/RefreshButton';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { useLocale } from '@/lib/format';
 import { eventStatusTone, registrationTone, sagaTone } from '@/lib/status';
@@ -65,7 +66,22 @@ export default function EventDetailPage() {
         <ArrowLeft aria-hidden className="size-4 rtl:rotate-180" />
         {t('events:detail.back')}
       </Link>
-      <PageHeader title={e.title} description={e.description ?? undefined} actions={<Badge tone={eventStatusTone[e.status]}>{t(`enums:EventStatus.${e.status}`)}</Badge>} />
+      <PageHeader
+        title={e.title}
+        description={e.description ?? undefined}
+        actions={
+          <>
+            <RefreshButton
+              loading={event.fetching || regs.fetching}
+              onRefresh={() => {
+                refetchEvent({ requestPolicy: 'network-only' });
+                refetchRegs({ requestPolicy: 'network-only' });
+              }}
+            />
+            <Badge tone={eventStatusTone[e.status]}>{t(`enums:EventStatus.${e.status}`)}</Badge>
+          </>
+        }
+      />
 
       <Card className="mb-4">
         <CardBody>

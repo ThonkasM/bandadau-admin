@@ -9,6 +9,7 @@ export { LanguageSwitcher } from './LanguageSwitcher';
 export { Modal } from './Modal';
 export { PageHeader } from './PageHeader';
 export { Pagination } from './Pagination';
+export { RefreshButton } from './RefreshButton';
 export { Skeleton } from './Skeleton';
 export { Switch } from './Switch';
 export { ThemeToggle } from './ThemeToggle';

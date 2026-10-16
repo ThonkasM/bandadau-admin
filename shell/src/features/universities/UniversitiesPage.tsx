@@ -15,6 +15,7 @@ import { ErrorState } from '@/components/ui/ErrorState';
 import { Field, Input, Textarea } from '@/components/ui/Field';
 import { Modal } from '@/components/ui/Modal';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { RefreshButton } from '@/components/ui/RefreshButton';
 import { toast } from '@/components/ui/Toast';
 import { useLocale } from '@/lib/format';
 import { useErrorText } from '@/lib/graphql/errors';
@@ -106,10 +107,13 @@ export default function UniversitiesPage() {
         title={t('universities:title')}
         description={t('universities:description')}
         actions={
-          <Button onClick={() => setOpen(true)}>
-            <Plus aria-hidden className="size-4" />
-            {t('universities:create')}
-          </Button>
+          <>
+            <RefreshButton onRefresh={() => refetch({ requestPolicy: 'network-only' })} loading={result.fetching} />
+            <Button onClick={() => setOpen(true)}>
+              <Plus aria-hidden className="size-4" />
+              {t('universities:create')}
+            </Button>
+          </>
         }
       />
       <Card>
