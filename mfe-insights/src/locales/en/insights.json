@@ -65,7 +65,8 @@
       "failed": "The report could not be generated.",
       "noMarkdown": "The report has no text.",
       "answer": "Answer",
-      "answerDetail": "Details"
+      "answerDetail": "Details",
+      "engine": "Written by: {model}"
     },
     "audio": {
       "title": "Summary audio",
@@ -115,6 +116,19 @@
         "language-not-supported": "The browser does not recognize this language by voice.",
         "start-failed": "Could not start dictation. Try again.",
         "unknown": "Dictation failed. Type the question or try again."
+      }
+    },
+    "engine": {
+      "label": "Engine",
+      "autoNote": "Automatic uses the first available engine and falls back to the next one on failure.",
+      "externalNote": "External engine: people names are pseudonymized before leaving and restored in the answer.",
+      "localNote": "Local engine: data stays inside the platform.",
+      "unavailable": "unavailable",
+      "names": {
+        "AUTO": "Automatic",
+        "OPENCODE": "OpenCode",
+        "OLLAMA": "Ollama",
+        "STUB": "Deterministic"
       }
     }
   },

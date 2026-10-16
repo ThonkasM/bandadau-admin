@@ -4,6 +4,7 @@ import {
   AGENT_RUNS_QUERY,
   ALERT_RAISED_SUBSCRIPTION,
   ALERTS_QUERY,
+  REPORT_ENGINES_QUERY,
   REPORT_QUERY,
   REPORT_READY_SUBSCRIPTION,
   REPORTS_QUERY,
@@ -11,7 +12,7 @@ import {
   RUN_MONITORING_MUTATION,
 } from './operations';
 import type { RealtimeClient } from './realtime';
-import type { AgentRun, Alert, AlertSeverity, AlertStatus, Locale, Page, Report } from './types';
+import type { AgentRun, Alert, AlertSeverity, AlertStatus, Locale, Page, Report, ReportEngine, ReportEngineInfo } from './types';
 
 interface UserErrorItem {
   code: string;
@@ -63,11 +64,17 @@ export class InsightsService {
   }
 
   /** `idempotencyKey` identifica la *intención*: el mismo valor en un reintento devuelve el mismo reporte. */
-  async requestReport(question: string, locale: Locale, idempotencyKey: string): Promise<Report> {
+  /** Motores disponibles para el agente (con disponibilidad actual). */
+  async listReportEngines(): Promise<ReportEngineInfo[]> {
+    const data = unwrap(await this.client.request<{ reportEngines: ReportEngineInfo[] }>(REPORT_ENGINES_QUERY, {}));
+    return data.reportEngines;
+  }
+
+  async requestReport(question: string, locale: Locale, idempotencyKey: string, engine: ReportEngine = 'AUTO'): Promise<Report> {
     const data = unwrap(
       await this.client.request<{ requestReport: { report: Report | null; errors: UserErrorItem[] } }>(
         REQUEST_REPORT_MUTATION,
-        { question, locale: locale === 'en' ? 'en' : 'es' },
+        { question, locale: locale === 'en' ? 'en' : 'es', engine },
         { idempotencyKey },
       ),
     );

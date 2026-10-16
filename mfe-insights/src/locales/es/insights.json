@@ -65,7 +65,8 @@
       "failed": "El reporte no se pudo generar.",
       "noMarkdown": "El reporte no incluye texto.",
       "answer": "Respuesta",
-      "answerDetail": "Detalle"
+      "answerDetail": "Detalle",
+      "engine": "Redactado por: {model}"
     },
     "audio": {
       "title": "Audio del resumen",
@@ -115,6 +116,19 @@
         "language-not-supported": "El navegador no reconoce este idioma por voz.",
         "start-failed": "No se pudo iniciar el dictado. Inténtalo de nuevo.",
         "unknown": "El dictado falló. Escribe la pregunta o inténtalo de nuevo."
+      }
+    },
+    "engine": {
+      "label": "Motor",
+      "autoNote": "Automático usa el primer motor disponible y, si falla, el siguiente.",
+      "externalNote": "Motor externo: los nombres de personas se seudonimizan antes de salir y se restituyen en la respuesta.",
+      "localNote": "Motor local: los datos no salen de la plataforma.",
+      "unavailable": "no disponible",
+      "names": {
+        "AUTO": "Automático",
+        "OPENCODE": "OpenCode",
+        "OLLAMA": "Ollama",
+        "STUB": "Determinista"
       }
     }
   },

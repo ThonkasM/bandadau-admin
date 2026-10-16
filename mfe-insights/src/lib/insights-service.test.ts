@@ -19,7 +19,7 @@ describe('InsightsService', () => {
     expect(report.id).toBe(readyReport.id);
     const [query, vars, opts] = request.mock.calls[0] as unknown as [string, Record<string, unknown>, { idempotencyKey: string }];
     expect(query).toContain('requestReport');
-    expect(vars).toEqual({ question: 'Inscripciones', locale: 'en' });
+    expect(vars).toEqual({ question: 'Inscripciones', locale: 'en', engine: 'AUTO' });
     expect(opts.idempotencyKey).toBe('key-1');
   });
 

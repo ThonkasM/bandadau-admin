@@ -16,6 +16,18 @@ export interface TokenUsageView {
   total: number;
 }
 
+export type ReportEngine = 'AUTO' | 'OPENCODE' | 'OLLAMA' | 'STUB';
+export type EngineMode = 'AGENT' | 'HYBRID' | 'DETERMINISTIC';
+/** `reportEngines`: nunca trae claves ni URLs. */
+export interface ReportEngineInfo {
+  engine: Exclude<ReportEngine, 'AUTO'>;
+  label: string;
+  model: string | null;
+  available: boolean;
+  external: boolean;
+  mode: EngineMode;
+}
+
 export interface Report {
   id: string;
   title: string | null;
@@ -27,6 +39,9 @@ export interface Report {
   completedAt: string | null;
   audioUrl: string | null;
   audioDurationSeconds: number | null;
+  /** Motor real y modelo que redactó (ADR-0022). */
+  engine?: Exclude<ReportEngine, 'AUTO'> | null;
+  model?: string | null;
   agentRun: { id: string; status: AgentRunStatus; toolsUsed: string[]; tokens: TokenUsageView | null } | null;
   /** Solo en `report(id)` / `reportReady`. */
   markdown?: string | null;

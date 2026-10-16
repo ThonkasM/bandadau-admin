@@ -17,7 +17,12 @@ function fakes(overrides: Partial<Record<keyof InsightsService, unknown>> = {}) 
   const base = {
     listReports: vi.fn(async () => ({ items: [{ ...readyReport, markdown: undefined, dataset: undefined, chart: undefined }, pendingReport], hasNextPage: false, endCursor: null })),
     getReport: vi.fn(async (id: string) => (id === readyReport.id ? readyReport : pendingReport)),
-    requestReport: vi.fn(async (_q: string, _l: string, _k: string) => pendingReport),
+    requestReport: vi.fn(async (_q: string, _l: string, _k: string, _e?: string) => pendingReport),
+    listReportEngines: vi.fn(async () => [
+      { engine: 'OPENCODE', label: 'OpenCode Go', model: 'deepseek-v4.1-flash', available: false, external: true, mode: 'AGENT' },
+      { engine: 'OLLAMA', label: 'Ollama local', model: 'qwen2.5:3b', available: true, external: false, mode: 'HYBRID' },
+      { engine: 'STUB', label: 'Determinista', model: null, available: true, external: false, mode: 'DETERMINISTIC' },
+    ]),
     listAlerts: vi.fn(async () => [criticalAlert]),
     acknowledgeAlert: vi.fn(async () => ({ ...criticalAlert, status: 'ACKNOWLEDGED' })),
     runMonitoringNow: vi.fn(async () => monitoringRun),

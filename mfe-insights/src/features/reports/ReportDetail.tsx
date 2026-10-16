@@ -126,6 +126,7 @@ export function ReportDetail({
             <span className="bi-label">{t('reports.detail.tools')}</span>{' '}
             <span>{report.agentRun.toolsUsed.length > 0 ? report.agentRun.toolsUsed.join(', ') : t('reports.detail.toolsNone')}</span>
           </p>
+          {report.model ? <p className="bi-hint">{t('reports.detail.engine', { model: report.model })}</p> : null}
           {report.agentRun.tokens ? <p className="bi-hint">{t('reports.detail.tokens', { count: report.agentRun.tokens.total })}</p> : null}
           <button type="button" className="bi-link" onClick={onOpenRun}>
             {t('reports.detail.agentRun')}

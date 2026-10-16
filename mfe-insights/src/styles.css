@@ -162,6 +162,29 @@
   border-color: var(--bd-color-feedback-danger-border);
 }
 
+.bi-engine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--bd-space-2) var(--bd-space-3);
+}
+
+.bi-select {
+  min-height: 2.5rem;
+  padding: var(--bd-input-padding-y) var(--bd-input-padding-x);
+  border: 1px solid var(--bd-input-border);
+  border-radius: var(--bd-input-radius);
+  background: var(--bd-input-bg);
+  color: var(--bd-input-fg);
+  font: inherit;
+}
+
+.bi-select:focus-visible {
+  outline: 2px solid var(--bd-input-border-focus);
+  outline-offset: 1px;
+  border-color: var(--bd-input-border-focus);
+}
+
 .bi-hint {
   margin: 0;
   color: var(--bd-color-text-muted);

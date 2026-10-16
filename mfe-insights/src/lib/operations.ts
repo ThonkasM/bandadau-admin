@@ -3,7 +3,7 @@
 
 const REPORT_CORE = `
   id title question locale status failureReason createdAt completedAt
-  audioUrl audioDurationSeconds
+  audioUrl audioDurationSeconds engine model
   agentRun { id status toolsUsed tokens { input output total } }
 `;
 
@@ -32,8 +32,12 @@ export const REPORT_QUERY = `query InsightsReport($id: UUID!) {
   report(id: $id) { ${REPORT_FULL} }
 }`;
 
-export const REQUEST_REPORT_MUTATION = `mutation InsightsRequestReport($question: String!, $locale: Locale) {
-  requestReport(question: $question, locale: $locale) {
+export const REPORT_ENGINES_QUERY = `query InsightsReportEngines {
+  reportEngines { engine label model available external mode }
+}`;
+
+export const REQUEST_REPORT_MUTATION = `mutation InsightsRequestReport($question: String!, $locale: Locale, $engine: ReportEngine) {
+  requestReport(question: $question, locale: $locale, engine: $engine) {
     report { ${REPORT_CORE} }
     errors { code message field }
   }

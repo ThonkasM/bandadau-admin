@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useErrorMessage, useHost, useServices } from '../../app/services';
 import { Button, StateBox } from '../../components/ui';
-import type { Report } from '../../lib/types';
+import type { Report, ReportEngine, ReportEngineInfo } from '../../lib/types';
 import { DICTATION_SHORTCUT, DictationButton } from './DictationButton';
 import { useSpeechDictation } from './useSpeechDictation';
 
@@ -11,6 +11,7 @@ export const QUESTION_MIN = 5;
 export const QUESTION_MAX = 500;
 /** Segundos de la cuenta regresiva antes de enviar solo lo dictado (UC-19, flujo alterno «dictado»). */
 export const DICTATION_AUTO_SEND_SECONDS = 2;
+const ENGINE_ORDER = ['AUTO', 'OPENCODE', 'OLLAMA', 'STUB'] as const;
 const EXAMPLE_KEYS = [
   'reports.examples.creditsToday',
   'reports.examples.lastBuyer',
@@ -31,7 +32,22 @@ export function RequestReportForm({ onRequested }: { onRequested: (report: Repor
   const [busy, setBusy] = useState(false);
   const [problem, setProblem] = useState<string | null>(null);
   // La clave identifica la intención (pregunta + idioma): un reintento por red la reutiliza; una pregunta nueva, no.
-  const intent = useRef<{ key: string; question: string; locale: string } | null>(null);
+  const intent = useRef<{ key: string; question: string; locale: string; engine: ReportEngine } | null>(null);
+  // Motor del agente (ADR-0022): `reportEngines` dice cuáles responden ahora; los no disponibles se deshabilitan.
+  const [engine, setEngine] = useState<ReportEngine>('AUTO');
+  const [engines, setEngines] = useState<ReportEngineInfo[] | null>(null);
+  useEffect(() => {
+    let alive = true;
+    service
+      .listReportEngines()
+      .then((list) => alive && setEngines(list))
+      .catch(() => alive && setEngines(null)); // sin la lista el selector queda en «Automático»
+    return () => {
+      alive = false;
+    };
+  }, [service]);
+  const infoOf = (e: ReportEngine) => engines?.find((x) => x.engine === e);
+  const selected = infoOf(engine);
 
   const trimmed = question.trim();
   const validation =
@@ -64,13 +80,13 @@ export function RequestReportForm({ onRequested }: { onRequested: (report: Repor
   const send = async () => {
     if (busy || trimmed.length < QUESTION_MIN || validation) return;
     setCountdown(null);
-    if (!intent.current || intent.current.question !== trimmed || intent.current.locale !== locale) {
-      intent.current = { key: crypto.randomUUID(), question: trimmed, locale };
+    if (!intent.current || intent.current.question !== trimmed || intent.current.locale !== locale || intent.current.engine !== engine) {
+      intent.current = { key: crypto.randomUUID(), question: trimmed, locale, engine };
     }
     setBusy(true);
     setProblem(null);
     try {
-      const report = await service.requestReport(trimmed, locale, intent.current.key);
+      const report = await service.requestReport(trimmed, locale, intent.current.key, engine);
       intent.current = null;
       setQuestion('');
       onRequested(report);
@@ -157,6 +173,29 @@ export function RequestReportForm({ onRequested }: { onRequested: (report: Repor
           {busy ? t('reports.form.submitting') : t('reports.form.submit')}
         </Button>
       </div>
+      {engines ? (
+        <div className="bi-engine">
+          <label className="bi-label" htmlFor="bi-engine">
+            {t('reports.engine.label')}
+          </label>
+          <select id="bi-engine" className="bi-select" value={engine} disabled={busy} onChange={(e) => setEngine(e.target.value as ReportEngine)} aria-describedby="bi-engine-note">
+            {ENGINE_ORDER.map((e) => {
+              const info = infoOf(e);
+              const unavailable = e !== 'AUTO' && !(info?.available ?? false);
+              return (
+                <option key={e} value={e} disabled={unavailable}>
+                  {t(`reports.engine.names.${e}`)}
+                  {e !== 'AUTO' && info?.model ? ` · ${info.model}` : ''}
+                  {unavailable ? ` (${t('reports.engine.unavailable')})` : ''}
+                </option>
+              );
+            })}
+          </select>
+          <p id="bi-engine-note" className="bi-hint" data-testid="engine-note">
+            {engine === 'AUTO' ? t('reports.engine.autoNote') : selected?.external ? t('reports.engine.externalNote') : t('reports.engine.localNote')}
+          </p>
+        </div>
+      ) : null}
       <p id="bi-form-hint" className="bi-hint">
         {validation ?? t('reports.form.hint', { language: t(`reports.form.language.${locale}`) })}
       </p>

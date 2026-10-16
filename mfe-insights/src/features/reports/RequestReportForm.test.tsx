@@ -11,18 +11,23 @@ import { pendingReport } from '../../testing/fixtures';
 import { RequestReportForm } from './RequestReportForm';
 
 function setup(locale: 'es' | 'en' = 'es') {
-  const requestReport = vi.fn(async (_q: string, _l: string, _k: string) => pendingReport);
+  const requestReport = vi.fn(async (_q: string, _l: string, _k: string, _e?: string) => pendingReport);
+  const listReportEngines = vi.fn(async () => [
+      { engine: 'OPENCODE', label: 'OpenCode Go', model: 'deepseek-v4.1-flash', available: false, external: true, mode: 'AGENT' },
+      { engine: 'OLLAMA', label: 'Ollama local', model: 'qwen2.5:3b', available: true, external: false, mode: 'HYBRID' },
+      { engine: 'STUB', label: 'Determinista', model: null, available: true, external: false, mode: 'DETERMINISTIC' },
+    ]);
   const config = new HostConfig();
   config.update({ locale });
   const i18n = createI18n(locale);
-  const services = createServices(config, new ShellBridge((key) => key), i18n, { service: { requestReport } as unknown as InsightsService });
+  const services = createServices(config, new ShellBridge((key) => key), i18n, { service: { requestReport, listReportEngines } as unknown as InsightsService });
   const onRequested = vi.fn();
   const view = render(
     <ServicesProvider services={services}>
       <RequestReportForm onRequested={onRequested} />
     </ServicesProvider>,
   );
-  return { requestReport, onRequested, config, ...view };
+  return { requestReport, listReportEngines, onRequested, config, ...view };
 }
 
 const speak = (...segments: Array<[string, boolean]>) => act(() => Fake.last.emitResults(...segments));
@@ -66,7 +71,7 @@ describe('RequestReportForm — dictado por voz', () => {
     await act(() => vi.advanceTimersByTimeAsync(1000));
     expect(screen.getByTestId('dictation-countdown')).toHaveTextContent('0 s');
     await act(() => vi.advanceTimersByTimeAsync(50));
-    expect(requestReport).toHaveBeenCalledExactlyOnceWith('cuántos créditos se vendieron hoy', 'es', expect.any(String));
+    expect(requestReport).toHaveBeenCalledExactlyOnceWith('cuántos créditos se vendieron hoy', 'es', expect.any(String), 'AUTO');
     expect(onRequested).toHaveBeenCalledWith(pendingReport);
     expect(screen.queryByTestId('dictation-countdown')).toBeNull();
   });
@@ -163,5 +168,31 @@ describe('RequestReportForm — dictado por voz', () => {
   it('shows the privacy note (Google in Chrome) and the shortcut when supported', () => {
     setup();
     expect(screen.getByText(/servicio de reconocimiento de Google/)).toHaveTextContent('Alt+V');
+  });
+});
+
+describe('selector de motor (ADR-0022)', () => {
+  beforeEach(() => vi.useRealTimers());
+
+  it('lista Automático/OpenCode/Ollama/Determinista, deshabilita los no disponibles y avisa de que un motor externo seudonimiza', async () => {
+    setup();
+    const select = (await screen.findByLabelText('Motor')) as HTMLSelectElement;
+    const options = Array.from(select.options);
+    expect(options.map((o) => o.value)).toEqual(['AUTO', 'OPENCODE', 'OLLAMA', 'STUB']);
+    expect(options.find((o) => o.value === 'OPENCODE')?.disabled).toBe(true);
+    expect(options.find((o) => o.value === 'OLLAMA')?.disabled).toBe(false);
+    expect(screen.getByTestId('engine-note').textContent).toMatch(/Automático/);
+    fireEvent.change(select, { target: { value: 'OLLAMA' } });
+    expect(screen.getByTestId('engine-note').textContent).toMatch(/local/i);
+  });
+
+  it('envía el motor elegido a requestReport', async () => {
+    const { requestReport } = setup();
+    const select = await screen.findByLabelText('Motor');
+    fireEvent.change(select, { target: { value: 'STUB' } });
+    fireEvent.change(screen.getByLabelText('Pregunta en lenguaje natural'), { target: { value: '¿Quién compró el último ticket?' } });
+    fireEvent.submit(screen.getByRole('button', { name: 'Pedir reporte' }).closest('form') as HTMLFormElement);
+    await vi.waitFor(() => expect(requestReport).toHaveBeenCalledTimes(1));
+    expect(requestReport.mock.calls[0]?.[3]).toBe('STUB');
   });
 });
