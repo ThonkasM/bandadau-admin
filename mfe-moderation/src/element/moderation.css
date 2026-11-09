@@ -213,6 +213,22 @@
   .bmod-split {
     grid-template-columns: minmax(0, 1fr);
   }
+  /* El shell ya muestra el título de la página: aquí se deja solo para lectores de pantalla. */
+  .bmod-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+/* Los atajos de teclado no aplican en pantallas táctiles. */
+@media (hover: none) {
+  .bmod-hint,
+  .bmod-kbd {
+    display: none;
+  }
 }
 .bmod-left {
   display: flex;
@@ -475,4 +491,17 @@
 .bmod-check input {
   width: 1.25rem;
   height: 1.25rem;
+}
+
+/* Al llevar el detalle a la vista (una columna) no debe quedar bajo la cabecera fija del panel. */
+bmod-detail-panel {
+  scroll-margin-top: 5rem;
+}
+
+/* Táctil: campos de 16 px o iOS Safari hace zoom al enfocarlos. */
+@media (pointer: coarse) {
+  .bmod-select select,
+  .bmod-textarea {
+    font-size: 16px;
+  }
 }

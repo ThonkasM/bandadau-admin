@@ -1,7 +1,7 @@
 {
   "name": "mfe-moderation",
-  "version": "0.1.0",
-  "description": "Microfrontend de moderaci\u00f3n de Bandada U: <bandada-mfe-moderation> (Angular 21 + Angular Elements)",
+  "version": "0.1.1",
+  "description": "Microfrontend de moderación de Bandada U: <bandada-mfe-moderation> (Angular 21 + Angular Elements)",
   "private": true,
   "type": "module",
   "license": "UNLICENSED",

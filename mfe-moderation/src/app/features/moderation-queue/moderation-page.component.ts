@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { formatNumber } from '@bandada/i18n/format';
 import { TranslocoPipe } from '@jsverse/transloco';
 
@@ -106,7 +106,7 @@ const REASONS: Array<QueueFilters['reason']> = ['ALL', 'SPAM', 'HARASSMENT', 'NS
                   [entries]="store.entries()"
                   [selectedKey]="store.selectedKey()"
                   [locale]="config.locale()"
-                  (selectKey)="store.select($event)"
+                  (selectKey)="onSelect($event)"
                 />
                 @if (store.pageInfo().hasNextPage) {
                   <button type="button" class="bmod-btn bmod-btn--secondary bmod-more" [disabled]="store.loadingMore()" (click)="store.loadMore()">
@@ -115,6 +115,7 @@ const REASONS: Array<QueueFilters['reason']> = ['ALL', 'SPAM', 'HARASSMENT', 'NS
                 }
               </div>
               <bmod-detail-panel
+                #detail
                 [entry]="store.selected()"
                 [locale]="config.locale()"
                 [busy]="store.busy()"
@@ -156,6 +157,7 @@ export class ModerationPageComponent {
   protected readonly request = signal<ActionRequest | null>(null);
 
   private readonly list = viewChild(QueueListComponent);
+  private readonly detail = viewChild('detail', { read: ElementRef });
 
   protected readonly live = computed(() => (this.store.online() ? this.store.liveState() : 'offline'));
   protected readonly total = computed(() =>
@@ -166,6 +168,14 @@ export class ModerationPageComponent {
     ),
   );
   protected readonly waitingForToken = computed(() => !this.config.accessToken());
+
+  /** En una sola columna (≤ 52 rem) el detalle queda debajo de la lista: al elegir un elemento se lleva a la vista. */
+  protected onSelect(key: string): void {
+    this.store.select(key);
+    if (typeof matchMedia === 'function' && matchMedia('(max-width: 52rem)').matches) {
+      queueMicrotask(() => this.detail()?.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    }
+  }
 
   protected onFilter(key: keyof QueueFilters, value: string): void {
     this.store.setFilters({
