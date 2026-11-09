@@ -35,7 +35,7 @@ interface ToastDetail {
  * le pasa `graphql-url`, `access-token` (propiedad, nunca atributo), `base-path`, `theme` y `locale` y escucha
  * `bandada:navigate | toast | auth-expired`. Si algo falla muestra un fallback con reintento sin romper el shell.
  */
-export function MfeHost({ name }: { name: string }) {
+export function MfeHost({ name, view }: { name: string; view?: 'summary' | 'detail' }) {
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -51,10 +51,10 @@ export function MfeHost({ name }: { name: string }) {
   const locale = i18n.language === 'en' ? 'en' : 'es';
 
   // Lecturas "frescas" para los listeners (se registran una sola vez por montaje del elemento).
-  const latest = useRef({ token, theme, locale });
+  const latest = useRef({ token, theme, locale, view });
   const translate = useRef(t);
   useEffect(() => {
-    latest.current = { token, theme, locale };
+    latest.current = { token, theme, locale, view };
     translate.current = t;
   });
 
@@ -79,6 +79,7 @@ export function MfeHost({ name }: { name: string }) {
         el.setAttribute('base-path', basePath);
         el.setAttribute('theme', latest.current.theme);
         el.setAttribute('locale', latest.current.locale);
+        if (latest.current.view) el.setAttribute('view', latest.current.view);
 
         const on = (type: string, handler: (event: Event) => void) => {
           el.addEventListener(type, handler);
@@ -142,6 +143,12 @@ export function MfeHost({ name }: { name: string }) {
     el.setAttribute('locale', locale);
     el.dispatchEvent(new CustomEvent('bandada:locale-changed', { detail: { locale } }));
   }, [locale, state]);
+
+  // vista Resumen/Detalle (opcional): atributo `view` del microfrontend
+  useEffect(() => {
+    const el = elementRef.current;
+    if (el && view) el.setAttribute('view', view);
+  }, [view, state]);
 
   const retry = useCallback(() => {
     if (entry) resetMfeCache(entry);

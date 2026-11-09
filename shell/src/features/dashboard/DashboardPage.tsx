@@ -16,9 +16,11 @@ import { PageHeader } from '@/components/ui/PageHeader';
 import { RefreshButton } from '@/components/ui/RefreshButton';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { toast } from '@/components/ui/Toast';
+import { ViewModeToggle } from '@/components/ui/ViewModeToggle';
 import { daysAgo, isoDate, useLocale } from '@/lib/format';
 import { codeOf } from '@/lib/graphql/errors';
 import { serviceStatusTone, severityTone } from '@/lib/status';
+import { useViewMode } from '@/lib/view-mode';
 
 import { ALERT_RAISED_SUBSCRIPTION, DASHBOARD_QUERY, OPEN_ALERTS_QUERY, SERVICE_HEALTH_QUERY } from './graphql';
 
@@ -44,6 +46,7 @@ export default function DashboardPage() {
   const { t } = useTranslation();
   const locale = useLocale();
   const [days, setDays] = useState<(typeof RANGES)[number]>(7);
+  const summary = useViewMode((s) => s.mode) === 'summary';
 
   const range = useMemo(() => ({ from: isoDate(daysAgo(days - 1)), to: isoDate(new Date()), bucket: 'DAY' as const }), [days]);
   const [dash, refetchDash] = useQuery({ query: DASHBOARD_QUERY, variables: { range } });
@@ -64,6 +67,7 @@ export default function DashboardPage() {
   const loading = dash.fetching && !d;
   const services = health.data?.serviceHealth;
   const upCount = services?.services.filter((s) => s.status === 'UP').length ?? 0;
+  const healthRatio = [upCount, services?.services.length ?? 0].join(' / ');
 
   const allSeries = (d?.series ?? []).map((s) => ({
     name: s.name,
@@ -71,7 +75,9 @@ export default function DashboardPage() {
     points: s.points,
   }));
   // Los créditos tienen otra escala que los conteos: van en su propio gráfico.
-  const series = allSeries.filter((s) => !s.name.startsWith('credits'));
+  const countSeries = allSeries.filter((s) => !s.name.startsWith('credits'));
+  // Resumen: una sola serie (las inscripciones, que es lo que importa al negocio).
+  const series = summary ? (countSeries.filter((s) => s.name.startsWith('registrations')).length ? countSeries.filter((s) => s.name.startsWith('registrations')) : countSeries.slice(0, 1)) : countSeries;
   const creditSeries = allSeries.filter((s) => s.name.startsWith('credits'));
   // Fase 1: las alertas son de insights y el gateway responde FEATURE_DISABLED (no es un fallo).
   const alertsDisabled = !!alerts.error && codeOf(alerts.error) === 'FEATURE_DISABLED';
@@ -83,6 +89,7 @@ export default function DashboardPage() {
         description={t('dashboard:description')}
         actions={
           <>
+            <ViewModeToggle />
             <RefreshButton
               loading={dash.fetching || health.fetching || alerts.fetching}
               onRefresh={() => {
@@ -112,14 +119,25 @@ export default function DashboardPage() {
         </Card>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <StatCard icon={Users} label={t('dashboard:cards.activeUsers')} value={formatNumber(d?.activeUsers ?? 0, locale)} loading={loading} />
-          <StatCard icon={UserPlus} label={t('dashboard:cards.newUsers')} value={formatNumber(d?.newUsers ?? 0, locale)} loading={loading} />
-          <StatCard icon={FileText} label={t('dashboard:cards.posts')} value={formatNumber(d?.posts ?? 0, locale)} loading={loading} />
-          <StatCard icon={MessageSquare} label={t('dashboard:cards.comments')} value={formatNumber(d?.comments ?? 0, locale)} loading={loading} />
-          <StatCard icon={CalendarCheck} label={t('dashboard:cards.registrations')} value={formatNumber(d?.registrationsConfirmed ?? 0, locale)} loading={loading} />
-          <StatCard icon={Coins} label={t('dashboard:cards.creditsSpent')} value={formatCredits(d?.creditsSpent ?? 0, locale)} loading={loading} />
-          <StatCard icon={Flag} label={t('dashboard:cards.flagged')} value={formatNumber(d?.flaggedContent ?? 0, locale)} loading={loading} />
-          <StatCard icon={AlertTriangle} label={t('dashboard:cards.openAlerts')} value={formatNumber(d?.openAlerts ?? 0, locale)} loading={loading} />
+          {summary ? (
+            <>
+            <StatCard icon={CalendarCheck} label={t('dashboard:cards.registrations')} value={formatNumber(d?.registrationsConfirmed ?? 0, locale)} loading={loading} />
+            <StatCard icon={Users} label={t('dashboard:cards.activeUsers')} value={formatNumber(d?.activeUsers ?? 0, locale)} loading={loading} />
+            <StatCard icon={Coins} label={t('dashboard:cards.creditsSpent')} value={formatCredits(d?.creditsSpent ?? 0, locale)} loading={loading} />
+            <StatCard icon={AlertTriangle} label={t('dashboard:cards.openAlerts')} value={formatNumber(d?.openAlerts ?? 0, locale)} loading={loading} />
+            </>
+          ) : (
+            <>
+            <StatCard icon={Users} label={t('dashboard:cards.activeUsers')} value={formatNumber(d?.activeUsers ?? 0, locale)} loading={loading} />
+            <StatCard icon={UserPlus} label={t('dashboard:cards.newUsers')} value={formatNumber(d?.newUsers ?? 0, locale)} loading={loading} />
+            <StatCard icon={FileText} label={t('dashboard:cards.posts')} value={formatNumber(d?.posts ?? 0, locale)} loading={loading} />
+            <StatCard icon={MessageSquare} label={t('dashboard:cards.comments')} value={formatNumber(d?.comments ?? 0, locale)} loading={loading} />
+            <StatCard icon={CalendarCheck} label={t('dashboard:cards.registrations')} value={formatNumber(d?.registrationsConfirmed ?? 0, locale)} loading={loading} />
+            <StatCard icon={Coins} label={t('dashboard:cards.creditsSpent')} value={formatCredits(d?.creditsSpent ?? 0, locale)} loading={loading} />
+            <StatCard icon={Flag} label={t('dashboard:cards.flagged')} value={formatNumber(d?.flaggedContent ?? 0, locale)} loading={loading} />
+            <StatCard icon={AlertTriangle} label={t('dashboard:cards.openAlerts')} value={formatNumber(d?.openAlerts ?? 0, locale)} loading={loading} />
+            </>
+          )}
         </div>
       )}
 
@@ -134,7 +152,7 @@ export default function DashboardPage() {
             ) : (
               <div className="flex flex-col gap-6">
                 <LineChart series={series} locale={locale} title={t('dashboard:chart.title')} />
-                {creditSeries.length > 0 && <LineChart series={creditSeries} locale={locale} title={t('dashboard:chart.credits')} />}
+                {!summary && creditSeries.length > 0 && <LineChart series={creditSeries} locale={locale} title={t('dashboard:chart.credits')} />}
               </div>
             )}
           </CardBody>
@@ -151,6 +169,10 @@ export default function DashboardPage() {
               <Skeleton className="h-40 w-full" />
             ) : health.error && !services ? (
               <ErrorState error={health.error} onRetry={() => refetchHealth({ requestPolicy: 'network-only' })} />
+            ) : summary ? (
+              <p className="font-display text-3xl font-bold text-primary">
+                {healthRatio}
+              </p>
             ) : (
               <ul className="flex flex-col gap-2">
                 {services?.services.map((s) => (
@@ -169,7 +191,7 @@ export default function DashboardPage() {
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-4 xl:grid-cols-2">
-        <Card>
+        <Card className={summary ? 'xl:col-span-2' : undefined}>
           <CardHeader
             title={t('dashboard:alerts.title', { count: d?.openAlerts ?? 0 })}
             action={<span className="text-xs text-muted">{t('dashboard:alerts.insightsPhase2')}</span>}
@@ -185,7 +207,7 @@ export default function DashboardPage() {
               <EmptyState icon={Activity} title={t('dashboard:alerts.empty')} />
             ) : (
               <ul className="flex flex-col gap-3">
-                {alerts.data?.alerts.map((a) => (
+                {(summary ? alerts.data?.alerts.slice(0, 3) : alerts.data?.alerts)?.map((a) => (
                   <li key={a.id} className="flex items-start gap-3">
                     <Badge tone={severityTone[a.severity]}>{t(`enums:AlertSeverity.${a.severity}`)}</Badge>
                     <div className="min-w-0 flex-1">
@@ -199,6 +221,7 @@ export default function DashboardPage() {
           </CardBody>
         </Card>
 
+        {!summary && (
         <Card>
           <CardHeader title={t('dashboard:queues.title')} />
           <CardBody>
@@ -219,6 +242,7 @@ export default function DashboardPage() {
             )}
           </CardBody>
         </Card>
+        )}
       </div>
     </>
   );

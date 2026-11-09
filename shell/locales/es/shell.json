@@ -85,5 +85,10 @@
     "DOMAIN_ALREADY_ASSIGNED": "Ese dominio ya pertenece a otra universidad.",
     "HANDOFF_CODE_EXPIRED": "El enlace expiró.",
     "HANDOFF_TARGET_FORBIDDEN": "Tu cuenta no tiene acceso al panel."
+  },
+  "view": {
+    "label": "Vista",
+    "summary": "Resumen",
+    "detail": "Detalle"
   }
 }

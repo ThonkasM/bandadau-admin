@@ -1,12 +1,13 @@
 'use client';
 
-import { RoleGuard } from '@/components/layout/guards';
-import { InsightsSection } from '@/features/insights/InsightsSection';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
+/** «Reportes» se unificó con «Insights» (era el mismo microfrontend): se conservan los enlaces antiguos. */
 export default function Page() {
-  return (
-    <RoleGuard allow={['ADMIN']}>
-      <InsightsSection section="reports" />
-    </RoleGuard>
-  );
+  const router = useRouter();
+  useEffect(() => {
+    router.replace('/insights/');
+  }, [router]);
+  return null;
 }
