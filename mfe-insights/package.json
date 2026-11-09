@@ -1,6 +1,6 @@
 {
   "name": "mfe-insights",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Microfrontend de insights de Bandada U: <bandada-mfe-insights> (React 19 + Vite library mode)",
   "private": true,
   "type": "module",
