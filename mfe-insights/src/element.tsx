@@ -15,7 +15,7 @@ export const ELEMENT_NAME = 'bandada-mfe-insights';
  * propiedad `accessToken` (nunca atributo). Salidas: `bandada:navigate | toast | auth-expired`.
  */
 export class BandadaMfeInsights extends HTMLElement {
-  static readonly observedAttributes = ['graphql-url', 'base-path', 'theme', 'locale'];
+  static readonly observedAttributes = ['graphql-url', 'base-path', 'theme', 'locale', 'view'];
 
   /** Inyectable en pruebas. */
   static servicesFactory: ((config: HostConfig, bridge: ShellBridge, i18n: ReturnType<typeof createI18n>) => Services) | null = null;
@@ -65,6 +65,13 @@ export class BandadaMfeInsights extends HTMLElement {
     this.applyLocale(normalizeLocale(value));
   }
 
+  get view(): 'summary' | 'detail' {
+    return this.config.getSnapshot().view;
+  }
+  set view(value: string) {
+    this.config.update({ view: value === 'summary' ? 'summary' : 'detail' });
+  }
+
   attributeChangedCallback(name: string, _old: string | null, value: string | null): void {
     switch (name) {
       case 'graphql-url':
@@ -78,6 +85,9 @@ export class BandadaMfeInsights extends HTMLElement {
         break;
       case 'locale':
         this.applyLocale(normalizeLocale(value));
+        break;
+      case 'view':
+        this.view = value ?? 'detail';
         break;
     }
   }

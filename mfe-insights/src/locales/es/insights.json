@@ -276,5 +276,19 @@
     "VALIDATION_ERROR": "Revisa la pregunta e inténtalo de nuevo.",
     "NOT_FOUND": "No se encontró el elemento solicitado.",
     "generic": "Algo salió mal. Inténtalo de nuevo."
+  },
+  "summary": {
+    "openAlerts": "Alertas abiertas",
+    "allClear": "Todo en orden",
+    "needsAttention": "Requieren atención",
+    "lastMonitoring": "Último monitoreo",
+    "none": "Sin datos",
+    "reportsReady": "Reportes listos",
+    "latestAt": "Último {when}",
+    "noneYet": "Aún no hay reportes",
+    "conclusion": "Última conclusión",
+    "noAnswer": "Reporte sin respuesta destacada",
+    "recentAlerts": "Alertas recientes",
+    "ask": "Hacer una pregunta"
   }
 }

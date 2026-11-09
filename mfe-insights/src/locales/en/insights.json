@@ -276,5 +276,19 @@
     "VALIDATION_ERROR": "Check the question and try again.",
     "NOT_FOUND": "The requested item was not found.",
     "generic": "Something went wrong. Try again."
+  },
+  "summary": {
+    "openAlerts": "Open alerts",
+    "allClear": "All clear",
+    "needsAttention": "Need attention",
+    "lastMonitoring": "Last monitoring",
+    "none": "No data",
+    "reportsReady": "Reports ready",
+    "latestAt": "Latest {when}",
+    "noneYet": "No reports yet",
+    "conclusion": "Latest conclusion",
+    "noAnswer": "Report without a highlighted answer",
+    "recentAlerts": "Recent alerts",
+    "ask": "Ask a question"
   }
 }

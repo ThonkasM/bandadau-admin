@@ -288,4 +288,17 @@ describe('alerts (UC-20) and agent runs', () => {
     fireEvent.keyDown(root(el).querySelector('#bi-tab-reports') as HTMLElement, { key: 'ArrowRight' });
     expect(root(el).querySelector('#bi-tab-alerts')?.getAttribute('aria-selected')).toBe('true');
   });
+
+  it('renders the manager summary with view="summary" and the full tabs by default or with view="detail"', async () => {
+    fakes();
+    const el = await mount();
+    await waitFor(() => expect(root(el).querySelector('#bi-tab-reports')).not.toBeNull());
+    el.setAttribute('view', 'summary');
+    await waitFor(() => expect(root(el).querySelector('[data-testid=summary-view]')).not.toBeNull());
+    expect(root(el).querySelector('#bi-tab-reports')).toBeNull();
+    await waitFor(() => expect(text(el)).toContain('Alertas abiertas'));
+    el.setAttribute('view', 'detail');
+    await waitFor(() => expect(root(el).querySelector('#bi-tab-reports')).not.toBeNull());
+    expect(root(el).querySelector('[data-testid=summary-view]')).toBeNull();
+  });
 });

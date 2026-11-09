@@ -1,5 +1,7 @@
 export type ThemeName = 'light' | 'dark';
 export type LocaleName = 'es' | 'en';
+/** Vista del panel: `summary` (gerencial) o `detail` (completa; por defecto, compatible con shells anteriores). */
+export type ViewName = 'summary' | 'detail';
 
 export interface HostSnapshot {
   readonly graphqlUrl: string;
@@ -7,6 +9,7 @@ export interface HostSnapshot {
   readonly basePath: string;
   readonly theme: ThemeName;
   readonly locale: LocaleName;
+  readonly view: ViewName;
 }
 
 /**
@@ -21,6 +24,7 @@ export class HostConfig {
     basePath: '/insights',
     theme: 'light',
     locale: 'es',
+    view: 'detail',
   };
   private listeners = new Set<() => void>();
   private waiters: Array<() => void> = [];

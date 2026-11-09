@@ -5,6 +5,7 @@ import { Button, SeverityIcon, StateBox } from '../components/ui';
 import { AgentRunsTab } from '../features/agent-runs/AgentRunsTab';
 import { AlertsTab } from '../features/alerts/AlertsTab';
 import { ReportsTab } from '../features/reports/ReportsTab';
+import { SummaryView } from '../features/summary/SummaryView';
 import type { Alert } from '../lib/types';
 import { useAgentRuns, useAlerts, useReports } from './hooks';
 import { errorCode, useErrorMessage, useHost, useServices } from './services';
@@ -16,7 +17,7 @@ const TABS: TabId[] = ['reports', 'alerts', 'runs'];
 export function App() {
   const { t } = useTranslation();
   const { service, bridge } = useServices();
-  const { graphqlUrl, accessToken } = useHost();
+  const { graphqlUrl, accessToken, view } = useHost();
   const errorMessage = useErrorMessage();
   const [tab, setTab] = useState<TabId>('reports');
   const [running, setRunning] = useState(false);
@@ -91,6 +92,10 @@ export function App() {
         action={<Button onClick={() => { void reports.load(); void alerts.load(); void runs.load(); }}>{t('states.retry')}</Button>}
       />
     );
+  }
+
+  if (view === 'summary') {
+    return <SummaryView reports={reports} alerts={alerts} runs={runs} />;
   }
 
   return (
