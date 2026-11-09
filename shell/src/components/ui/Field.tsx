@@ -46,7 +46,7 @@ export function Field({ label, hint, error, required, children, className }: Fie
 }
 
 const CONTROL =
-  'w-full rounded-md border bg-surface px-3 min-h-11 md:min-h-10 text-sm text-primary placeholder:text-muted ' +
+  'w-full rounded-md border bg-surface px-3 min-h-11 md:min-h-10 text-base md:text-sm text-primary placeholder:text-muted ' +
   'focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-focus ' +
   'disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-muted';
 

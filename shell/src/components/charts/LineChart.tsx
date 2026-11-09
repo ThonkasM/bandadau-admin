@@ -84,7 +84,8 @@ export function LineChart({ series, locale, title }: { series: ChartSeries[]; lo
           </span>
         ))}
       </figcaption>
-      <table className="sr-only">
+      <div className="sr-only">
+      <table>
         <caption>{title}</caption>
         <thead>
           <tr>
@@ -107,6 +108,7 @@ export function LineChart({ series, locale, title }: { series: ChartSeries[]; lo
           ))}
         </tbody>
       </table>
+      </div>
     </figure>
   );
 }

@@ -111,7 +111,7 @@ export default function DashboardPage() {
           <ErrorState error={dash.error} onRetry={() => refetchDash({ requestPolicy: 'network-only' })} />
         </Card>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <StatCard icon={Users} label={t('dashboard:cards.activeUsers')} value={formatNumber(d?.activeUsers ?? 0, locale)} loading={loading} />
           <StatCard icon={UserPlus} label={t('dashboard:cards.newUsers')} value={formatNumber(d?.newUsers ?? 0, locale)} loading={loading} />
           <StatCard icon={FileText} label={t('dashboard:cards.posts')} value={formatNumber(d?.posts ?? 0, locale)} loading={loading} />
@@ -123,7 +123,7 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <div className="mt-4 grid gap-4 xl:grid-cols-3">
+      <div className="mt-4 grid grid-cols-1 gap-4 xl:grid-cols-3">
         <Card className="xl:col-span-2">
           <CardHeader title={t('dashboard:chart.title')} description={t('dashboard:chart.description', { count: days })} />
           <CardBody>
@@ -168,7 +168,7 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      <div className="mt-4 grid gap-4 xl:grid-cols-2">
+      <div className="mt-4 grid grid-cols-1 gap-4 xl:grid-cols-2">
         <Card>
           <CardHeader
             title={t('dashboard:alerts.title', { count: d?.openAlerts ?? 0 })}

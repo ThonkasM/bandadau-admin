@@ -13,6 +13,7 @@
     color: var(--bd-color-text-primary);
     line-height: var(--bd-line-height-normal);
     min-height: 100vh;
+    min-height: 100dvh; /* móvil: la barra de direcciones cambia la altura útil */
   }
   :focus-visible {
     outline-color: var(--bd-color-border-focus);

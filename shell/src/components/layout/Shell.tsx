@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { type ReactNode, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ErrorBoundary } from './ErrorBoundary';
@@ -23,6 +23,21 @@ export function Shell({ children }: { children: ReactNode }) {
   });
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // Con el menú móvil abierto, la página de atrás no debe desplazarse; Escape lo cierra.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [mobileOpen]);
+
   const toggle = () =>
     setCollapsed((value) => {
       try {
@@ -34,7 +49,7 @@ export function Shell({ children }: { children: ReactNode }) {
     });
 
   return (
-    <div className="flex min-h-screen bg-canvas">
+    <div className="flex min-h-dvh bg-canvas">
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:start-3 focus:top-3 focus:z-[var(--bd-z-toast)] focus:rounded-md focus:bg-action-primary focus:px-4 focus:py-2 focus:text-action-primary-fg">
         {t('common:a11y.skipToContent')}
       </a>
