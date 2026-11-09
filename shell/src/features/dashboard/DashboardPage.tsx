@@ -6,7 +6,7 @@ import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useSubscription } from 'urql';
 
-import { LineChart } from '@/components/charts/LineChart';
+import { LineChart, metricChip } from '@/components/charts/LineChart';
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardBody, CardHeader } from '@/components/ui/Card';
 import { EmptyState } from '@/components/ui/EmptyState';
@@ -26,11 +26,11 @@ import { ALERT_RAISED_SUBSCRIPTION, DASHBOARD_QUERY, OPEN_ALERTS_QUERY, SERVICE_
 
 const RANGES = [7, 30, 90] as const;
 
-function StatCard({ icon: Icon, label, value, loading }: { icon: typeof Users; label: string; value: ReactNode; loading: boolean }) {
+function StatCard({ icon: Icon, label, value, loading, metric }: { icon: typeof Users; label: string; value: ReactNode; loading: boolean; metric?: string }) {
   return (
     <Card>
       <CardBody className="flex items-start gap-3">
-        <span className="flex size-10 shrink-0 items-center justify-center rounded-md bg-feedback-info text-feedback-info-fg">
+        <span className={`flex size-10 shrink-0 items-center justify-center rounded-md ${metric ? metricChip(metric) : 'bg-feedback-info text-feedback-info-fg'}`}>
           <Icon aria-hidden className="size-5" />
         </span>
         <div className="min-w-0">
@@ -74,11 +74,9 @@ export default function DashboardPage() {
     label: t(`dashboard:series.${s.name}`, { defaultValue: s.name }),
     points: s.points,
   }));
-  // Los créditos tienen otra escala que los conteos: van en su propio gráfico.
-  const countSeries = allSeries.filter((s) => !s.name.startsWith('credits'));
-  // Resumen: una sola serie (las inscripciones, que es lo que importa al negocio).
-  const series = summary ? (countSeries.filter((s) => s.name.startsWith('registrations')).length ? countSeries.filter((s) => s.name.startsWith('registrations')) : countSeries.slice(0, 1)) : countSeries;
-  const creditSeries = allSeries.filter((s) => s.name.startsWith('credits'));
+  // Cada métrica tiene su propia escala (publicaciones ≈ decenas, créditos ≈ cientos): un gráfico por métrica, para que ninguna se aplane.
+  // Resumen: solo las inscripciones, que es lo que importa al negocio.
+  const charts = summary ? allSeries.filter((s) => s.name === 'registrationsConfirmed').concat(allSeries.filter((s) => s.name === 'registrationsConfirmed').length ? [] : allSeries.slice(0, 1)) : allSeries;
   // Fase 1: las alertas son de insights y el gateway responde FEATURE_DISABLED (no es un fallo).
   const alertsDisabled = !!alerts.error && codeOf(alerts.error) === 'FEATURE_DISABLED';
 
@@ -121,19 +119,19 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {summary ? (
             <>
-            <StatCard icon={CalendarCheck} label={t('dashboard:cards.registrations')} value={formatNumber(d?.registrationsConfirmed ?? 0, locale)} loading={loading} />
-            <StatCard icon={Users} label={t('dashboard:cards.activeUsers')} value={formatNumber(d?.activeUsers ?? 0, locale)} loading={loading} />
-            <StatCard icon={Coins} label={t('dashboard:cards.creditsSpent')} value={formatCredits(d?.creditsSpent ?? 0, locale)} loading={loading} />
+            <StatCard icon={CalendarCheck} label={t('dashboard:cards.registrations')} value={formatNumber(d?.registrationsConfirmed ?? 0, locale)} loading={loading} metric="registrationsConfirmed" />
+            <StatCard icon={Users} label={t('dashboard:cards.activeUsers')} value={formatNumber(d?.activeUsers ?? 0, locale)} loading={loading} metric="activeUsers" />
+            <StatCard icon={Coins} label={t('dashboard:cards.creditsSpent')} value={formatCredits(d?.creditsSpent ?? 0, locale)} loading={loading} metric="creditsSpent" />
             <StatCard icon={AlertTriangle} label={t('dashboard:cards.openAlerts')} value={formatNumber(d?.openAlerts ?? 0, locale)} loading={loading} />
             </>
           ) : (
             <>
-            <StatCard icon={Users} label={t('dashboard:cards.activeUsers')} value={formatNumber(d?.activeUsers ?? 0, locale)} loading={loading} />
-            <StatCard icon={UserPlus} label={t('dashboard:cards.newUsers')} value={formatNumber(d?.newUsers ?? 0, locale)} loading={loading} />
-            <StatCard icon={FileText} label={t('dashboard:cards.posts')} value={formatNumber(d?.posts ?? 0, locale)} loading={loading} />
-            <StatCard icon={MessageSquare} label={t('dashboard:cards.comments')} value={formatNumber(d?.comments ?? 0, locale)} loading={loading} />
-            <StatCard icon={CalendarCheck} label={t('dashboard:cards.registrations')} value={formatNumber(d?.registrationsConfirmed ?? 0, locale)} loading={loading} />
-            <StatCard icon={Coins} label={t('dashboard:cards.creditsSpent')} value={formatCredits(d?.creditsSpent ?? 0, locale)} loading={loading} />
+            <StatCard icon={Users} label={t('dashboard:cards.activeUsers')} value={formatNumber(d?.activeUsers ?? 0, locale)} loading={loading} metric="activeUsers" />
+            <StatCard icon={UserPlus} label={t('dashboard:cards.newUsers')} value={formatNumber(d?.newUsers ?? 0, locale)} loading={loading} metric="newUsers" />
+            <StatCard icon={FileText} label={t('dashboard:cards.posts')} value={formatNumber(d?.posts ?? 0, locale)} loading={loading} metric="posts" />
+            <StatCard icon={MessageSquare} label={t('dashboard:cards.comments')} value={formatNumber(d?.comments ?? 0, locale)} loading={loading} metric="comments" />
+            <StatCard icon={CalendarCheck} label={t('dashboard:cards.registrations')} value={formatNumber(d?.registrationsConfirmed ?? 0, locale)} loading={loading} metric="registrationsConfirmed" />
+            <StatCard icon={Coins} label={t('dashboard:cards.creditsSpent')} value={formatCredits(d?.creditsSpent ?? 0, locale)} loading={loading} metric="creditsSpent" />
             <StatCard icon={Flag} label={t('dashboard:cards.flagged')} value={formatNumber(d?.flaggedContent ?? 0, locale)} loading={loading} />
             <StatCard icon={AlertTriangle} label={t('dashboard:cards.openAlerts')} value={formatNumber(d?.openAlerts ?? 0, locale)} loading={loading} />
             </>
@@ -147,12 +145,16 @@ export default function DashboardPage() {
           <CardBody>
             {loading ? (
               <Skeleton className="h-60 w-full" />
-            ) : series.length === 0 ? (
+            ) : charts.length === 0 ? (
               <EmptyState icon={Activity} title={t('dashboard:chart.empty')} />
             ) : (
-              <div className="flex flex-col gap-6">
-                <LineChart series={series} locale={locale} title={t('dashboard:chart.title')} />
-                {!summary && creditSeries.length > 0 && <LineChart series={creditSeries} locale={locale} title={t('dashboard:chart.credits')} />}
+              <div className={charts.length > 1 ? 'grid grid-cols-1 gap-6 md:grid-cols-2' : undefined}>
+                {charts.map((c) => (
+                  <div key={c.name} className="min-w-0">
+                    <h3 className="mb-1 text-sm font-semibold text-primary">{c.label}</h3>
+                    <LineChart series={[c]} locale={locale} title={c.label} format={c.name.startsWith('credits') ? (v) => formatCredits(v, locale) : undefined} />
+                  </div>
+                ))}
               </div>
             )}
           </CardBody>

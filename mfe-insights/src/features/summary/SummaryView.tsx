@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import type { useAgentRuns, useAlerts, useReports } from '../../app/hooks';
 import { useServices } from '../../app/services';
-import { SeverityIcon, useFormat } from '../../components/ui';
+import { SeverityIcon, Spinner, useFormat } from '../../components/ui';
 import { splitAnswer } from '../../lib/answer';
 import { normalizeDataset } from '../../lib/dataset';
 import type { Report } from '../../lib/types';
@@ -31,6 +31,7 @@ export function SummaryView({
 
   const ready = useMemo(() => reports.items.filter((r) => r.status === 'READY'), [reports.items]);
   const latest = ready[0] ?? null;
+  const pending = reports.items.some((r) => r.status === 'PENDING' || r.status === 'RUNNING');
   const lastRun = runs.items[0] ?? null;
   const topAlerts = alerts.items.filter((a) => a.status === 'OPEN').slice(0, TOP_ALERTS);
 
@@ -50,23 +51,19 @@ export function SummaryView({
 
   return (
     <div className="bi-app" data-testid="summary-view">
-      <div className="bi-kpis">
-        <div className="bi-kpi">
-          <p className="bi-kpi__label">{t('summary.openAlerts')}</p>
-          <p className="bi-kpi__value">{alerts.openCount}</p>
-          <p className="bi-hint">{alerts.openCount === 0 ? t('summary.allClear') : t('summary.needsAttention')}</p>
+      <section className="bi-card" aria-labelledby="bi-sum-ask">
+        <h2 id="bi-sum-ask" className="bi-card__title">
+          {t('summary.ask')}
+        </h2>
+        <RequestReportForm onRequested={onRequested} />
+      </section>
+
+      {pending ? (
+        <div className="bi-progress" role="status" aria-live="polite">
+          <Spinner />
+          <span>{t('reports.detail.generating')}</span>
         </div>
-        <div className="bi-kpi">
-          <p className="bi-kpi__label">{t('summary.lastMonitoring')}</p>
-          <p className="bi-kpi__value">{lastRun ? t(`enums:AgentRunStatus.${lastRun.status}`) : t('summary.none')}</p>
-          <p className="bi-hint">{lastRun ? relative(lastRun.startedAt) : ''}</p>
-        </div>
-        <div className="bi-kpi">
-          <p className="bi-kpi__label">{t('summary.reportsReady')}</p>
-          <p className="bi-kpi__value">{ready.length}</p>
-          <p className="bi-hint">{latest ? t('summary.latestAt', { when: relative(latest.completedAt ?? latest.createdAt) }) : t('summary.noneYet')}</p>
-        </div>
-      </div>
+      ) : null}
 
       <section className="bi-card" aria-labelledby="bi-sum-title">
         <h2 id="bi-sum-title" className="bi-card__title">
@@ -86,6 +83,24 @@ export function SummaryView({
         )}
       </section>
 
+      <div className="bi-kpis">
+        <div className="bi-kpi">
+          <p className="bi-kpi__label">{t('summary.openAlerts')}</p>
+          <p className="bi-kpi__value">{alerts.openCount}</p>
+          <p className="bi-hint">{alerts.openCount === 0 ? t('summary.allClear') : t('summary.needsAttention')}</p>
+        </div>
+        <div className="bi-kpi">
+          <p className="bi-kpi__label">{t('summary.lastMonitoring')}</p>
+          <p className="bi-kpi__value">{lastRun ? t(`enums:AgentRunStatus.${lastRun.status}`) : t('summary.none')}</p>
+          <p className="bi-hint">{lastRun ? relative(lastRun.startedAt) : ''}</p>
+        </div>
+        <div className="bi-kpi">
+          <p className="bi-kpi__label">{t('summary.reportsReady')}</p>
+          <p className="bi-kpi__value">{ready.length}</p>
+          <p className="bi-hint">{latest ? t('summary.latestAt', { when: relative(latest.completedAt ?? latest.createdAt) }) : t('summary.noneYet')}</p>
+        </div>
+      </div>
+
       {topAlerts.length > 0 ? (
         <section className="bi-card" aria-labelledby="bi-sum-alerts">
           <h2 id="bi-sum-alerts" className="bi-card__title">
@@ -102,10 +117,6 @@ export function SummaryView({
         </section>
       ) : null}
 
-      <details className="bi-card bi-summary-ask">
-        <summary className="bi-card__title">{t('summary.ask')}</summary>
-        <RequestReportForm onRequested={onRequested} />
-      </details>
     </div>
   );
 }

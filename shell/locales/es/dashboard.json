@@ -28,7 +28,8 @@
     "comments": "Comentarios",
     "activeUsers": "Usuarios activos",
     "creditsSpent": "Créditos gastados",
-    "creditsToppedUp": "Créditos recargados"
+    "creditsToppedUp": "Créditos recargados",
+    "postsCreated": "Publicaciones"
   },
   "health": {
     "title": "Salud de servicios",

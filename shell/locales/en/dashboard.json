@@ -28,7 +28,8 @@
     "comments": "Comments",
     "activeUsers": "Active users",
     "creditsSpent": "Credits spent",
-    "creditsToppedUp": "Credits topped up"
+    "creditsToppedUp": "Credits topped up",
+    "postsCreated": "Posts"
   },
   "health": {
     "title": "Service health",

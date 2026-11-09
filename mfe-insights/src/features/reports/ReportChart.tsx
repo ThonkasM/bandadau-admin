@@ -20,7 +20,7 @@ export function prepareSpec(raw: unknown, dataset: Dataset | null): Spec | null 
     else if (!data?.values) spec['data'] = { values: rows };
   }
   if (spec['width'] === undefined) spec['width'] = 'container';
-  if (spec['height'] === undefined) spec['height'] = 280;
+  if (spec['height'] === undefined) spec['height'] = 240;
   return spec;
 }
 
