@@ -1,5 +1,5 @@
 import type { Role } from '@bandada/contracts-ts/graphql/admin';
-import { CalendarDays, GraduationCap, LayoutDashboard, type LucideIcon, ShieldCheck, Sparkles, Users, Workflow } from 'lucide-react';
+import { CalendarDays, FileText, GraduationCap, LayoutDashboard, type LucideIcon, ShieldCheck, Sparkles, Users, Workflow } from 'lucide-react';
 
 import { env } from '@/lib/env';
 
@@ -21,6 +21,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { key: 'universities', href: '/universities/', icon: GraduationCap, roles: ['ADMIN'], group: 'manage' },
   { key: 'events', href: '/events/', icon: CalendarDays, roles: ['ADMIN'], group: 'manage' },
   { key: 'sagas', href: '/sagas/', icon: Workflow, roles: ['ADMIN'], group: 'manage' },
+  { key: 'reports', href: '/reports/', icon: FileText, roles: ['ADMIN'], group: 'manage' },
   { key: 'insights', href: '/insights/', icon: Sparkles, roles: ['ADMIN'], group: 'insights', phase2: true },
 ];
 

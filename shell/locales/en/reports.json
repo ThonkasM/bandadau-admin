@@ -1,0 +1,57 @@
+{
+  "title": "Reports",
+  "description": "Fixed reports on attendance, registrations and credits, with CSV export. For free-form questions use Insights.",
+  "exportCsv": "Export CSV",
+  "unknownUser": "Unknown user",
+  "free": "Free",
+  "truncated": "Partial list: the analysis cap was reached.",
+  "tabs": {
+    "attendance": "Attendance",
+    "registrations": "Registrations",
+    "credits": "Credits"
+  },
+  "range": {
+    "label": "Range",
+    "lastDays": "{count, plural, one {Last day} other {Last # days}}"
+  },
+  "attendance": {
+    "title": "Tickets validated at the door",
+    "description": "Who scanned each ticket and whose it was.",
+    "empty": "No tickets were validated in this range.",
+    "when": "Date and time",
+    "event": "Event",
+    "what": "Record",
+    "sentence": "{organizer} scanned {attendee}’s ticket",
+    "scannedBy": "Scanned by",
+    "attendee": "Attendee",
+    "eventFilter": "Event",
+    "allEvents": "All events",
+    "total": "Tickets validated",
+    "events": "Events with attendance",
+    "organizers": "People who scanned"
+  },
+  "registrations": {
+    "title": "Registrations by event",
+    "description": "Seats taken per event (all events; the totals above use the range).",
+    "empty": "There are no events yet.",
+    "event": "Event",
+    "organizer": "Organizer",
+    "startsAt": "Date",
+    "seats": "Seats taken",
+    "capacity": "Total capacity",
+    "price": "Price",
+    "confirmed": "Confirmed registrations",
+    "failed": "Failed registrations",
+    "cancelled": "Cancelled registrations"
+  },
+  "credits": {
+    "title": "Credits per day",
+    "description": "Credit top-ups, spending and refunds.",
+    "empty": "There are no credit movements in this range.",
+    "date": "Date",
+    "topUp": "Top-ups",
+    "debit": "Spending",
+    "refund": "Refunds",
+    "net": "Net"
+  }
+}

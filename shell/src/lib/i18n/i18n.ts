@@ -6,17 +6,19 @@ import { initReactI18next } from 'react-i18next';
 import enAuth from '../../../locales/en/auth.json';
 import enDashboard from '../../../locales/en/dashboard.json';
 import enEvents from '../../../locales/en/events.json';
+import enReports from '../../../locales/en/reports.json';
 import enShell from '../../../locales/en/shell.json';
 import enUniversities from '../../../locales/en/universities.json';
 import enUsers from '../../../locales/en/users.json';
 import esAuth from '../../../locales/es/auth.json';
 import esDashboard from '../../../locales/es/dashboard.json';
 import esEvents from '../../../locales/es/events.json';
+import esReports from '../../../locales/es/reports.json';
 import esShell from '../../../locales/es/shell.json';
 import esUniversities from '../../../locales/es/universities.json';
 import esUsers from '../../../locales/es/users.json';
 
-export const NAMESPACES = ['shell', 'auth', 'dashboard', 'users', 'universities', 'events', 'common', 'enums', 'errors'] as const;
+export const NAMESPACES = ['shell', 'auth', 'dashboard', 'users', 'universities', 'events', 'reports', 'common', 'enums', 'errors'] as const;
 
 const resources = {
   es: {
@@ -27,6 +29,7 @@ const resources = {
     users: esUsers,
     universities: esUniversities,
     events: esEvents,
+    reports: esReports,
   },
   en: {
     ...sharedResources.en,
@@ -36,6 +39,7 @@ const resources = {
     users: enUsers,
     universities: enUniversities,
     events: enEvents,
+    reports: enReports,
   },
 };
 

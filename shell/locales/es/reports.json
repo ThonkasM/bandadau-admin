@@ -1,0 +1,57 @@
+{
+  "title": "Reportes",
+  "description": "Informes fijos sobre asistencia, inscripciones y créditos, con exportación a CSV. Para preguntas libres usa Insights.",
+  "exportCsv": "Exportar CSV",
+  "unknownUser": "Usuario desconocido",
+  "free": "Gratis",
+  "truncated": "Lista parcial: se alcanzó el tope de registros analizados.",
+  "tabs": {
+    "attendance": "Asistencia",
+    "registrations": "Inscripciones",
+    "credits": "Créditos"
+  },
+  "range": {
+    "label": "Rango",
+    "lastDays": "{count, plural, one {Último día} other {Últimos # días}}"
+  },
+  "attendance": {
+    "title": "Entradas validadas en la puerta",
+    "description": "Quién escaneó cada entrada y de quién era.",
+    "empty": "No hay entradas validadas en este rango.",
+    "when": "Fecha y hora",
+    "event": "Evento",
+    "what": "Registro",
+    "sentence": "{organizer} escaneó la entrada de {attendee}",
+    "scannedBy": "Escaneó",
+    "attendee": "Asistente",
+    "eventFilter": "Evento",
+    "allEvents": "Todos los eventos",
+    "total": "Entradas validadas",
+    "events": "Eventos con asistencia",
+    "organizers": "Personas que escanearon"
+  },
+  "registrations": {
+    "title": "Inscripciones por evento",
+    "description": "Cupo ocupado por evento (todos los eventos; los totales de arriba usan el rango).",
+    "empty": "Aún no hay eventos.",
+    "event": "Evento",
+    "organizer": "Organizador",
+    "startsAt": "Fecha",
+    "seats": "Cupo ocupado",
+    "capacity": "Cupo total",
+    "price": "Precio",
+    "confirmed": "Inscripciones confirmadas",
+    "failed": "Inscripciones fallidas",
+    "cancelled": "Inscripciones canceladas"
+  },
+  "credits": {
+    "title": "Créditos por día",
+    "description": "Recargas, gastos y reembolsos de créditos.",
+    "empty": "No hay movimientos de créditos en este rango.",
+    "date": "Fecha",
+    "topUp": "Recargas",
+    "debit": "Gastos",
+    "refund": "Reembolsos",
+    "net": "Neto"
+  }
+}
