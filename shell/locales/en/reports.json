@@ -1,6 +1,6 @@
 {
   "title": "Reports",
-  "description": "Fixed reports on attendance, registrations and credits, with CSV export. For free-form questions use Insights.",
+  "description": "Fixed reports on attendance, registrations, SAGAs and credits, with CSV export. For free-form questions use Insights.",
   "exportCsv": "Export CSV",
   "unknownUser": "Unknown user",
   "free": "Free",
@@ -8,7 +8,8 @@
   "tabs": {
     "attendance": "Attendance",
     "registrations": "Registrations",
-    "credits": "Credits"
+    "credits": "Credits",
+    "sagas": "SAGAs"
   },
   "range": {
     "label": "Range",
@@ -28,7 +29,14 @@
     "allEvents": "All events",
     "total": "Tickets validated",
     "events": "Events with attendance",
-    "organizers": "People who scanned"
+    "organizers": "People who scanned",
+    "byEventTitle": "Attendance by event",
+    "byEventDescription": "Enrolled attendees versus tickets scanned at the door, for events with attendance in the range.",
+    "enrolled": "Enrolled",
+    "scanned": "Scanned",
+    "rate": "Attendance",
+    "chartTitle": "Enrolled and attended by event",
+    "chartDescription": "Enrolled attendees versus tickets scanned at the door."
   },
   "registrations": {
     "title": "Registrations by event",
@@ -42,7 +50,16 @@
     "price": "Price",
     "confirmed": "Confirmed registrations",
     "failed": "Failed registrations",
-    "cancelled": "Cancelled registrations"
+    "cancelled": "Cancelled registrations",
+    "status": "Status",
+    "whenFilter": "Event date",
+    "when": {
+      "all": "All",
+      "upcoming": "Upcoming",
+      "past": "Past"
+    },
+    "chartTitle": "Seats taken by event",
+    "chartDescription": "Total capacity and seats taken for the latest listed events."
   },
   "credits": {
     "title": "Credits per day",
@@ -52,6 +69,31 @@
     "topUp": "Top-ups",
     "debit": "Spending",
     "refund": "Refunds",
-    "net": "Net"
+    "net": "Net",
+    "chartTitle": "Credits per day (chart)",
+    "chartDescription": "Top-ups, spending and refunds over the range."
+  },
+  "noValue": "—",
+  "sagas": {
+    "title": "Registration and cancellation SAGAs",
+    "description": "Status of every SAGA updated in the range, with its step, retries and duration.",
+    "empty": "No SAGAs in this range.",
+    "type": "Type",
+    "status": "Status",
+    "step": "Step",
+    "failure": "Failure reason",
+    "retries": "Retries",
+    "startedAt": "Started",
+    "updatedAt": "Last update",
+    "duration": "Duration",
+    "underMinute": "Under 1 min",
+    "minutes": "{count} min",
+    "completed": "Completed",
+    "compensated": "Compensated",
+    "failed": "Failed",
+    "inProgress": "In progress",
+    "byStatusTitle": "SAGAs by status",
+    "byDayTitle": "SAGAs started per day",
+    "count": "SAGAs"
   }
 }

@@ -1,6 +1,6 @@
 {
   "title": "Reportes",
-  "description": "Informes fijos sobre asistencia, inscripciones y créditos, con exportación a CSV. Para preguntas libres usa Insights.",
+  "description": "Informes fijos sobre asistencia, inscripciones, SAGAs y créditos, con exportación a CSV. Para preguntas libres usa Insights.",
   "exportCsv": "Exportar CSV",
   "unknownUser": "Usuario desconocido",
   "free": "Gratis",
@@ -8,7 +8,8 @@
   "tabs": {
     "attendance": "Asistencia",
     "registrations": "Inscripciones",
-    "credits": "Créditos"
+    "credits": "Créditos",
+    "sagas": "SAGAs"
   },
   "range": {
     "label": "Rango",
@@ -28,7 +29,14 @@
     "allEvents": "Todos los eventos",
     "total": "Entradas validadas",
     "events": "Eventos con asistencia",
-    "organizers": "Personas que escanearon"
+    "organizers": "Personas que escanearon",
+    "byEventTitle": "Asistencia por evento",
+    "byEventDescription": "Inscritos frente a entradas escaneadas en la puerta, de los eventos con asistencia en el rango.",
+    "enrolled": "Inscritos",
+    "scanned": "Escaneadas",
+    "rate": "Asistencia",
+    "chartTitle": "Inscritos y asistentes por evento",
+    "chartDescription": "Barras de inscritos frente a entradas escaneadas en la puerta."
   },
   "registrations": {
     "title": "Inscripciones por evento",
@@ -42,7 +50,16 @@
     "price": "Precio",
     "confirmed": "Inscripciones confirmadas",
     "failed": "Inscripciones fallidas",
-    "cancelled": "Inscripciones canceladas"
+    "cancelled": "Inscripciones canceladas",
+    "status": "Estado",
+    "whenFilter": "Fecha del evento",
+    "when": {
+      "all": "Todos",
+      "upcoming": "Próximos",
+      "past": "Realizados"
+    },
+    "chartTitle": "Cupo ocupado por evento",
+    "chartDescription": "Cupo total y lugares ocupados de los últimos eventos listados."
   },
   "credits": {
     "title": "Créditos por día",
@@ -52,6 +69,31 @@
     "topUp": "Recargas",
     "debit": "Gastos",
     "refund": "Reembolsos",
-    "net": "Neto"
+    "net": "Neto",
+    "chartTitle": "Créditos por día (gráfico)",
+    "chartDescription": "Recargas, gastos y reembolsos a lo largo del rango."
+  },
+  "noValue": "—",
+  "sagas": {
+    "title": "SAGAs de inscripción y cancelación",
+    "description": "Estado de cada SAGA actualizada en el rango, con su paso, reintentos y duración.",
+    "empty": "No hay SAGAs en este rango.",
+    "type": "Tipo",
+    "status": "Estado",
+    "step": "Paso",
+    "failure": "Motivo de fallo",
+    "retries": "Reintentos",
+    "startedAt": "Inicio",
+    "updatedAt": "Última actualización",
+    "duration": "Duración",
+    "underMinute": "Menos de 1 min",
+    "minutes": "{count} min",
+    "completed": "Completadas",
+    "compensated": "Compensadas",
+    "failed": "Fallidas",
+    "inProgress": "En curso",
+    "byStatusTitle": "SAGAs por estado",
+    "byDayTitle": "SAGAs iniciadas por día",
+    "count": "SAGAs"
   }
 }

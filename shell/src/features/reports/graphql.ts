@@ -88,3 +88,21 @@ export const WALLET_REPORT_QUERY = gql<{ walletStats: WalletReport }, { range: {
     }
   }
 `;
+
+export interface SagaReportRow {
+  id: string;
+  type: 'REGISTRATION' | 'CANCELLATION';
+  step: string;
+  status: string;
+  failureReason: string | null;
+  retries: number;
+  startedAt: string;
+  updatedAt: string;
+}
+
+/** SAGAs de inscripción y cancelación actualizadas desde el inicio del rango (tope de la API: 50). */
+export const SAGAS_REPORT_QUERY = gql<{ sagas: SagaReportRow[] }, { since: string; first: number }>`
+  query SagasReport($since: DateTime, $first: Int) {
+    sagas(since: $since, first: $first) { id type step status failureReason retries startedAt updatedAt }
+  }
+`;
